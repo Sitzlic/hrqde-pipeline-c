@@ -47,10 +47,11 @@ class SpanCandidate(BaseModel):
     processed_raw_id: str
     text: str
     span_type: SpanType
-    token_start: int
-    token_end: int
+    char_start: int
+    char_end: int
     extractor: Literal["adj_noun", "escoxlm_r"]
     requirement_kind: RequirementKind = RequirementKind.MUST
+    score: float | None = None
 
 
 class JobPostingDraft(BaseModel):

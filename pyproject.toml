@@ -19,6 +19,10 @@ dev = [
     "pytest>=8.0",
     "ruff>=0.5",
 ]
+ml = [
+    "transformers>=4.40",
+    "torch>=2.0",
+]
 
 [project.scripts]
 hrqde-c = "hrqde_c.cli:app"

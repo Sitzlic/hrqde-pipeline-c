@@ -9,6 +9,7 @@ from pathlib import Path
 import spacy
 from spacy.language import Language
 
+from hrqde_c.extractors import escoxlm_r
 from hrqde_c.models import (
     JobPostingDraft,
     MappingDecision,
@@ -17,7 +18,6 @@ from hrqde_c.models import (
     RawAdvertisement,
     SpanCandidate,
     SpanMapping,
-    SpanType,
     Token,
 )
 
@@ -59,30 +59,12 @@ def process_nlp(raw: RawAdvertisement) -> ProcessedAdvertisement:
     return ProcessedAdvertisement(raw_id=raw.id, language="de", tokens=tokens)
 
 
-def extract_spans(processed: ProcessedAdvertisement) -> list[SpanCandidate]:
-    # TODO Span-Extraktion (ADJ+NOUN via spaCy Dependency-Parser, ESCOXLM-R).
-    # Bis dahin: zwei feste Kandidaten, damit die Pipeline durchläuft.
-    spans = [
-        SpanCandidate(
-            id=f"{processed.raw_id}-span-1",
-            processed_raw_id=processed.raw_id,
-            text="Projektmanagement",
-            span_type=SpanType.SKILL,
-            token_start=0,
-            token_end=1,
-            extractor="adj_noun",
-        ),
-        SpanCandidate(
-            id=f"{processed.raw_id}-span-2",
-            processed_raw_id=processed.raw_id,
-            text="Java-Kenntnisse",
-            span_type=SpanType.KNOWLEDGE,
-            token_start=2,
-            token_end=3,
-            extractor="escoxlm_r",
-        ),
-    ]
-    log.info("extraction: %s -> %d Span-Kandidaten", processed.raw_id, len(spans))
+def extract_spans(
+    raw: RawAdvertisement, processed: ProcessedAdvertisement
+) -> list[SpanCandidate]:
+    # TODO regelbasierten ADJ+NOUN-Extraktor auf processed hinzufuegen (RC-C.1.1).
+    spans = escoxlm_r.extract(raw)
+    log.info("extraction: %s -> %d Span-Kandidaten", raw.id, len(spans))
     return spans
 
 
@@ -180,7 +162,7 @@ def run(input_path: Path, output_dir: Path) -> list[Path]:
     outputs: list[Path] = []
     for raw in raws:
         processed = process_nlp(raw)
-        spans = extract_spans(processed)
+        spans = extract_spans(raw, processed)
         draft = aggregate(raw, spans)
         mappings = map_to_esco(draft.span_candidates)
         requirements = build_requirements(draft.span_candidates, mappings)
