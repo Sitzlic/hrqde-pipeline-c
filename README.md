@@ -31,6 +31,8 @@ hrqde-c -i data/input/example_posting.json -o data/output -v
 
 - `src/hrqde_c/models.py` - Datenklassen (Pydantic)
 - `src/hrqde_c/pipeline.py` - Stages und Orchestrierung
+- `src/hrqde_c/extractors/` - Span-Extraktoren
 - `src/hrqde_c/cli.py` - CLI
+- `scripts/` - Probeläufe (nicht Teil der Pipeline)
 - `data/input/` - Beispiel-Anzeigen (JSON)
 - `data/output/` - Pipeline-Output (TTL)
