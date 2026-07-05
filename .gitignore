@@ -25,3 +25,6 @@ htmlcov/
 # Pipeline output
 data/output/*
 !data/output/.gitkeep
+
+# Embeddings-Cache
+data/esco/*.embeddings.pt

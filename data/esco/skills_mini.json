@@ -1,0 +1,98 @@
+[
+  {
+    "uri": "http://data.europa.eu/esco/skill/mini/java",
+    "pref_label": "Java (Programmiersprache)",
+    "alt_labels": ["Java", "Java-Programmierung", "Java-Kenntnisse"],
+    "definition": "Techniken und Prinzipien der Softwareentwicklung in der Programmiersprache Java."
+  },
+  {
+    "uri": "http://data.europa.eu/esco/skill/mini/projektmanagement",
+    "pref_label": "Projektmanagement",
+    "alt_labels": ["Projekte managen", "Projektsteuerung", "Projektleitung"],
+    "definition": "Planen, koordinieren und steuern von Projekten unter Berücksichtigung von Umfang, Zeit, Ressourcen und Qualität."
+  },
+  {
+    "uri": "http://data.europa.eu/esco/skill/mini/agile-methoden",
+    "pref_label": "Agile Methoden",
+    "alt_labels": ["Scrum", "Kanban", "agiles Arbeiten", "agile Vorgehensweisen"],
+    "definition": "Iterative Vorgehensmodelle der Softwareentwicklung mit kurzen Feedbackzyklen."
+  },
+  {
+    "uri": "http://data.europa.eu/esco/skill/mini/softwareentwicklung",
+    "pref_label": "Softwareentwicklung",
+    "alt_labels": ["Software-Entwicklung", "Programmieren", "Anwendungsentwicklung"],
+    "definition": "Entwurf, Implementierung, Test und Wartung von Softwaresystemen."
+  },
+  {
+    "uri": "http://data.europa.eu/esco/skill/mini/datenbankdesign",
+    "pref_label": "Datenbankdesign",
+    "alt_labels": ["Datenbank-Modellierung", "Datenmodellierung"],
+    "definition": "Entwurf und Optimierung relationaler und nicht-relationaler Datenbanken."
+  },
+  {
+    "uri": "http://data.europa.eu/esco/skill/mini/analytisches-denken",
+    "pref_label": "Analytisches Denken",
+    "alt_labels": ["analytische Fähigkeit", "logisches Denken", "strukturiertes Denken"],
+    "definition": "Fähigkeit, komplexe Sachverhalte zu zerlegen und systematisch zu analysieren."
+  },
+  {
+    "uri": "http://data.europa.eu/esco/skill/mini/teamfaehigkeit",
+    "pref_label": "Teamfähigkeit",
+    "alt_labels": ["Zusammenarbeit im Team", "Kooperationsfähigkeit", "Teamarbeit"],
+    "definition": "Fähigkeit, konstruktiv mit anderen zusammenzuarbeiten und gemeinsame Ziele zu erreichen."
+  },
+  {
+    "uri": "http://data.europa.eu/esco/skill/mini/kommunikationsstaerke",
+    "pref_label": "Kommunikationsstärke",
+    "alt_labels": ["Kommunikationsfähigkeit", "kommunikative Kompetenz", "verbale Kommunikation"],
+    "definition": "Fähigkeit, sich klar und wirkungsvoll mündlich und schriftlich auszudrücken."
+  },
+  {
+    "uri": "http://data.europa.eu/esco/skill/mini/eigenverantwortung",
+    "pref_label": "Eigenverantwortliches Arbeiten",
+    "alt_labels": ["Selbstständigkeit", "Eigeninitiative", "eigenverantwortlich"],
+    "definition": "Fähigkeit, Aufgaben selbstständig und ergebnisorientiert zu bearbeiten."
+  },
+  {
+    "uri": "http://data.europa.eu/esco/skill/mini/englisch",
+    "pref_label": "Englischkenntnisse",
+    "alt_labels": ["Englisch", "English", "englische Sprache"],
+    "definition": "Sprachkenntnisse in Englisch in Wort und Schrift."
+  },
+  {
+    "uri": "http://data.europa.eu/esco/skill/mini/buchhaltung",
+    "pref_label": "Buchhaltung",
+    "alt_labels": ["Buchführung", "Finanzbuchhaltung", "Rechnungswesen"],
+    "definition": "Erfassung und Dokumentation geschäftlicher Vorgänge nach handelsrechtlichen Vorschriften."
+  },
+  {
+    "uri": "http://data.europa.eu/esco/skill/mini/marketing",
+    "pref_label": "Marketing",
+    "alt_labels": ["Vermarktung", "Absatzwirtschaft"],
+    "definition": "Planung und Umsetzung von Maßnahmen zur Absatzförderung und Kundengewinnung."
+  },
+  {
+    "uri": "http://data.europa.eu/esco/skill/mini/vertrieb",
+    "pref_label": "Vertrieb",
+    "alt_labels": ["Sales", "Verkauf", "Kundenakquise"],
+    "definition": "Aktivitäten zum Verkauf von Produkten und Dienstleistungen an Endkunden oder Geschäftskunden."
+  },
+  {
+    "uri": "http://data.europa.eu/esco/skill/mini/kundenberatung",
+    "pref_label": "Kundenberatung",
+    "alt_labels": ["Kundenbetreuung", "Beratung", "Kundenservice"],
+    "definition": "Beratung und Betreuung von Kundinnen und Kunden zu Produkten und Dienstleistungen."
+  },
+  {
+    "uri": "http://data.europa.eu/esco/skill/mini/fuehrerschein-b",
+    "pref_label": "Führerschein Klasse B",
+    "alt_labels": ["PKW-Führerschein", "Fahrerlaubnis Klasse B"],
+    "definition": "Fahrerlaubnis zum Führen von Kraftfahrzeugen bis 3,5 t Gesamtmasse."
+  },
+  {
+    "uri": "http://data.europa.eu/esco/skill/mini/erste-hilfe",
+    "pref_label": "Erste Hilfe",
+    "alt_labels": ["Erste-Hilfe-Kenntnisse", "Notfallhilfe"],
+    "definition": "Fähigkeit, in Notfallsituationen medizinische Sofortmaßnahmen zu leisten."
+  }
+]

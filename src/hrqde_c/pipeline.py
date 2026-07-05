@@ -10,6 +10,7 @@ import spacy
 from spacy.language import Language
 
 from hrqde_c.extractors import escoxlm_r
+from hrqde_c.mapping import esco
 from hrqde_c.models import (
     JobPostingDraft,
     MappingDecision,
@@ -79,18 +80,18 @@ def aggregate(raw: RawAdvertisement, spans: list[SpanCandidate]) -> JobPostingDr
 
 
 def map_to_esco(spans: list[SpanCandidate]) -> list[SpanMapping]:
-    # TODO echtes Matching gegen einen ESCO-Index (siehe RC-C.2.1/2.2).
+    index = esco.get_index()
     mappings = []
     for span in spans:
-        score = 0.82
+        best = index.match(span.text, top_k=1)[0]
         mappings.append(
             SpanMapping(
                 id=f"mapping-{uuid.uuid4().hex[:8]}",
                 span_id=span.id,
-                concept_uri=f"http://data.europa.eu/esco/skill/STUB-{span.text}",
-                score=score,
+                concept_uri=best.concept.uri,
+                score=best.score,
                 decision=MappingDecision.ACCEPTED
-                if score >= MAPPING_THRESHOLD
+                if best.score >= MAPPING_THRESHOLD
                 else MappingDecision.REJECTED,
             )
         )
