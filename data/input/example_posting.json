@@ -1,6 +1,8 @@
 {
   "id": "demo-001",
   "source_uri": "https://example.com/stellen/demo-001",
+  "crawl_date": "2026-07-01",
+  "platform": "example.com",
   "employer": "Beispiel GmbH",
   "posting_date": "2026-06-15",
   "title": "Software-Entwickler:in (Java)",

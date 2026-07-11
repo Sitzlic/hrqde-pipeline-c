@@ -1,0 +1,338 @@
+# =====================================================================
+# HR-QDE SHACL Shapes — Combined File
+# Version 0.1.3  ·  2026-05-17
+#
+# Single-file aggregate of all shape modules. Used because neosemantics
+# n10s.validation.shacl.import.fetch overwrites previous shape sets.
+#
+# v0.1.1: requirementKind value "nice-to-have" replaced by
+#         "nice_to_have" (hyphen vs subtraction operator).
+# v0.1.2: single quotes removed from all sh:message texts (neosemantics
+#         does not escape single quotes when generating the Cypher
+#         validation query, causing string termination crashes).
+# v0.1.3: aligned with hrqde-ontology v0.1.1.
+#         - EducationalModuleShape: added moduleType property constraint
+#           with sh:in controlled vocabulary, plus optional
+#           hasUnmappedOutcome.
+#         - LearningOutcomeShape: provenanceSource value list documented.
+#         - UnmappedLearningOutcomeShape: new shape for the Säule-B
+#           unmapped-outcome class (reviewReason + evidenceExcerpt
+#           required, no targetsCompetence required).
+# =====================================================================
+
+@prefix hrqde:       <http://hr-qde.org/ontology/> .
+@prefix hrqde-shape: <http://hr-qde.org/shapes/> .
+@prefix sh:          <http://www.w3.org/ns/shacl#> .
+@prefix rdf:         <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:        <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:         <http://www.w3.org/2001/XMLSchema#> .
+
+
+# Säule A — As-Is-Profile (Voeltz) ====================================
+
+hrqde-shape:LearnerShape
+  a                 sh:NodeShape ;
+  sh:targetClass    hrqde:Learner ;
+  sh:property [
+    sh:path         hrqde:hasProfile ;
+    sh:minCount     1 ;
+    sh:maxCount     1 ;
+    sh:nodeKind     sh:IRI ;
+    sh:message      "Learner must have exactly one CompetencyProfile."@en ,
+                    "Lerner muss genau ein CompetencyProfile haben."@de ;
+  ] .
+
+hrqde-shape:CompetencyProfileShape
+  a                 sh:NodeShape ;
+  sh:targetClass    hrqde:CompetencyProfile ;
+  sh:property [
+    sh:path         hrqde:containsCompetence ;
+    sh:minCount     1 ;
+    sh:nodeKind     sh:IRI ;
+    sh:message      "CompetencyProfile must contain at least one AcquiredCompetence."@en ;
+  ] .
+
+hrqde-shape:AcquiredCompetenceShape
+  a                 sh:NodeShape ;
+  sh:targetClass    hrqde:AcquiredCompetence ;
+  sh:property [
+    sh:path         hrqde:acquiredCompetenceOf ;
+    sh:minCount     1 ;
+    sh:maxCount     1 ;
+    sh:nodeKind     sh:IRI ;
+    sh:pattern      "^http://data\\.europa\\.eu/esco/skill/" ;
+    sh:message      "AcquiredCompetence must reference exactly one ESCO skill URI."@en ,
+                    "AcquiredCompetence muss genau eine ESCO-Skill-URI referenzieren."@de ;
+  ] ;
+  sh:property [
+    sh:path         hrqde:hasProficiencyLevel ;
+    sh:minCount     1 ;
+    sh:maxCount     1 ;
+    sh:nodeKind     sh:IRI ;
+    sh:pattern      "^http://hr-qde\\.org/ontology/DQR[1-8]$" ;
+    sh:message      "AcquiredCompetence must reference exactly one ProficiencyLevel DQR1-DQR8."@en ,
+                    "AcquiredCompetence muss genau einen ProficiencyLevel referenzieren."@de ;
+  ] ;
+  sh:property [
+    sh:path         hrqde:provenanceConfidence ;
+    sh:datatype     xsd:decimal ;
+    sh:minCount     1 ;
+    sh:maxCount     1 ;
+    sh:minInclusive "0.0"^^xsd:decimal ;
+    sh:maxInclusive "1.0"^^xsd:decimal ;
+    sh:message      "provenanceConfidence must be a decimal in 0.0 to 1.0."@en ,
+                    "provenanceConfidence muss ein Dezimalwert zwischen 0.0 und 1.0 sein."@de ;
+  ] ;
+  sh:property [
+    sh:path         hrqde:provenanceSource ;
+    sh:datatype     xsd:string ;
+    sh:in           ("cv" "transcript" "certificate" "reference" "self_declaration") ;
+    sh:maxCount     1 ;
+  ] ;
+  sh:property [
+    sh:path         hrqde:acquiredOn ;
+    sh:datatype     xsd:date ;
+    sh:maxCount     1 ;
+  ] .
+
+
+# Säule B — Supply-Profile (Köppe) ====================================
+
+hrqde-shape:EducationalModuleShape
+  a                 sh:NodeShape ;
+  sh:targetClass    hrqde:EducationalModule ;
+  sh:property [
+    sh:path         hrqde:moduleCode ;
+    sh:datatype     xsd:string ;
+    sh:minCount     1 ;
+    sh:maxCount     1 ;
+    sh:minLength    1 ;
+  ] ;
+  sh:property [
+    sh:path         rdfs:label ;
+    sh:minCount     1 ;
+  ] ;
+  sh:property [
+    sh:path         hrqde:ects ;
+    sh:datatype     xsd:decimal ;
+    sh:minCount     1 ;
+    sh:maxCount     1 ;
+    sh:minExclusive "0.0"^^xsd:decimal ;
+    sh:message      "EducationalModule must carry a positive ECTS value."@en ,
+                    "Lehrmodul muss einen positiven ECTS-Wert tragen."@de ;
+  ] ;
+  sh:property [
+    sh:path         hrqde:offeredBy ;
+    sh:minCount     1 ;
+    sh:maxCount     1 ;
+    sh:nodeKind     sh:IRI ;
+    sh:message      "EducationalModule must reference exactly one HigherEducationInstitution."@en ,
+                    "Lehrmodul muss genau eine Hochschule referenzieren."@de ;
+  ] ;
+  sh:property [
+    sh:path         hrqde:hasOutcome ;
+    sh:minCount     1 ;
+    sh:nodeKind     sh:IRI ;
+    sh:message      "EducationalModule must have at least one LearningOutcome."@en ,
+                    "Lehrmodul muss mindestens ein Lernergebnis haben."@de ;
+  ] ;
+  sh:property [
+    sh:path         hrqde:hasUnmappedOutcome ;
+    sh:nodeKind     sh:IRI ;
+    sh:message      "If present, hasUnmappedOutcome must reference an UnmappedLearningOutcome IRI."@en ;
+  ] ;
+  sh:property [
+    sh:path         hrqde:requiresCompetence ;
+    sh:nodeKind     sh:IRI ;
+    sh:pattern      "^http://data\\.europa\\.eu/esco/skill/" ;
+  ] ;
+  sh:property [
+    sh:path         hrqde:moduleType ;
+    sh:datatype     xsd:string ;
+    sh:maxCount     1 ;
+    sh:in           ("Pflichtmodul"
+                     "Bachelorseminar"
+                     "Masterseminar"
+                     "Fachpraktikum"
+                     "Projektpraktikum"
+                     "Abschlussmodul") ;
+    sh:message      "moduleType must be one of: Pflichtmodul, Bachelorseminar, Masterseminar, Fachpraktikum, Projektpraktikum, Abschlussmodul."@en ,
+                    "moduleType muss einer der Werte sein: Pflichtmodul, Bachelorseminar, Masterseminar, Fachpraktikum, Projektpraktikum, Abschlussmodul."@de ;
+  ] .
+
+hrqde-shape:LearningOutcomeShape
+  a                 sh:NodeShape ;
+  sh:targetClass    hrqde:LearningOutcome ;
+  sh:property [
+    sh:path         hrqde:targetsCompetence ;
+    sh:minCount     1 ;
+    sh:maxCount     1 ;
+    sh:nodeKind     sh:IRI ;
+    sh:pattern      "^http://data\\.europa\\.eu/esco/skill/" ;
+    sh:message      "LearningOutcome must reference exactly one ESCO skill URI."@en ,
+                    "Lernergebnis muss genau eine ESCO-Skill-URI referenzieren."@de ;
+  ] ;
+  sh:property [
+    sh:path         hrqde:targetLevel ;
+    sh:minCount     1 ;
+    sh:maxCount     1 ;
+    sh:nodeKind     sh:IRI ;
+    sh:pattern      "^http://hr-qde\\.org/ontology/DQR[1-8]$" ;
+  ] ;
+  sh:property [
+    sh:path         hrqde:provenanceConfidence ;
+    sh:datatype     xsd:decimal ;
+    sh:minCount     1 ;
+    sh:maxCount     1 ;
+    sh:minInclusive "0.0"^^xsd:decimal ;
+    sh:maxInclusive "1.0"^^xsd:decimal ;
+  ] ;
+  sh:property [
+    sh:path         hrqde:provenanceSource ;
+    sh:datatype     xsd:string ;
+    sh:in           ("module_handbook" "course_catalog") ;
+    sh:maxCount     1 ;
+  ] .
+
+# v0.1.3 ADDITION: UnmappedLearningOutcomeShape
+hrqde-shape:UnmappedLearningOutcomeShape
+  a                 sh:NodeShape ;
+  sh:targetClass    hrqde:UnmappedLearningOutcome ;
+  sh:property [
+    sh:path         rdfs:label ;
+    sh:minCount     1 ;
+    sh:message      "UnmappedLearningOutcome must carry at least one rdfs:label for human review."@en ,
+                    "UnmappedLearningOutcome muss mindestens ein rdfs:label tragen, damit es manuell reviewt werden kann."@de ;
+  ] ;
+  sh:property [
+    sh:path         hrqde:reviewReason ;
+    sh:datatype     xsd:string ;
+    sh:minCount     1 ;
+    sh:maxCount     1 ;
+    sh:minLength    1 ;
+    sh:message      "UnmappedLearningOutcome must carry exactly one reviewReason describing why no ESCO link was established."@en ,
+                    "UnmappedLearningOutcome muss genau einen reviewReason tragen, der erklärt, warum keine ESCO-Verknüpfung möglich war."@de ;
+  ] ;
+  sh:property [
+    sh:path         hrqde:evidenceExcerpt ;
+    sh:datatype     xsd:string ;
+    sh:minCount     1 ;
+    sh:maxCount     1 ;
+    sh:minLength    1 ;
+    sh:message      "UnmappedLearningOutcome must carry exactly one evidenceExcerpt from the source document for manual review."@en ,
+                    "UnmappedLearningOutcome muss genau einen evidenceExcerpt aus dem Quelldokument tragen, um manuelle Überprüfung zu ermöglichen."@de ;
+  ] ;
+  sh:property [
+    sh:path         hrqde:provenanceSource ;
+    sh:datatype     xsd:string ;
+    sh:in           ("module_handbook" "course_catalog") ;
+    sh:maxCount     1 ;
+  ] ;
+  sh:property [
+    sh:path         hrqde:provenanceConfidence ;
+    sh:datatype     xsd:decimal ;
+    sh:maxCount     1 ;
+    sh:minInclusive "0.0"^^xsd:decimal ;
+    sh:maxInclusive "1.0"^^xsd:decimal ;
+  ] .
+
+hrqde-shape:HigherEducationInstitutionShape
+  a                 sh:NodeShape ;
+  sh:targetClass    hrqde:HigherEducationInstitution ;
+  sh:property [
+    sh:path         rdfs:label ;
+    sh:minCount     1 ;
+  ] ;
+  sh:property [
+    sh:path         hrqde:institutionType ;
+    sh:nodeKind     sh:IRI ;
+    sh:maxCount     1 ;
+  ] .
+
+
+# Säule C — Demand-Profile (Sitzler) ==================================
+
+hrqde-shape:JobPostingShape
+  a                 sh:NodeShape ;
+  sh:targetClass    hrqde:JobPosting ;
+  sh:property [
+    sh:path         hrqde:postingDate ;
+    sh:datatype     xsd:date ;
+    sh:minCount     1 ;
+    sh:maxCount     1 ;
+    sh:message      "JobPosting must carry a postingDate xsd:date."@en ,
+                    "Stellenausschreibung muss ein postingDate tragen."@de ;
+  ] ;
+  sh:property [
+    sh:path         hrqde:issuedBy ;
+    sh:minCount     1 ;
+    sh:maxCount     1 ;
+    sh:nodeKind     sh:IRI ;
+    sh:message      "JobPosting must reference exactly one Employer."@en ,
+                    "Stellenausschreibung muss genau einen Arbeitgeber referenzieren."@de ;
+  ] ;
+  sh:property [
+    sh:path         hrqde:refersToOccupation ;
+    sh:maxCount     1 ;
+    sh:nodeKind     sh:IRI ;
+    sh:pattern      "^http://data\\.europa\\.eu/esco/occupation/" ;
+  ] ;
+  sh:property [
+    sh:path         hrqde:hasRequirement ;
+    sh:minCount     1 ;
+    sh:nodeKind     sh:IRI ;
+  ] ;
+  sh:property [
+    sh:path         hrqde:sourceUrl ;
+    sh:datatype     xsd:anyURI ;
+    sh:maxCount     1 ;
+  ] .
+
+hrqde-shape:QualificationRequirementShape
+  a                 sh:NodeShape ;
+  sh:targetClass    hrqde:QualificationRequirement ;
+  sh:property [
+    sh:path         hrqde:refersToCompetence ;
+    sh:minCount     1 ;
+    sh:maxCount     1 ;
+    sh:nodeKind     sh:IRI ;
+    sh:pattern      "^http://data\\.europa\\.eu/esco/skill/" ;
+  ] ;
+  sh:property [
+    sh:path         hrqde:requiredLevel ;
+    sh:minCount     1 ;
+    sh:maxCount     1 ;
+    sh:nodeKind     sh:IRI ;
+    sh:pattern      "^http://hr-qde\\.org/ontology/DQR[1-8]$" ;
+  ] ;
+  sh:property [
+    sh:path         hrqde:requirementKind ;
+    sh:datatype     xsd:string ;
+    sh:minCount     1 ;
+    sh:maxCount     1 ;
+    sh:in           ("must" "nice_to_have") ;
+    sh:message      "requirementKind must be must or nice_to_have."@en ,
+                    "requirementKind muss must oder nice_to_have sein."@de ;
+  ] ;
+  sh:property [
+    sh:path         hrqde:provenanceConfidence ;
+    sh:datatype     xsd:decimal ;
+    sh:minCount     1 ;
+    sh:maxCount     1 ;
+    sh:minInclusive "0.0"^^xsd:decimal ;
+    sh:maxInclusive "1.0"^^xsd:decimal ;
+  ] ;
+  sh:property [
+    sh:path         hrqde:provenanceSource ;
+    sh:datatype     xsd:string ;
+    sh:in           ("job_posting" "company_profile") ;
+    sh:maxCount     1 ;
+  ] .
+
+hrqde-shape:EmployerShape
+  a                 sh:NodeShape ;
+  sh:targetClass    hrqde:Employer ;
+  sh:property [
+    sh:path         rdfs:label ;
+    sh:minCount     1 ;
+  ] .

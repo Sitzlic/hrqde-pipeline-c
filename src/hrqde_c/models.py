@@ -22,8 +22,11 @@ class MappingDecision(str, Enum):
 
 
 class RawAdvertisement(BaseModel):
+    # Provenance-Felder sind Pflicht (SA-C.1.04)
     id: str
     source_uri: str
+    crawl_date: str
+    platform: str
     employer: str
     posting_date: str
     title: str
