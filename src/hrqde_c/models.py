@@ -31,6 +31,8 @@ class RawAdvertisement(BaseModel):
     posting_date: str
     title: str
     raw_text: str
+    # ISCO-Hauptgruppe fuer den DQR-Default, fehlt sie greift der Fallback
+    isco_group: int | None = None
 
 
 class Token(BaseModel):
@@ -76,6 +78,8 @@ class SpanMapping(BaseModel):
     concept_uri: str
     score: float
     decision: MappingDecision
+    # 1 = bester Treffer unter den Top-k
+    rank: int = 1
 
 
 class QualificationRequirement(BaseModel):

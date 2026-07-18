@@ -1,21 +1,57 @@
 [
   {
+    "uri": "http://data.europa.eu/esco/skill/mini/python",
+    "pref_label": "Python (Programmiersprache)",
+    "alt_labels": ["Python", "Python-Programmierung", "Python-Kenntnisse"],
+    "definition": "Techniken und Prinzipien der Softwareentwicklung in der Programmiersprache Python."
+  },
+  {
     "uri": "http://data.europa.eu/esco/skill/mini/java",
     "pref_label": "Java (Programmiersprache)",
     "alt_labels": ["Java", "Java-Programmierung", "Java-Kenntnisse"],
     "definition": "Techniken und Prinzipien der Softwareentwicklung in der Programmiersprache Java."
   },
   {
-    "uri": "http://data.europa.eu/esco/skill/mini/projektmanagement",
-    "pref_label": "Projektmanagement",
-    "alt_labels": ["Projekte managen", "Projektsteuerung", "Projektleitung"],
-    "definition": "Planen, koordinieren und steuern von Projekten unter Berücksichtigung von Umfang, Zeit, Ressourcen und Qualität."
+    "uri": "http://data.europa.eu/esco/skill/mini/sql",
+    "pref_label": "SQL (Datenbankabfragesprache)",
+    "alt_labels": ["SQL", "SQL-Kenntnisse", "Structured Query Language"],
+    "definition": "Abfrage, Manipulation und Verwaltung von Daten in relationalen Datenbanken mit SQL."
   },
   {
-    "uri": "http://data.europa.eu/esco/skill/mini/agile-methoden",
-    "pref_label": "Agile Methoden",
-    "alt_labels": ["Scrum", "Kanban", "agiles Arbeiten", "agile Vorgehensweisen"],
-    "definition": "Iterative Vorgehensmodelle der Softwareentwicklung mit kurzen Feedbackzyklen."
+    "uri": "http://data.europa.eu/esco/skill/mini/datenpipelines",
+    "pref_label": "Datenpipelines entwickeln",
+    "alt_labels": ["Datenpipeline", "Data Pipeline", "Datenverarbeitungsstrecke"],
+    "definition": "Entwurf und Betrieb automatisierter Strecken zur Verarbeitung und Weiterleitung von Daten."
+  },
+  {
+    "uri": "http://data.europa.eu/esco/skill/mini/etl",
+    "pref_label": "ETL-Prozesse aufbauen",
+    "alt_labels": ["ETL", "Extract Transform Load", "Datenintegration"],
+    "definition": "Extraktion, Transformation und Laden von Daten aus heterogenen Quellen in Zielsysteme."
+  },
+  {
+    "uri": "http://data.europa.eu/esco/skill/mini/datenbankdesign",
+    "pref_label": "Datenbankdesign",
+    "alt_labels": ["Datenbank-Modellierung", "Datenmodellierung", "Datenbankentwurf"],
+    "definition": "Entwurf und Optimierung relationaler und nicht-relationaler Datenbanken."
+  },
+  {
+    "uri": "http://data.europa.eu/esco/skill/mini/cloud-aws",
+    "pref_label": "Cloud-Plattformen (AWS)",
+    "alt_labels": ["AWS", "Amazon Web Services", "Cloud Computing"],
+    "definition": "Nutzung und Betrieb von Anwendungen auf Cloud-Infrastruktur, insbesondere Amazon Web Services."
+  },
+  {
+    "uri": "http://data.europa.eu/esco/skill/mini/docker-kubernetes",
+    "pref_label": "Containerisierung (Docker, Kubernetes)",
+    "alt_labels": ["Docker", "Kubernetes", "Container-Orchestrierung"],
+    "definition": "Paketierung und Orchestrierung von Anwendungen in Containern."
+  },
+  {
+    "uri": "http://data.europa.eu/esco/skill/mini/kafka",
+    "pref_label": "Streaming-Technologien (Apache Kafka)",
+    "alt_labels": ["Apache Kafka", "Kafka", "Event-Streaming"],
+    "definition": "Verarbeitung kontinuierlicher Datenströme mit Streaming-Plattformen wie Apache Kafka."
   },
   {
     "uri": "http://data.europa.eu/esco/skill/mini/softwareentwicklung",
@@ -24,10 +60,100 @@
     "definition": "Entwurf, Implementierung, Test und Wartung von Softwaresystemen."
   },
   {
-    "uri": "http://data.europa.eu/esco/skill/mini/datenbankdesign",
-    "pref_label": "Datenbankdesign",
-    "alt_labels": ["Datenbank-Modellierung", "Datenmodellierung"],
-    "definition": "Entwurf und Optimierung relationaler und nicht-relationaler Datenbanken."
+    "uri": "http://data.europa.eu/esco/skill/mini/agile-methoden",
+    "pref_label": "Agile Methoden",
+    "alt_labels": ["Scrum", "Kanban", "agiles Arbeiten", "agile Vorgehensweisen", "agile Teams"],
+    "definition": "Iterative Vorgehensmodelle der Softwareentwicklung mit kurzen Feedbackzyklen."
+  },
+  {
+    "uri": "http://data.europa.eu/esco/skill/mini/informatik-studium",
+    "pref_label": "Studium der Informatik",
+    "alt_labels": ["Informatikstudium", "abgeschlossenes Informatikstudium"],
+    "definition": "Formaler Hochschulabschluss im Fach Informatik oder einem vergleichbaren Studiengang."
+  },
+  {
+    "uri": "http://data.europa.eu/esco/skill/mini/grundpflege",
+    "pref_label": "Grund- und Behandlungspflege",
+    "alt_labels": ["Grundpflege", "Behandlungspflege", "ganzheitliche Pflege"],
+    "definition": "Durchführung grundlegender und behandlungsbezogener pflegerischer Tätigkeiten."
+  },
+  {
+    "uri": "http://data.europa.eu/esco/skill/mini/pflegedokumentation",
+    "pref_label": "Pflegedokumentation",
+    "alt_labels": ["Pflegeverlauf dokumentieren", "Dokumentation der Pflege"],
+    "definition": "Systematische schriftliche Erfassung des Pflegeprozesses und -verlaufs."
+  },
+  {
+    "uri": "http://data.europa.eu/esco/skill/mini/pflegeplanung",
+    "pref_label": "Pflegeplanung",
+    "alt_labels": ["Pflege planen", "Pflegeprozessplanung"],
+    "definition": "Planung und Steuerung individueller Pflegemaßnahmen für pflegebedürftige Personen."
+  },
+  {
+    "uri": "http://data.europa.eu/esco/skill/mini/medikamentengabe",
+    "pref_label": "Verabreichung von Medikamenten",
+    "alt_labels": ["Medikamente verabreichen", "Medikamentengabe", "Arzneimittelgabe"],
+    "definition": "Verabreichung von Arzneimitteln nach ärztlicher Anordnung."
+  },
+  {
+    "uri": "http://data.europa.eu/esco/skill/mini/pflegeausbildung",
+    "pref_label": "Ausbildung als Pflegefachkraft",
+    "alt_labels": ["examinierte Pflegefachkraft", "Gesundheits- und Krankenpflege", "Altenpflege"],
+    "definition": "Abgeschlossene Berufsausbildung in der Gesundheits-, Kranken- oder Altenpflege."
+  },
+  {
+    "uri": "http://data.europa.eu/esco/skill/mini/schichtdienst",
+    "pref_label": "Bereitschaft zum Schichtdienst",
+    "alt_labels": ["Schichtdienst", "Schichtarbeit", "Wochenendarbeit"],
+    "definition": "Bereitschaft zur Arbeit in wechselnden Schichten einschließlich Wochenenden."
+  },
+  {
+    "uri": "http://data.europa.eu/esco/skill/mini/empathie",
+    "pref_label": "Einfühlungsvermögen",
+    "alt_labels": ["Empathie", "einfühlsamer Umgang", "Mitgefühl"],
+    "definition": "Fähigkeit, sich in die Lage und Bedürfnisse anderer Menschen hineinzuversetzen."
+  },
+  {
+    "uri": "http://data.europa.eu/esco/skill/mini/buchhaltung",
+    "pref_label": "Finanzbuchhaltung",
+    "alt_labels": ["Buchhaltung", "Buchführung", "laufende Buchhaltung"],
+    "definition": "Erfassung und Dokumentation geschäftlicher Vorgänge nach handelsrechtlichen Vorschriften."
+  },
+  {
+    "uri": "http://data.europa.eu/esco/skill/mini/rechnungswesen",
+    "pref_label": "Rechnungswesen",
+    "alt_labels": ["Rechnungswesen-Kenntnisse", "betriebliches Rechnungswesen"],
+    "definition": "Systematische Erfassung, Auswertung und Überwachung finanzieller Geschäftsvorfälle."
+  },
+  {
+    "uri": "http://data.europa.eu/esco/skill/mini/umsatzsteuer",
+    "pref_label": "Umsatzsteuervoranmeldung erstellen",
+    "alt_labels": ["Umsatzsteuervoranmeldung", "USt-Voranmeldung"],
+    "definition": "Erstellung periodischer Umsatzsteuervoranmeldungen für das Finanzamt."
+  },
+  {
+    "uri": "http://data.europa.eu/esco/skill/mini/jahresabschluss",
+    "pref_label": "Jahresabschluss vorbereiten",
+    "alt_labels": ["Jahresabschluss", "Monatsabschluss", "Abschlusserstellung"],
+    "definition": "Mitwirkung bei der Erstellung von Monats- und Jahresabschlüssen."
+  },
+  {
+    "uri": "http://data.europa.eu/esco/skill/mini/datev",
+    "pref_label": "DATEV anwenden",
+    "alt_labels": ["DATEV", "DATEV-Kenntnisse", "Buchhaltungssoftware"],
+    "definition": "Sicherer Umgang mit der Buchhaltungs- und Steuersoftware DATEV."
+  },
+  {
+    "uri": "http://data.europa.eu/esco/skill/mini/ms-office",
+    "pref_label": "MS-Office-Anwendungen",
+    "alt_labels": ["MS Office", "Microsoft Office", "Excel", "Office-Kenntnisse"],
+    "definition": "Anwendung gängiger Büro-Software wie Word, Excel und Outlook."
+  },
+  {
+    "uri": "http://data.europa.eu/esco/skill/mini/kaufm-ausbildung",
+    "pref_label": "Kaufmännische Ausbildung",
+    "alt_labels": ["Steuerfachangestellte", "kaufmännische Berufsausbildung"],
+    "definition": "Abgeschlossene Berufsausbildung in einem kaufmännischen oder steuerfachlichen Beruf."
   },
   {
     "uri": "http://data.europa.eu/esco/skill/mini/analytisches-denken",
@@ -50,8 +176,26 @@
   {
     "uri": "http://data.europa.eu/esco/skill/mini/eigenverantwortung",
     "pref_label": "Eigenverantwortliches Arbeiten",
-    "alt_labels": ["Selbstständigkeit", "Eigeninitiative", "eigenverantwortlich"],
+    "alt_labels": ["Selbstständigkeit", "Eigeninitiative", "eigenverantwortlich", "strukturierte Arbeitsweise"],
     "definition": "Fähigkeit, Aufgaben selbstständig und ergebnisorientiert zu bearbeiten."
+  },
+  {
+    "uri": "http://data.europa.eu/esco/skill/mini/zuverlaessigkeit",
+    "pref_label": "Zuverlässigkeit",
+    "alt_labels": ["Verantwortungsbewusstsein", "Gewissenhaftigkeit", "Sorgfalt"],
+    "definition": "Verlässliche und gewissenhafte Erfüllung übertragener Aufgaben."
+  },
+  {
+    "uri": "http://data.europa.eu/esco/skill/mini/diskretion",
+    "pref_label": "Diskretion",
+    "alt_labels": ["Verschwiegenheit", "vertraulicher Umgang mit Daten"],
+    "definition": "Vertraulicher und verantwortungsvoller Umgang mit sensiblen Informationen."
+  },
+  {
+    "uri": "http://data.europa.eu/esco/skill/mini/deutsch",
+    "pref_label": "Deutschkenntnisse",
+    "alt_labels": ["Deutsch", "deutsche Sprache", "Deutsch in Wort und Schrift"],
+    "definition": "Sprachkenntnisse in Deutsch in Wort und Schrift."
   },
   {
     "uri": "http://data.europa.eu/esco/skill/mini/englisch",
@@ -60,10 +204,16 @@
     "definition": "Sprachkenntnisse in Englisch in Wort und Schrift."
   },
   {
-    "uri": "http://data.europa.eu/esco/skill/mini/buchhaltung",
-    "pref_label": "Buchhaltung",
-    "alt_labels": ["Buchführung", "Finanzbuchhaltung", "Rechnungswesen"],
-    "definition": "Erfassung und Dokumentation geschäftlicher Vorgänge nach handelsrechtlichen Vorschriften."
+    "uri": "http://data.europa.eu/esco/skill/mini/projektmanagement",
+    "pref_label": "Projektmanagement",
+    "alt_labels": ["Projekte managen", "Projektsteuerung", "Projektleitung"],
+    "definition": "Planen, koordinieren und steuern von Projekten unter Berücksichtigung von Umfang, Zeit, Ressourcen und Qualität."
+  },
+  {
+    "uri": "http://data.europa.eu/esco/skill/mini/kundenberatung",
+    "pref_label": "Kundenberatung",
+    "alt_labels": ["Kundenbetreuung", "Beratung", "Kundenkontakt", "Mandantenbetreuung"],
+    "definition": "Beratung und Betreuung von Kundinnen und Kunden zu Produkten und Dienstleistungen."
   },
   {
     "uri": "http://data.europa.eu/esco/skill/mini/marketing",
@@ -75,13 +225,7 @@
     "uri": "http://data.europa.eu/esco/skill/mini/vertrieb",
     "pref_label": "Vertrieb",
     "alt_labels": ["Sales", "Verkauf", "Kundenakquise"],
-    "definition": "Aktivitäten zum Verkauf von Produkten und Dienstleistungen an Endkunden oder Geschäftskunden."
-  },
-  {
-    "uri": "http://data.europa.eu/esco/skill/mini/kundenberatung",
-    "pref_label": "Kundenberatung",
-    "alt_labels": ["Kundenbetreuung", "Beratung", "Kundenservice"],
-    "definition": "Beratung und Betreuung von Kundinnen und Kunden zu Produkten und Dienstleistungen."
+    "definition": "Aktivitäten zum Verkauf von Produkten und Dienstleistungen."
   },
   {
     "uri": "http://data.europa.eu/esco/skill/mini/fuehrerschein-b",

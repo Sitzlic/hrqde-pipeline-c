@@ -1,0 +1,35 @@
+[
+  {
+    "id": "it-data-engineer-001",
+    "source_uri": "https://example.com/stellen/it-data-engineer-001",
+    "crawl_date": "2026-07-01",
+    "platform": "example.com",
+    "employer": "Nordlicht Data Solutions GmbH",
+    "posting_date": "2026-06-20",
+    "title": "Data Engineer (m/w/d)",
+    "isco_group": 2,
+    "raw_text": "Die Nordlicht Data Solutions GmbH ist ein wachsendes Beratungshaus mit Sitz in Hamburg. Für den Ausbau unseres Datenplattform-Teams suchen wir zum nächstmöglichen Zeitpunkt eine Data Engineerin oder einen Data Engineer in Vollzeit.\n\nDeine Aufgaben:\nDu entwirfst und betreibst skalierbare Datenpipelines für die Verarbeitung großer Datenmengen. Du modellierst relationale und dokumentenorientierte Datenbanken und sorgst für deren Performance und Verfügbarkeit. Gemeinsam mit dem Analytics-Team überführst du Rohdaten in belastbare Datenprodukte.\n\nDein Profil:\nDu verfügst über ein abgeschlossenes Studium der Informatik oder eine vergleichbare Qualifikation. Fundierte Kenntnisse in Python und SQL setzen wir voraus. Erfahrung mit Cloud-Plattformen wie AWS sowie mit Containerisierung (Docker, Kubernetes) ist erforderlich. Kenntnisse in Datenbankdesign und im Aufbau von ETL-Prozessen runden dein Profil ab. Erfahrung mit Streaming-Technologien wie Apache Kafka ist von Vorteil. Sehr gute Deutsch- und Englischkenntnisse in Wort und Schrift sind zwingend erforderlich.\n\nWir erwarten ausgeprägtes analytisches Denken, eine strukturierte und eigenverantwortliche Arbeitsweise sowie Teamfähigkeit. Idealerweise bringst du Erfahrung in der Zusammenarbeit in agilen Teams mit.\n\nWir bieten flexible Arbeitszeiten, die Möglichkeit zum mobilen Arbeiten und ein attraktives Weiterbildungsbudget."
+  },
+  {
+    "id": "pflege-fachkraft-002",
+    "source_uri": "https://example.com/stellen/pflege-fachkraft-002",
+    "crawl_date": "2026-07-01",
+    "platform": "example.com",
+    "employer": "Seniorenresidenz Am Stadtpark gGmbH",
+    "posting_date": "2026-06-18",
+    "title": "Pflegefachkraft (m/w/d) in Voll- oder Teilzeit",
+    "isco_group": 3,
+    "raw_text": "Die Seniorenresidenz Am Stadtpark ist eine moderne Pflegeeinrichtung mit 120 Plätzen im Herzen von Freiburg. Zur Verstärkung unseres Teams suchen wir examinierte Pflegefachkräfte.\n\nIhre Aufgaben:\nSie übernehmen die ganzheitliche Grund- und Behandlungspflege unserer Bewohnerinnen und Bewohner. Sie dokumentieren den Pflegeverlauf sorgfältig und wirken bei der Pflegeplanung mit. Die Verabreichung von Medikamenten nach ärztlicher Anordnung gehört ebenso zu Ihrem Aufgabengebiet wie die Begleitung und Beratung der Angehörigen.\n\nIhr Profil:\nSie verfügen über eine abgeschlossene Ausbildung als Pflegefachkraft, Gesundheits- und Krankenpflegerin oder Altenpfleger. Erste Berufserfahrung ist wünschenswert, aber keine Voraussetzung. Wir erwarten Einfühlungsvermögen im Umgang mit pflegebedürftigen Menschen, Zuverlässigkeit und Verantwortungsbewusstsein. Bereitschaft zur Arbeit im Schichtdienst sowie an Wochenenden wird vorausgesetzt. Kenntnisse in der Pflegedokumentation und ein sicherer Umgang mit gängiger Dokumentationssoftware sind von Vorteil.\n\nWir bieten eine unbefristete Anstellung, eine tarifliche Vergütung nach AVR sowie umfangreiche Fort- und Weiterbildungsmöglichkeiten."
+  },
+  {
+    "id": "kaufm-buchhaltung-003",
+    "source_uri": "https://example.com/stellen/kaufm-buchhaltung-003",
+    "crawl_date": "2026-07-01",
+    "platform": "example.com",
+    "employer": "Steuerkanzlei Berger & Partner",
+    "posting_date": "2026-06-25",
+    "title": "Buchhalter / Finanzbuchhalter (m/w/d)",
+    "isco_group": 3,
+    "raw_text": "Die Steuerkanzlei Berger & Partner betreut mittelständische Unternehmen in allen steuerlichen und betriebswirtschaftlichen Fragen. Zur Verstärkung unseres Teams in München suchen wir eine Finanzbuchhalterin oder einen Finanzbuchhalter.\n\nIhre Aufgaben:\nSie bearbeiten die laufende Finanzbuchhaltung mehrerer Mandanten. Sie erstellen Umsatzsteuervoranmeldungen und wirken bei der Vorbereitung von Monats- und Jahresabschlüssen mit. Der Kontakt zu Mandanten und Behörden gehört zu Ihrem Arbeitsalltag.\n\nIhr Profil:\nSie haben eine abgeschlossene kaufmännische Ausbildung, idealerweise als Steuerfachangestellte oder Steuerfachangestellter. Fundierte Kenntnisse im Rechnungswesen und in der Buchhaltung sind erforderlich. Ein sicherer Umgang mit DATEV und den gängigen MS-Office-Anwendungen wird vorausgesetzt. Wir legen Wert auf eine sorgfältige und gewissenhafte Arbeitsweise sowie auf Diskretion im Umgang mit vertraulichen Daten. Kommunikationsstärke und ein freundliches Auftreten gegenüber Mandanten sind uns wichtig. Englischkenntnisse sind von Vorteil.\n\nWir bieten Ihnen einen sicheren Arbeitsplatz, geregelte Arbeitszeiten und eine leistungsgerechte Bezahlung."
+  }
+]

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import csv
 import json
 import logging
 import re
@@ -13,7 +14,7 @@ from spacy.language import Language
 
 from hrqde_c import __version__
 from hrqde_c.extractors import adj_noun, escoxlm_r
-from hrqde_c.mapping import esco
+from hrqde_c.mapping import dqr, esco
 from hrqde_c.models import (
     JobPostingDraft,
     MappingDecision,
@@ -30,9 +31,8 @@ log = logging.getLogger(__name__)
 
 SPACY_MODEL = "de_core_news_sm"
 MAPPING_THRESHOLD = 0.5
-# Begruendeter Default gemaess Lieferspec §5; Kalibrierung pro
-# ISCO-Hauptgruppe folgt mit der DQR-Heuristik (RC-C.2.5).
-DEFAULT_DQR_LEVEL = "DQR4"
+# top-3 behalten, damit sich der Threshold spaeter kalibrieren laesst (SA-C.2.02)
+MAPPING_TOP_K = 3
 
 # Signalwoerter fuer nice_to_have (Lieferspec §4)
 NICE_TO_HAVE_MARKERS = re.compile(
@@ -121,27 +121,37 @@ def aggregate(raw: RawAdvertisement, spans: list[SpanCandidate]) -> JobPostingDr
 
 def map_to_esco(spans: list[SpanCandidate]) -> list[SpanMapping]:
     index = esco.get_index()
-    mappings = []
+    mappings: list[SpanMapping] = []
+    accepted = 0
     for span in spans:
-        best = index.match(span.text, top_k=1)[0]
-        mappings.append(
-            SpanMapping(
-                id=f"mapping-{uuid.uuid4().hex[:8]}",
-                span_id=span.id,
-                concept_uri=best.concept.uri,
-                score=best.score,
-                decision=MappingDecision.ACCEPTED
-                if best.score >= MAPPING_THRESHOLD
-                else MappingDecision.REJECTED,
+        for rank, match in enumerate(index.match(span.text, top_k=MAPPING_TOP_K), start=1):
+            # nur Rang 1 kann accepted werden, der Rest laeuft als rejected mit
+            is_accept = rank == 1 and match.score >= MAPPING_THRESHOLD
+            accepted += int(is_accept)
+            mappings.append(
+                SpanMapping(
+                    id=f"mapping-{uuid.uuid4().hex[:8]}",
+                    span_id=span.id,
+                    concept_uri=match.concept.uri,
+                    score=match.score,
+                    decision=MappingDecision.ACCEPTED if is_accept
+                    else MappingDecision.REJECTED,
+                    rank=rank,
+                )
             )
-        )
-    log.info("mapping: %d Spans -> %d SpanMappings", len(spans), len(mappings))
+    log.info(
+        "mapping: %d Spans -> %d SpanMappings (%d akzeptiert)",
+        len(spans), len(mappings), accepted,
+    )
     return mappings
 
 
 def build_requirements(
-    spans: list[SpanCandidate], mappings: list[SpanMapping]
+    raw: RawAdvertisement,
+    spans: list[SpanCandidate],
+    mappings: list[SpanMapping],
 ) -> list[QualificationRequirement]:
+    required_level = dqr.default_for_isco_group(raw.isco_group)
     by_span = {m.span_id: m for m in mappings if m.decision == MappingDecision.ACCEPTED}
 
     # Dubletten pro Konzept-URI: hoechster Score gewinnt, must schlaegt nice_to_have
@@ -163,7 +173,7 @@ def build_requirements(
             QualificationRequirement(
                 id=f"req-{uuid.uuid4().hex[:8]}",
                 refers_to_competence=concept_uri,
-                required_level=DEFAULT_DQR_LEVEL,  # TODO DQR-Heuristik (RC-C.2.5)
+                required_level=required_level,
                 requirement_kind=span.requirement_kind,
                 provenance_confidence=mapping.score,
             )
@@ -247,6 +257,36 @@ def write_ttl(
     return path
 
 
+def write_mapping_csv(
+    raw: RawAdvertisement,
+    spans: list[SpanCandidate],
+    mappings: list[SpanMapping],
+    output_dir: Path,
+) -> Path:
+    """Alle Mappings (auch rejected) als CSV fuer die Stichprobenpruefung (AF-C.2.02)."""
+    span_by_id = {s.id: s for s in spans}
+    output_dir.mkdir(parents=True, exist_ok=True)
+    path = output_dir / f"{raw.id}_mappings.csv"
+    with path.open("w", encoding="utf-8", newline="") as fh:
+        writer = csv.writer(fh)
+        writer.writerow(
+            ["span_id", "span_text", "extractor", "rank", "concept_uri", "score", "decision"]
+        )
+        for m in sorted(mappings, key=lambda m: (m.span_id, m.rank)):
+            span = span_by_id.get(m.span_id)
+            writer.writerow([
+                m.span_id,
+                span.text if span else "",
+                span.extractor if span else "",
+                m.rank,
+                m.concept_uri,
+                f"{m.score:.4f}",
+                m.decision.value,
+            ])
+    log.info("csv: %d Mapping-Zeilen -> %s", len(mappings), path)
+    return path
+
+
 def write_run_metadata(
     output_dir: Path,
     input_path: Path,
@@ -272,7 +312,8 @@ def write_run_metadata(
             "esco_encoder": esco.DEFAULT_MODEL_ID,
             "esco_concepts": str(esco.DEFAULT_CONCEPTS_PATH),
             "mapping_threshold": MAPPING_THRESHOLD,
-            "default_dqr_level": DEFAULT_DQR_LEVEL,
+            "mapping_top_k": MAPPING_TOP_K,
+            "dqr_strategy": "ISCO-Hauptgruppen-Default (Fallback DQR4)",
         },
     }
     path = output_dir / "run_metadata.json"
@@ -289,7 +330,8 @@ def run(input_path: Path, output_dir: Path) -> list[Path]:
         spans = extract_spans(raw, processed)
         draft = aggregate(raw, spans)
         mappings = map_to_esco(draft.span_candidates)
-        requirements = build_requirements(draft.span_candidates, mappings)
+        write_mapping_csv(raw, draft.span_candidates, mappings, output_dir)
+        requirements = build_requirements(raw, draft.span_candidates, mappings)
         outputs.append(write_ttl(raw, requirements, output_dir))
     write_run_metadata(output_dir, input_path, outputs, len(raws))
     log.info("pipeline: fertig, %d TTL-Dateien geschrieben", len(outputs))
