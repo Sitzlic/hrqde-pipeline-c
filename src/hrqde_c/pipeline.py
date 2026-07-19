@@ -11,6 +11,7 @@ from pathlib import Path
 
 import spacy
 from spacy.language import Language
+from spacy.tokens import Doc
 
 from hrqde_c import __version__
 from hrqde_c.extractors import adj_noun, escoxlm_r
@@ -62,9 +63,7 @@ def acquire(input_path: Path) -> list[RawAdvertisement]:
     return raws
 
 
-def process_nlp(raw: RawAdvertisement) -> ProcessedAdvertisement:
-    nlp = _load_nlp()
-    doc = nlp(raw.raw_text)
+def process_nlp(raw: RawAdvertisement, doc: Doc) -> ProcessedAdvertisement:
     tokens = [
         Token(text=tok.text, pos=tok.pos_, lemma=tok.lemma_)
         for tok in doc
@@ -74,10 +73,8 @@ def process_nlp(raw: RawAdvertisement) -> ProcessedAdvertisement:
     return ProcessedAdvertisement(raw_id=raw.id, language="de", tokens=tokens)
 
 
-def classify_requirement_kind(raw_text: str, spans: list[SpanCandidate]) -> None:
+def classify_requirement_kind(doc: Doc, spans: list[SpanCandidate]) -> None:
     """Saetze mit Markern wie "von Vorteil": alle Spans darin werden nice_to_have."""
-    nlp = _load_nlp()
-    doc = nlp(raw_text)
     nice_ranges = [
         (sent.start_char, sent.end_char)
         for sent in doc.sents
@@ -92,13 +89,11 @@ def classify_requirement_kind(raw_text: str, spans: list[SpanCandidate]) -> None
                 break
 
 
-def extract_spans(
-    raw: RawAdvertisement, processed: ProcessedAdvertisement
-) -> list[SpanCandidate]:
-    # Beide Extraktionspfade laufen parallel und werden nicht zusammengelegt
-    # (SA-C.1.02) - das extractor-Feld haelt sie fuer UC-C.3 unterscheidbar.
-    spans = adj_noun.extract(raw, _load_nlp()) + escoxlm_r.extract(raw)
-    classify_requirement_kind(raw.raw_text, spans)
+def extract_spans(raw: RawAdvertisement, doc: Doc) -> list[SpanCandidate]:
+    # beide Pfade getrennt lassen (SA-C.1.02), das extractor-Feld
+    # unterscheidet sie fuer die Auswertung
+    spans = adj_noun.extract(raw, doc) + escoxlm_r.extract(raw)
+    classify_requirement_kind(doc, spans)
     by_extractor = {"adj_noun": 0, "escoxlm_r": 0}
     for s in spans:
         by_extractor[s.extractor] += 1
@@ -324,10 +319,13 @@ def write_run_metadata(
 
 def run(input_path: Path, output_dir: Path) -> list[Path]:
     raws = acquire(input_path)
+    nlp = _load_nlp()
     outputs: list[Path] = []
     for raw in raws:
-        processed = process_nlp(raw)
-        spans = extract_spans(raw, processed)
+        # einmal parsen, das Doc geht an alle spaCy-Schritte
+        doc = nlp(raw.raw_text)
+        process_nlp(raw, doc)
+        spans = extract_spans(raw, doc)
         draft = aggregate(raw, spans)
         mappings = map_to_esco(draft.span_candidates)
         write_mapping_csv(raw, draft.span_candidates, mappings, output_dir)

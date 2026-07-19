@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import logging
 
-from spacy.language import Language
 from spacy.tokens import Doc
 
 from hrqde_c.models import RawAdvertisement, SpanCandidate, SpanType
@@ -28,10 +27,9 @@ def _candidate_spans(doc: Doc):
         yield doc[token.i : head.i + 1]
 
 
-def extract(raw: RawAdvertisement, nlp: Language) -> list[SpanCandidate]:
+def extract(raw: RawAdvertisement, doc: Doc) -> list[SpanCandidate]:
     # TODO Uebersetzungsstufe fehlt noch (SA-C.1.03, Komposita-Problem),
     # bis dahin deutsches Original
-    doc = nlp(raw.raw_text)
     spans: list[SpanCandidate] = []
     for idx, span in enumerate(_candidate_spans(doc), start=1):
         spans.append(
