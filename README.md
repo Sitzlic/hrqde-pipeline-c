@@ -63,6 +63,10 @@ HRQDE_ENCODER="isy-thl/multilingual-e5-base-course-skill-tuned" hrqde-c -i ...
 - `data/shapes/` - SHACL-Shapes des Toolkits für die Validierung
 - `data/output/` - Pipeline-Output (TTL, CSV, Metadaten)
 
+## Beispiel
+
+Ein kompletter Durchlauf (Anzeige -> TTL -> Mapping-CSV) liegt in [`examples/`](examples/).
+
 ## Tests
 
 ```bash

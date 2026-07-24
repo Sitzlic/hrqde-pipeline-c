@@ -1,0 +1,72 @@
+@prefix hrqde:      <http://hr-qde.org/ontology/> .
+@prefix sitzler:    <http://hr-qde.org/data/sitzler/> .
+@prefix employer:   <http://hr-qde.org/data/sitzler/employer/> .
+@prefix esco-skill: <http://data.europa.eu/esco/skill/> .
+@prefix rdfs:       <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:        <http://www.w3.org/2001/XMLSchema#> .
+
+
+employer:seniorenresidenz-am-stadtpark-ggmbh
+  a           hrqde:Employer ;
+  rdfs:label  "Seniorenresidenz Am Stadtpark gGmbH"@de .
+
+sitzler:posting_554479e9
+  a                    hrqde:JobPosting ;
+  rdfs:label           "Pflegefachkraft (m/w/d) in Voll- oder Teilzeit"@de ;
+  hrqde:postingDate    "2026-06-18"^^xsd:date ;
+  hrqde:issuedBy       employer:seniorenresidenz-am-stadtpark-ggmbh ;
+  hrqde:sourceUrl      "https://example.com/stellen/pflege-fachkraft-002"^^xsd:anyURI ;
+  hrqde:hasRequirement sitzler:req_554479e9_1 ,
+                       sitzler:req_554479e9_2 ,
+                       sitzler:req_554479e9_3 ,
+                       sitzler:req_554479e9_4 ,
+                       sitzler:req_554479e9_5 ,
+                       sitzler:req_554479e9_6 .
+
+sitzler:req_554479e9_1
+  a                          hrqde:QualificationRequirement ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/mini/pflegeplanung> ;
+  hrqde:requiredLevel        hrqde:DQR5 ;
+  hrqde:requirementKind      "must" ;
+  hrqde:provenanceConfidence "0.65"^^xsd:decimal ;
+  hrqde:provenanceSource     "job_posting" .
+
+sitzler:req_554479e9_2
+  a                          hrqde:QualificationRequirement ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/mini/pflegeausbildung> ;
+  hrqde:requiredLevel        hrqde:DQR5 ;
+  hrqde:requirementKind      "must" ;
+  hrqde:provenanceConfidence "0.69"^^xsd:decimal ;
+  hrqde:provenanceSource     "job_posting" .
+
+sitzler:req_554479e9_3
+  a                          hrqde:QualificationRequirement ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/mini/grundpflege> ;
+  hrqde:requiredLevel        hrqde:DQR5 ;
+  hrqde:requirementKind      "must" ;
+  hrqde:provenanceConfidence "0.93"^^xsd:decimal ;
+  hrqde:provenanceSource     "job_posting" .
+
+sitzler:req_554479e9_4
+  a                          hrqde:QualificationRequirement ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/mini/erste-hilfe> ;
+  hrqde:requiredLevel        hrqde:DQR5 ;
+  hrqde:requirementKind      "nice_to_have" ;
+  hrqde:provenanceConfidence "0.54"^^xsd:decimal ;
+  hrqde:provenanceSource     "job_posting" .
+
+sitzler:req_554479e9_5
+  a                          hrqde:QualificationRequirement ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/mini/medikamentengabe> ;
+  hrqde:requiredLevel        hrqde:DQR5 ;
+  hrqde:requirementKind      "must" ;
+  hrqde:provenanceConfidence "0.87"^^xsd:decimal ;
+  hrqde:provenanceSource     "job_posting" .
+
+sitzler:req_554479e9_6
+  a                          hrqde:QualificationRequirement ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/mini/pflegedokumentation> ;
+  hrqde:requiredLevel        hrqde:DQR5 ;
+  hrqde:requirementKind      "nice_to_have" ;
+  hrqde:provenanceConfidence "1.00"^^xsd:decimal ;
+  hrqde:provenanceSource     "job_posting" .
