@@ -26,13 +26,14 @@ def _load(model_id: str) -> "Pipeline":
     return pipeline(model=model_id, aggregation_strategy="first")
 
 
-def _strip_trailing_punct(hit: dict) -> dict:
-    word = hit["word"]
-    end = hit["end"]
-    while word and word[-1] in TRAILING_PUNCT:
-        word = word[:-1]
+def _trim(hit: dict, text: str) -> dict:
+    # Offsets an den Rohtext anlegen, fuehrende/letzte Leerzeichen und Satzzeichen weg
+    start, end = hit["start"], hit["end"]
+    while start < end and text[start].isspace():
+        start += 1
+    while end > start and (text[end - 1] in TRAILING_PUNCT or text[end - 1].isspace()):
         end -= 1
-    return {**hit, "word": word, "end": end}
+    return {**hit, "start": start, "end": end}
 
 
 def _merge_adjacent(hits: list[dict]) -> list[dict]:
@@ -44,7 +45,6 @@ def _merge_adjacent(hits: list[dict]) -> list[dict]:
     for h in sorted_hits[1:]:
         prev = merged[-1]
         if h["start"] - prev["end"] <= 1:
-            prev["word"] = f"{prev['word']} {h['word']}"
             prev["end"] = h["end"]
             prev["score"] = (prev["score"] + h["score"]) / 2
         else:
@@ -52,17 +52,20 @@ def _merge_adjacent(hits: list[dict]) -> list[dict]:
     return merged
 
 
-def _postprocess(hits: list[dict]) -> list[dict]:
-    stripped = [_strip_trailing_punct(h) for h in hits]
-    return _merge_adjacent([h for h in stripped if h["word"]])
+def _postprocess(hits: list[dict], text: str) -> list[dict]:
+    # Span-Text kommt aus dem Rohtext statt aus hit["word"], die HF-Aggregation
+    # verliert dort Teile nach Whitespace (siehe DEVLOG 05.08.)
+    trimmed = [_trim(h, text) for h in hits]
+    merged = _merge_adjacent([h for h in trimmed if h["end"] > h["start"]])
+    return [{**h, "word": text[h["start"]:h["end"]]} for h in merged]
 
 
 def extract(raw: RawAdvertisement) -> list[SpanCandidate]:
     text = raw.raw_text
     labelled: list[tuple[SpanType, dict]] = []
-    for hit in _postprocess(_load(SKILL_MODEL)(text)):
+    for hit in _postprocess(_load(SKILL_MODEL)(text), text):
         labelled.append((SpanType.SKILL, hit))
-    for hit in _postprocess(_load(KNOWLEDGE_MODEL)(text)):
+    for hit in _postprocess(_load(KNOWLEDGE_MODEL)(text), text):
         labelled.append((SpanType.KNOWLEDGE, hit))
 
     spans: list[SpanCandidate] = []
