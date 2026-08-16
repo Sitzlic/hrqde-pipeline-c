@@ -12,7 +12,8 @@ Durchstich von Akquise bis TTL-Lieferung:
 - DQR-Niveau über ISCO-Hauptgruppen-Heuristik
 - TTL nach HR-QDE-Lieferspec, SHACL-validiert
 
-Akquise ist noch ein JSON-Reader, kein Crawler.
+Akquise: JSON-Reader plus Anbindung der BA-Jobsuche-API (`fetch`-Kommando,
+funktioniert nur mit deutscher IP, die API blockt Auslands-Anfragen).
 
 Reihenfolge der Stages in `pipeline.py`:
 
@@ -32,22 +33,38 @@ python -m spacy download de_core_news_sm
 
 ```bash
 # Ein Minimalbeispiel
-hrqde-c -i data/input/example_posting.json -o data/output -v
+hrqde-c run -i data/input/example_posting.json -o data/output -v
 
 # Drei realistische Anzeigen (IT, Pflege, kaufmännisch)
-hrqde-c -i data/input/postings_sample.json -o data/output -v
+hrqde-c run -i data/input/postings_sample.json -o data/output -v
+
+# Echte Anzeigen von der BA-Jobsuche holen (deutsche IP noetig)
+hrqde-c fetch --was "Pflegefachkraft" --wo Berlin -n 25 -o data/input/fetched.json
 ```
 
 Pro Lauf entstehen im Output-Verzeichnis: `<id>.ttl` (Lieferung),
 `<id>_mappings.csv` (alle Mapping-Kandidaten für die Stichprobenprüfung),
 `run_metadata.json` (Lauf-Parameter).
 
+### ESCO-Index
+
+Mitgeliefert ist nur ein Mini-Bestand (`data/esco/skills_mini.json`, 40 Konzepte).
+Den vollen Index (alle ~13.500 ESCO-Skills, Labels DE+EN) einmalig bauen:
+
+```bash
+python scripts/fetch_esco_skills.py
+```
+
+Liegt `data/esco/skills_full.json` danach vor, nutzt die Pipeline ihn automatisch.
+Beim ersten Lauf wird der Embedding-Cache gebaut, das dauert ein paar Minuten.
+Übersteuern per `HRQDE_ESCO_CONCEPTS=<pfad>`.
+
 ### Encoder wechseln
 
 Der ESCO-Encoder ist per Umgebungsvariable austauschbar:
 
 ```bash
-HRQDE_ENCODER="isy-thl/multilingual-e5-base-course-skill-tuned" hrqde-c -i ...
+HRQDE_ENCODER="isy-thl/multilingual-e5-base-course-skill-tuned" hrqde-c run -i ...
 ```
 
 ## Verzeichnisse
@@ -56,10 +73,11 @@ HRQDE_ENCODER="isy-thl/multilingual-e5-base-course-skill-tuned" hrqde-c -i ...
 - `src/hrqde_c/pipeline.py` - Stages und Orchestrierung
 - `src/hrqde_c/extractors/` - Span-Extraktoren (adj_noun, escoxlm_r)
 - `src/hrqde_c/mapping/` - ESCO-Index/Matching und DQR-Heuristik
+- `src/hrqde_c/acquisition/` - BA-Jobsuche-Anbindung
 - `src/hrqde_c/cli.py` - CLI
 - `scripts/` - Probeläufe (nicht Teil der Pipeline)
 - `data/input/` - Beispiel-Anzeigen (JSON)
-- `data/esco/` - Konzeptindex (Mini-Bootstrap) + Embeddings-Cache
+- `data/esco/` - Konzeptindex (Mini-Bootstrap, voller Index per Script) + Embeddings-Cache
 - `data/shapes/` - SHACL-Shapes des Toolkits für die Validierung
 - `data/output/` - Pipeline-Output (TTL, CSV, Metadaten)
 
