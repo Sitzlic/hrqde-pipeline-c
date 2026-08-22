@@ -17,9 +17,22 @@ if TYPE_CHECKING:
 
 log = logging.getLogger(__name__)
 
-DEFAULT_CONCEPTS_PATH = Path("data/esco/skills_mini.json")
+FULL_CONCEPTS_PATH = Path("data/esco/skills_full.json")
+MINI_CONCEPTS_PATH = Path("data/esco/skills_mini.json")
 DEFAULT_TOP_K = 3
 ENCODER_ENV = "HRQDE_ENCODER"
+CONCEPTS_ENV = "HRQDE_ESCO_CONCEPTS"
+
+
+def _default_concepts_path() -> Path:
+    env = os.environ.get(CONCEPTS_ENV)
+    if env:
+        return Path(env)
+    # voller Index sobald gebaut, sonst der Mini-Bestand
+    return FULL_CONCEPTS_PATH if FULL_CONCEPTS_PATH.exists() else MINI_CONCEPTS_PATH
+
+
+DEFAULT_CONCEPTS_PATH = _default_concepts_path()
 
 # E5-Modelle wollen query:/passage:-Prefixes, alle anderen laufen ohne
 ENCODER_PROFILES: dict[str, dict[str, str]] = {
@@ -78,11 +91,35 @@ def encode(
 class Match:
     concept: EscoConcept
     score: float
+    # das Label, ueber das der Treffer zustande kam (pref oder alt, DE oder EN)
+    label: str = ""
+
+
+def _label_table(concepts: list[EscoConcept]) -> tuple[list[str], list[int]]:
+    """Alle Labels flach, owners[i] zeigt auf das Konzept zu labels[i]."""
+    labels: list[str] = []
+    owners: list[int] = []
+    for idx, concept in enumerate(concepts):
+        for label in [concept.pref_label, *concept.alt_labels]:
+            labels.append(label)
+            owners.append(idx)
+    return labels, owners
 
 
 class EscoIndex:
-    def __init__(self, concepts: list[EscoConcept], embeddings: "torch.Tensor", model_id: str):
+    """Matcht auf Label-Ebene, dedupliziert die Treffer aufs Konzept."""
+
+    def __init__(
+        self,
+        concepts: list[EscoConcept],
+        labels: list[str],
+        owners: list[int],
+        embeddings: "torch.Tensor",
+        model_id: str,
+    ):
         self.concepts = concepts
+        self.labels = labels
+        self.owners = owners
         self.embeddings = embeddings
         self.model_id = model_id
 
@@ -91,9 +128,23 @@ class EscoIndex:
 
         query_emb = encode([query], model_id=self.model_id, mode="query")[0]
         scores = torch.matmul(self.embeddings, query_emb)
-        top_scores, top_idx = torch.topk(scores, k=min(top_k, len(self.concepts)))
-        return [Match(concept=self.concepts[i], score=float(s))
-                for s, i in zip(top_scores, top_idx)]
+        # mehr Labels ziehen als Konzepte gebraucht werden, ein Konzept kann
+        # mit mehreren Labels vorne liegen
+        k = min(max(top_k * 5, 20), len(self.labels))
+        top_scores, top_idx = torch.topk(scores, k=k)
+
+        best: dict[int, Match] = {}
+        for score, label_idx in zip(top_scores, top_idx):
+            owner = self.owners[label_idx]
+            if owner not in best:
+                best[owner] = Match(
+                    concept=self.concepts[owner],
+                    score=float(score),
+                    label=self.labels[label_idx],
+                )
+            if len(best) >= top_k:
+                break
+        return sorted(best.values(), key=lambda m: m.score, reverse=True)
 
 
 def _slug(model_id: str) -> str:
@@ -104,7 +155,7 @@ def _cache_path(concepts_path: Path, model_id: str) -> Path:
     return concepts_path.parent / f"{concepts_path.stem}.{_slug(model_id)}.embeddings.pt"
 
 
-def _load_from_cache(cache_path: Path, expected_uris: list[str], expected_model: str):
+def _load_from_cache(cache_path: Path, expected_labels: list[str], expected_model: str):
     import torch
 
     if not cache_path.exists():
@@ -116,17 +167,19 @@ def _load_from_cache(cache_path: Path, expected_uris: list[str], expected_model:
         return None
     if blob.get("model_id") != expected_model:
         return None
-    if list(blob.get("uris", [])) != expected_uris:
-        log.info("esco-index: Cache-Konzepte weichen ab, neu bauen")
+    if list(blob.get("labels", [])) != expected_labels:
+        log.info("esco-index: Cache-Labels weichen ab, neu bauen")
         return None
     return blob["embeddings"]
 
 
-def _save_cache(cache_path: Path, embeddings, uris: list[str], model_id: str) -> None:
+def _save_cache(cache_path: Path, embeddings, labels: list[str], model_id: str) -> None:
     import torch
 
     cache_path.parent.mkdir(parents=True, exist_ok=True)
-    torch.save({"model_id": model_id, "uris": uris, "embeddings": embeddings}, cache_path)
+    torch.save(
+        {"model_id": model_id, "labels": labels, "embeddings": embeddings}, cache_path
+    )
     log.info("esco-index: Cache geschrieben nach %s", cache_path)
 
 
@@ -136,17 +189,21 @@ def get_index(
     model_id: str = DEFAULT_MODEL_ID,
 ) -> EscoIndex:
     concepts = load_concepts(concepts_path)
-    uris = [c.uri for c in concepts]
+    labels, owners = _label_table(concepts)
     cache_path = _cache_path(concepts_path, model_id)
 
-    cached = _load_from_cache(cache_path, uris, model_id)
+    cached = _load_from_cache(cache_path, labels, model_id)
     if cached is not None:
-        log.info("esco-index: Cache-Hit (%d Konzepte, %s)", len(concepts), model_id)
-        return EscoIndex(concepts, cached, model_id)
+        log.info(
+            "esco-index: Cache-Hit (%d Konzepte, %d Labels, %s)",
+            len(concepts), len(labels), model_id,
+        )
+        return EscoIndex(concepts, labels, owners, cached, model_id)
 
-    log.info("esco-index: encode %d Konzepte mit %s", len(concepts), model_id)
-    embeddings = encode(
-        [c.pref_label for c in concepts], model_id=model_id, mode="passage"
+    log.info(
+        "esco-index: encode %d Labels aus %d Konzepten mit %s",
+        len(labels), len(concepts), model_id,
     )
-    _save_cache(cache_path, embeddings, uris, model_id)
-    return EscoIndex(concepts, embeddings, model_id)
+    embeddings = encode(labels, model_id=model_id, mode="passage")
+    _save_cache(cache_path, embeddings, labels, model_id)
+    return EscoIndex(concepts, labels, owners, embeddings, model_id)

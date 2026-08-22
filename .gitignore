@@ -28,3 +28,6 @@ data/output/*
 
 # Embeddings-Cache
 data/esco/*.embeddings.pt
+
+# Voller ESCO-Bestand ist per scripts/fetch_esco_skills.py reproduzierbar
+data/esco/skills_full.json
