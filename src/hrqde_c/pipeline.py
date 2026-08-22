@@ -132,6 +132,7 @@ def map_to_esco(spans: list[SpanCandidate]) -> list[SpanMapping]:
                     decision=MappingDecision.ACCEPTED if is_accept
                     else MappingDecision.REJECTED,
                     rank=rank,
+                    matched_label=match.label,
                 )
             )
     log.info(
@@ -265,7 +266,8 @@ def write_mapping_csv(
     with path.open("w", encoding="utf-8", newline="") as fh:
         writer = csv.writer(fh)
         writer.writerow(
-            ["span_id", "span_text", "extractor", "rank", "concept_uri", "score", "decision"]
+            ["span_id", "span_text", "extractor", "rank", "concept_uri",
+             "matched_label", "score", "decision"]
         )
         for m in sorted(mappings, key=lambda m: (m.span_id, m.rank)):
             span = span_by_id.get(m.span_id)
@@ -275,6 +277,7 @@ def write_mapping_csv(
                 span.extractor if span else "",
                 m.rank,
                 m.concept_uri,
+                m.matched_label,
                 f"{m.score:.4f}",
                 m.decision.value,
             ])

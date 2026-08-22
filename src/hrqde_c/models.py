@@ -80,6 +80,8 @@ class SpanMapping(BaseModel):
     decision: MappingDecision
     # 1 = bester Treffer unter den Top-k
     rank: int = 1
+    # ueber welches Konzept-Label (pref oder alt, DE oder EN) der Treffer kam
+    matched_label: str = ""
 
 
 class QualificationRequirement(BaseModel):
