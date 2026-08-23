@@ -90,3 +90,27 @@ class QualificationRequirement(BaseModel):
     required_level: str
     requirement_kind: RequirementKind
     provenance_confidence: float
+
+
+class GoldSpan(BaseModel):
+    text: str
+    span_type: SpanType
+    # Positionen im Token-Bestand der Anzeige, Ende exklusiv
+    token_start: int
+    token_end: int
+    # optionale manuell zugeordnete Referenz-URI fuer die Mapping-Bewertung
+    esco_uri: str | None = None
+
+
+class GoldAdvertisement(BaseModel):
+    """Annotierte Variante einer RawAdvertisement (BIO-Schema, SA-C.3.02)."""
+
+    raw_id: str
+    # Kalibrierteil tunt den Threshold, Testteil misst (SA-C.3.06)
+    partition: Literal["kalibrier", "test"]
+    tokens: list[str]
+    bio_labels: list[str]
+    spans: list[GoldSpan]
+    annotator_ids: list[str]
+    # Cohen's Kappa, nur bei doppelt annotierten Anzeigen belegt (SA-C.3.03)
+    inter_annotator_agreement: float | None = None
