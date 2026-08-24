@@ -78,10 +78,14 @@ hrqde-c gold-sample -i data/input/fetched.json -n 60 --seed 42
 
 # 2. data/gold/labelstudio_config.xml als Labeling-Interface in Label Studio
 #    einrichten, labelstudio_tasks.json importieren, annotieren, Export als JSON
+
+# 3. Export uebernehmen (BIO-Schema, bei Doppelannotation Cohen's Kappa)
+hrqde-c gold-import -e ls_export.json
 ```
 
-Der Split steht im `sample_manifest.json`: Kalibrierteil fuer das
-Threshold-Tuning, Testteil fuer den Extraktor-Vergleich.
+Der Split steht im `sample_manifest.json` und wird beim Import wieder
+angelegt: Kalibrierteil fuer das Threshold-Tuning, Testteil fuer den
+Extraktor-Vergleich.
 
 ## Verzeichnisse
 
@@ -89,7 +93,7 @@ Threshold-Tuning, Testteil fuer den Extraktor-Vergleich.
 - `src/hrqde_c/pipeline.py` - Stages und Orchestrierung
 - `src/hrqde_c/extractors/` - Span-Extraktoren (adj_noun, escoxlm_r)
 - `src/hrqde_c/mapping/` - ESCO-Index/Matching und DQR-Heuristik
-- `src/hrqde_c/gold/` - Gold-Standard-Kette (Sampling, Label Studio, BIO)
+- `src/hrqde_c/gold/` - Gold-Standard-Kette (Sampling, Label Studio, BIO, Kappa)
 - `src/hrqde_c/acquisition/` - BA-Jobsuche-Anbindung
 - `src/hrqde_c/cli.py` - CLI
 - `scripts/` - Probeläufe (nicht Teil der Pipeline)

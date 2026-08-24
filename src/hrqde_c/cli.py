@@ -84,3 +84,43 @@ def gold_sample(
     label_studio.write_tasks(tasks, out_dir / "labelstudio_tasks.json")
     label_studio.write_config(out_dir / "labelstudio_config.xml")
     typer.echo(f"{len(tasks)} Tasks mit Vor-Annotationen -> {out_dir}")
+
+
+@app.command("gold-import")
+def gold_import(
+    export: Path = typer.Option(..., "--export", "-e", help="Label-Studio-Export (JSON)."),
+    manifest: Path = typer.Option(
+        Path("data/gold/sample_manifest.json"), "--manifest", "-m"
+    ),
+    output: Path = typer.Option(Path("data/gold/gold_advertisements.json"), "--output", "-o"),
+    verbose: bool = typer.Option(False, "--verbose", "-v"),
+) -> None:
+    """Label-Studio-Export als BIO-Gold-Standard übernehmen, Kappa berechnen."""
+    logging.basicConfig(
+        level=logging.DEBUG if verbose else logging.INFO,
+        format="%(levelname)-7s %(name)s | %(message)s",
+    )
+    import json
+
+    from hrqde_c.gold import label_studio, sampling
+
+    payload = json.loads(export.read_text(encoding="utf-8"))
+    partition = sampling.load_manifest(manifest)
+    gold = label_studio.import_gold(payload, partition)
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(
+        json.dumps([g.model_dump(exclude_none=True) for g in gold],
+                   ensure_ascii=False, indent=1),
+        encoding="utf-8",
+    )
+    doubled = [g for g in gold if g.inter_annotator_agreement is not None]
+    parts = {"kalibrier": 0, "test": 0}
+    for g in gold:
+        parts[g.partition] += 1
+    typer.echo(
+        f"{len(gold)} GoldAdvertisements -> {output} "
+        f"({parts['kalibrier']} Kalibrier, {parts['test']} Test)"
+    )
+    if doubled:
+        mean = sum(g.inter_annotator_agreement for g in doubled) / len(doubled)
+        typer.echo(f"Doppelannotation: {len(doubled)} Anzeigen, mittleres Kappa {mean:.3f}")

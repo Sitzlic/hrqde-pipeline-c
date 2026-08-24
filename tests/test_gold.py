@@ -1,6 +1,7 @@
 import json
 
 from hrqde_c.gold import bio, label_studio, sampling
+from hrqde_c.gold.adjudicator import cohens_kappa
 from hrqde_c.models import RawAdvertisement, SpanCandidate, SpanType
 
 TEXT = "Wir suchen Erfahrung mit Java und agilen Methoden."
@@ -61,6 +62,15 @@ def test_manifest_roundtrip(tmp_path):
     assert json.loads(path.read_text())["seed"] == 42
 
 
+def test_kappa_perfect_and_known_value():
+    assert cohens_kappa(["O", "B-Skill"], ["O", "B-Skill"]) == 1.0
+    # 10 Tokens, 7 Uebereinstimmungen, bekanntes Rechenbeispiel
+    a = ["O"] * 6 + ["B-Skill"] * 4
+    b = ["O"] * 5 + ["B-Skill"] * 5
+    # observed = 0.9, expected = 0.6*0.5 + 0.4*0.5 = 0.5 -> kappa = 0.8
+    assert abs(cohens_kappa(a, b) - 0.8) < 1e-9
+
+
 def test_union_spans_removes_exact_duplicates():
     java = TEXT.index("Java")
     def span(extractor, start, end, span_type):
@@ -74,3 +84,35 @@ def test_union_spans_removes_exact_duplicates():
         span("escoxlm_r", java, java + 4, SpanType.SKILL),      # anderer Typ, bleibt
     ]
     assert len(label_studio.union_spans(spans)) == 2
+
+
+def test_import_gold_with_double_annotation():
+    java = TEXT.index("Java")
+    def annotation(annotator, end_offset):
+        return {
+            "completed_by": annotator,
+            "result": [{
+                "from_name": "label", "to_name": "text", "type": "labels",
+                "value": {"start": java, "end": java + end_offset,
+                          "text": TEXT[java:java + end_offset], "labels": ["Knowledge"]},
+            }],
+        }
+    export = [{
+        "data": {"raw_id": "ad-1", "title": "Titel", "partition": "test", "text": TEXT},
+        "annotations": [annotation({"email": "manuel@example.org"}, 4), annotation(2, 4)],
+    }]
+    gold = label_studio.import_gold(export, {"ad-1": "test"})
+    assert len(gold) == 1
+    g = gold[0]
+    assert g.partition == "test"
+    assert g.annotator_ids == ["manuel@example.org", "2"]
+    assert g.inter_annotator_agreement == 1.0
+    assert g.spans[0].text == "Java"
+
+
+def test_import_gold_skips_unknown_and_unannotated():
+    export = [
+        {"data": {"raw_id": "fremd", "text": TEXT}, "annotations": [{"result": []}]},
+        {"data": {"raw_id": "ad-1", "text": TEXT}, "annotations": []},
+    ]
+    assert label_studio.import_gold(export, {"ad-1": "test"}) == []
