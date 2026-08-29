@@ -102,6 +102,27 @@ class GoldSpan(BaseModel):
     esco_uri: str | None = None
 
 
+class EvaluationRun(BaseModel):
+    """Ein Auswertungslauf einer Extraktionsvariante gegen den Testteil."""
+
+    id: str
+    variant: str
+    gold_dataset: str
+    partition: Literal["kalibrier", "test"] = "test"
+    advertisement_count: int
+    run_timestamp: str
+
+
+class EvaluationResult(BaseModel):
+    run_id: str
+    precision: float
+    recall: float
+    f1: float
+    true_positives: int
+    false_positives: int
+    false_negatives: int
+
+
 class GoldAdvertisement(BaseModel):
     """Annotierte Variante einer RawAdvertisement (BIO-Schema, SA-C.3.02)."""
 

@@ -124,3 +124,47 @@ def gold_import(
     if doubled:
         mean = sum(g.inter_annotator_agreement for g in doubled) / len(doubled)
         typer.echo(f"Doppelannotation: {len(doubled)} Anzeigen, mittleres Kappa {mean:.3f}")
+
+
+@app.command()
+def evaluate(
+    gold: Path = typer.Option(
+        Path("data/gold/gold_advertisements.json"), "--gold", "-g"
+    ),
+    input: Path = typer.Option(..., "--input", "-i", help="JSON mit den Rohanzeigen."),
+    out_dir: Path = typer.Option(Path("data/gold"), "--out-dir", "-o"),
+    verbose: bool = typer.Option(False, "--verbose", "-v"),
+) -> None:
+    """Extraktionsvarianten gegen den Testteil auswerten (Span-F1) und
+    den Vergleichsbericht als CSV exportieren."""
+    logging.basicConfig(
+        level=logging.DEBUG if verbose else logging.INFO,
+        format="%(levelname)-7s %(name)s | %(message)s",
+    )
+    import json
+
+    from hrqde_c.gold import evaluator, reporter
+    from hrqde_c.models import GoldAdvertisement
+
+    gold_ads = [GoldAdvertisement(**g) for g in json.loads(gold.read_text(encoding="utf-8"))]
+    raws_by_id = {r.id: r for r in pipeline.acquire(input)}
+    runs = [
+        evaluator.evaluate_variant(variant, gold_ads, raws_by_id, str(gold))
+        for variant in evaluator.VARIANTS
+    ]
+    out_dir.mkdir(parents=True, exist_ok=True)
+    (out_dir / "evaluation_runs.json").write_text(
+        json.dumps(
+            [{"run": run.model_dump(), "result": result.model_dump()} for run, result in runs],
+            ensure_ascii=False, indent=1,
+        ),
+        encoding="utf-8",
+    )
+    reporter.write_report(runs, out_dir / "evaluation_report.csv")
+    for run, result in sorted(runs, key=lambda r: r[1].f1, reverse=True):
+        typer.echo(
+            f"{run.variant:16s} P={result.precision:.3f} R={result.recall:.3f} "
+            f"F1={result.f1:.3f} (tp={result.true_positives} fp={result.false_positives} "
+            f"fn={result.false_negatives})"
+        )
+    typer.echo(f"Bericht -> {out_dir / 'evaluation_report.csv'}")

@@ -87,6 +87,17 @@ Der Split steht im `sample_manifest.json` und wird beim Import wieder
 angelegt: Kalibrierteil fuer das Threshold-Tuning, Testteil fuer den
 Extraktor-Vergleich.
 
+Auswertung gegen den fertigen Gold Standard:
+
+```bash
+# Span-F1 pro Extraktionsvariante gegen den Testteil, Bericht als CSV
+hrqde-c evaluate -i data/input/fetched.json
+```
+
+Die Variante ADJ+NOUN nach Uebersetzung ins Englische ist konzipiert,
+aber im Prototyp nicht realisiert (deklarierte Abweichung), der
+Evaluator laeuft deshalb mit zwei Varianten.
+
 ## Verzeichnisse
 
 - `src/hrqde_c/models.py` - Datenklassen (Pydantic)
