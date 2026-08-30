@@ -168,3 +168,35 @@ def evaluate(
             f"fn={result.false_negatives})"
         )
     typer.echo(f"Bericht -> {out_dir / 'evaluation_report.csv'}")
+
+
+@app.command()
+def calibrate(
+    gold: Path = typer.Option(
+        Path("data/gold/gold_advertisements.json"), "--gold", "-g"
+    ),
+    output: Path = typer.Option(Path("data/gold/calibration.csv"), "--output", "-o"),
+    verbose: bool = typer.Option(False, "--verbose", "-v"),
+) -> None:
+    """Schwellenwert-Tabelle auf dem Kalibrierteil erzeugen (Tuning-Grundlage
+    für den Mapping-Threshold)."""
+    logging.basicConfig(
+        level=logging.DEBUG if verbose else logging.INFO,
+        format="%(levelname)-7s %(name)s | %(message)s",
+    )
+    import csv
+    import json
+
+    from hrqde_c.gold import calibration
+    from hrqde_c.models import GoldAdvertisement
+
+    gold_ads = [GoldAdvertisement(**g) for g in json.loads(gold.read_text(encoding="utf-8"))]
+    rows = calibration.sweep(gold_ads)
+    output.parent.mkdir(parents=True, exist_ok=True)
+    with output.open("w", encoding="utf-8", newline="") as fh:
+        writer = csv.DictWriter(fh, fieldnames=list(rows[0].keys()))
+        writer.writeheader()
+        writer.writerows(rows)
+    best = max(rows, key=lambda r: r["f1"])
+    typer.echo(f"{len(rows)} Schwellenwerte -> {output}")
+    typer.echo(f"Bestes F1 {best['f1']:.3f} bei Threshold {best['threshold']}")

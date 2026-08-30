@@ -1,6 +1,6 @@
 import csv
 
-from hrqde_c.gold import evaluator, reporter
+from hrqde_c.gold import calibration, evaluator, reporter
 from hrqde_c.models import (
     GoldAdvertisement,
     GoldSpan,
@@ -94,3 +94,22 @@ def test_report_csv_sorted_by_f1(tmp_path):
     rows = list(csv.DictReader(path.open()))
     assert [r["variant"] for r in rows] == ["escoxlm-r-de", "adj-noun-de"]
     assert rows[0]["f1"] == "1.0"
+
+
+def test_calibration_sweep():
+    gold = _gold(partition="kalibrier", esco_uri="uri:java")
+
+    def fake_match(text):
+        return ("uri:java", 0.7)
+
+    rows = calibration.sweep([gold], thresholds=[0.5, 0.8], match_fn=fake_match)
+    assert rows[0] == {"threshold": 0.5, "precision": 1.0, "recall": 1.0,
+                       "f1": 1.0, "accepted": 1, "references": 1}
+    assert rows[1]["accepted"] == 0
+    assert rows[1]["f1"] == 0.0
+
+
+def test_calibration_requires_reference_uris():
+    import pytest
+    with pytest.raises(ValueError):
+        calibration.sweep([_gold(partition="kalibrier")], match_fn=lambda t: ("x", 1.0))

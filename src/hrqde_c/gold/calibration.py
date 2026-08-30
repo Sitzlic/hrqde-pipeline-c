@@ -1,0 +1,63 @@
+"""Schwellenwert-Bestimmung auf dem Kalibrierteil (SA-C.3.05).
+
+Fuer jede GoldSpan mit manuell zugeordneter esco_uri wird der Mapper
+befragt. Pro Schwellenwert entsteht eine Zeile Precision/Recall/F1,
+die Tabelle ist die Tuning-Grundlage fuer AF-C.2.03.
+"""
+
+from __future__ import annotations
+
+import logging
+from typing import Callable
+
+from hrqde_c.models import GoldAdvertisement
+
+log = logging.getLogger(__name__)
+
+DEFAULT_THRESHOLDS = [round(0.30 + i * 0.05, 2) for i in range(13)]  # 0.30 .. 0.90
+
+
+def _default_match_fn(text: str) -> tuple[str, float]:
+    from hrqde_c.mapping import esco
+
+    match = esco.get_index().match(text, top_k=1)[0]
+    return match.concept.uri, match.score
+
+
+def sweep(
+    gold_ads: list[GoldAdvertisement],
+    thresholds: list[float] | None = None,
+    match_fn: Callable[[str], tuple[str, float]] | None = None,
+) -> list[dict]:
+    thresholds = thresholds or DEFAULT_THRESHOLDS
+    match = match_fn or _default_match_fn
+
+    references = [
+        (span.text, span.esco_uri)
+        for gold in gold_ads if gold.partition == "kalibrier"
+        for span in gold.spans if span.esco_uri
+    ]
+    if not references:
+        raise ValueError(
+            "Kalibrierteil enthaelt keine GoldSpans mit esco_uri, "
+            "erst Referenz-URIs annotieren"
+        )
+    log.info("calibration: %d Referenz-Spans im Kalibrierteil", len(references))
+
+    scored = [(match(text), uri) for text, uri in references]
+    rows = []
+    for threshold in thresholds:
+        accepted = [(pred, uri) for (pred, uri) in scored if pred[1] >= threshold]
+        correct = sum(1 for (pred_uri, _), uri in accepted if pred_uri == uri)
+        precision = correct / len(accepted) if accepted else 0.0
+        recall = correct / len(references)
+        f1 = 2 * precision * recall / (precision + recall) if precision + recall else 0.0
+        rows.append({
+            "threshold": threshold,
+            "precision": round(precision, 4),
+            "recall": round(recall, 4),
+            "f1": round(f1, 4),
+            "accepted": len(accepted),
+            "references": len(references),
+        })
+    return rows

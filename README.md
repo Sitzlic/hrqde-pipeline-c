@@ -92,6 +92,10 @@ Auswertung gegen den fertigen Gold Standard:
 ```bash
 # Span-F1 pro Extraktionsvariante gegen den Testteil, Bericht als CSV
 hrqde-c evaluate -i data/input/fetched.json
+
+# Schwellenwert-Tabelle auf dem Kalibrierteil
+# (braucht GoldSpans mit manuell zugeordneter esco_uri)
+hrqde-c calibrate
 ```
 
 Die Variante ADJ+NOUN nach Uebersetzung ins Englische ist konzipiert,
