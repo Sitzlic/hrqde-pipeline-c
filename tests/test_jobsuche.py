@@ -1,10 +1,10 @@
 from hrqde_c.acquisition import jobsuche
 
 SEARCH_HIT = {
-    "refnr": "17606-43991424-223-S",
-    "titel": "Duales Studium Informatik (m/w/d)",
-    "arbeitgeber": "Biotronik SE & Co. KG",
-    "aktuelleVeroeffentlichungsdatum": "2026-08-30",
+    "referenznummer": "17606-43991424-223-S",
+    "stellenangebotsTitel": "Duales Studium Informatik (m/w/d)",
+    "firma": "Biotronik SE & Co. KG",
+    "datumErsteVeroeffentlichung": "2026-08-30",
 }
 
 DETAIL = {
@@ -26,7 +26,7 @@ def test_mapping_builds_raw_advertisement():
 
 
 def test_posting_date_falls_back_to_detail_timestamp():
-    hit = {**SEARCH_HIT, "aktuelleVeroeffentlichungsdatum": None}
+    hit = {**SEARCH_HIT, "datumErsteVeroeffentlichung": None}
     raw = jobsuche.to_raw_advertisement(hit, DETAIL, crawl_date="2026-09-06")
     assert raw.posting_date == "2026-08-15"
 

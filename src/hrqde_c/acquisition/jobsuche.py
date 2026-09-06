@@ -5,7 +5,8 @@ erst der Detail-Aufruf den Beschreibungs-Volltext. Anzeigen ohne Volltext
 (extern gehostete Inserate) werden uebersprungen.
 
 Achtung: der Dienst blockt Anfragen aus dem Ausland, Aufrufe brauchen
-eine deutsche IP (oder VPN).
+eine deutsche IP (oder VPN). Suche laeuft ueber /pc/v6/jobs, die alten
+v4-Suchpfade liefern pauschal 403.
 """
 
 from __future__ import annotations
@@ -23,7 +24,7 @@ from hrqde_c.models import RawAdvertisement
 
 log = logging.getLogger(__name__)
 
-BASE_URL = "https://rest.arbeitsagentur.de/jobboerse/jobsuche-service/pc/v4"
+BASE_URL = "https://rest.arbeitsagentur.de/jobboerse/jobsuche-service"
 # oeffentlicher Key der freien API (bund.dev)
 API_KEY = "jobboerse-jobsuche"
 PLATFORM = "ba_jobsuche"
@@ -45,15 +46,15 @@ def search(was: str, wo: str | None = None, size: int = 25, page: int = 1) -> li
     params: dict = {"was": was, "size": size, "page": page}
     if wo:
         params["wo"] = wo
-    payload = _get(f"{BASE_URL}/jobs?{urlencode(params)}")
-    hits = payload.get("stellenangebote") or []
+    payload = _get(f"{BASE_URL}/pc/v6/jobs?{urlencode(params)}")
+    hits = payload.get("ergebnisliste") or []
     log.info("jobsuche: %r Seite %d -> %d Treffer", was, page, len(hits))
     return hits
 
 
 def details(refnr: str) -> dict:
     encoded = base64.b64encode(refnr.encode("utf-8")).decode("ascii")
-    return _get(f"{BASE_URL}/jobdetails/{encoded}")
+    return _get(f"{BASE_URL}/pc/v4/jobdetails/{encoded}")
 
 
 def _iso_date(value: str | None) -> str | None:
@@ -66,11 +67,11 @@ def _iso_date(value: str | None) -> str | None:
 def to_raw_advertisement(hit: dict, detail: dict, crawl_date: str) -> RawAdvertisement | None:
     """None, wenn kein Volltext vorliegt (externes Inserat)."""
     text = (detail.get("stellenangebotsBeschreibung") or "").strip()
-    refnr = hit.get("refnr") or detail.get("referenznummer")
+    refnr = hit.get("referenznummer") or detail.get("referenznummer")
     if not text or not refnr:
         return None
     posting_date = (
-        _iso_date(hit.get("aktuelleVeroeffentlichungsdatum"))
+        _iso_date(hit.get("datumErsteVeroeffentlichung"))
         or _iso_date(detail.get("datumErsteVeroeffentlichung"))
         or crawl_date
     )
@@ -79,9 +80,10 @@ def to_raw_advertisement(hit: dict, detail: dict, crawl_date: str) -> RawAdverti
         source_uri=DETAIL_PAGE.format(refnr=refnr),
         crawl_date=crawl_date,
         platform=PLATFORM,
-        employer=hit.get("arbeitgeber") or detail.get("firma") or "unbekannt",
+        employer=hit.get("firma") or detail.get("firma") or "unbekannt",
         posting_date=posting_date,
-        title=hit.get("titel") or hit.get("beruf") or detail.get("stellenangebotsTitel") or refnr,
+        title=hit.get("stellenangebotsTitel") or hit.get("hauptberuf")
+        or detail.get("stellenangebotsTitel") or refnr,
         raw_text=text,
     )
 
@@ -95,7 +97,7 @@ def fetch(was: str, wo: str | None = None, count: int = 25) -> list[RawAdvertise
         if not hits:
             break
         for hit in hits:
-            refnr = hit.get("refnr")
+            refnr = hit.get("referenznummer")
             if not refnr:
                 continue
             time.sleep(REQUEST_DELAY)
