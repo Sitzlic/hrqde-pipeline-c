@@ -31,6 +31,7 @@ data/esco/*.embeddings.pt
 
 # Voller ESCO-Bestand ist per scripts/fetch_esco_skills.py reproduzierbar
 data/esco/skills_full.json
+data/esco/occupations_full.json
 
 # Gezogene BA-Rohdaten bleiben lokal (Lizenzlage Weitergabe offen), per fetch reproduzierbar
 data/input/ba_*.json

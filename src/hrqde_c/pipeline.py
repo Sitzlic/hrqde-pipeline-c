@@ -146,9 +146,12 @@ def build_requirements(
     raw: RawAdvertisement,
     spans: list[SpanCandidate],
     mappings: list[SpanMapping],
-) -> list[QualificationRequirement]:
-    required_level = dqr.default_for_isco_group(raw.isco_group)
+) -> tuple[list[QualificationRequirement], dqr.DqrResult]:
     by_span = {m.span_id: m for m in mappings if m.decision == MappingDecision.ACCEPTED}
+    dqr_result = dqr.determine(
+        [m.concept_uri for m in by_span.values()], raw.isco_group
+    )
+    required_level = dqr_result.level
 
     # Dubletten pro Konzept-URI: hoechster Score gewinnt, must schlaegt nice_to_have
     best_per_concept: dict[str, tuple[SpanCandidate, SpanMapping]] = {}
@@ -175,10 +178,10 @@ def build_requirements(
             )
         )
     log.info(
-        "requirements: %d Spans -> %d Requirements (konsolidiert)",
-        len(spans), len(requirements),
+        "requirements: %d Spans -> %d Requirements (konsolidiert, DQR via %s)",
+        len(spans), len(requirements), dqr_result.stage,
     )
-    return requirements
+    return requirements, dqr_result
 
 
 # --- TTL-Lieferung gemaess hrqde-shape-demand.ttl (Toolkit v0.1.1) ---
@@ -207,6 +210,7 @@ def write_ttl(
     raw: RawAdvertisement,
     requirements: list[QualificationRequirement],
     output_dir: Path,
+    occupation_uri: str | None = None,
 ) -> Path:
     output_dir.mkdir(parents=True, exist_ok=True)
     path = output_dir / f"{raw.id}.ttl"
@@ -228,6 +232,9 @@ def write_ttl(
     lines.append(f'  hrqde:postingDate    "{raw.posting_date}"^^xsd:date ;')
     lines.append(f"  hrqde:issuedBy       employer:{employer_slug} ;")
     lines.append(f'  hrqde:sourceUrl      "{raw.source_uri}"^^xsd:anyURI ;')
+    if occupation_uri:
+        # Berufsprofil aus dem DQR-Occupation-Lookup (Shape: maxCount 1, optional)
+        lines.append(f"  hrqde:refersToOccupation <{occupation_uri}> ;")
     if req_uris:
         joined = " ,\n                       ".join(req_uris)
         lines.append(f"  hrqde:hasRequirement {joined} .")
@@ -311,7 +318,8 @@ def write_run_metadata(
             "esco_concepts": str(esco.DEFAULT_CONCEPTS_PATH),
             "mapping_threshold": MAPPING_THRESHOLD,
             "mapping_top_k": MAPPING_TOP_K,
-            "dqr_strategy": "ISCO-Hauptgruppen-Default (Fallback DQR4)",
+            "dqr_strategy": "Occupation-Lookup -> ISCO-Hauptgruppen-Default -> DQR4",
+            "esco_occupations": str(dqr.DEFAULT_OCCUPATIONS_PATH),
         },
     }
     path = output_dir / "run_metadata.json"
@@ -332,8 +340,9 @@ def run(input_path: Path, output_dir: Path) -> list[Path]:
         draft = aggregate(raw, spans)
         mappings = map_to_esco(draft.span_candidates)
         write_mapping_csv(raw, draft.span_candidates, mappings, output_dir)
-        requirements = build_requirements(raw, draft.span_candidates, mappings)
-        outputs.append(write_ttl(raw, requirements, output_dir))
+        requirements, dqr_result = build_requirements(raw, draft.span_candidates, mappings)
+        outputs.append(write_ttl(raw, requirements, output_dir,
+                                 occupation_uri=dqr_result.occupation_uri))
     write_run_metadata(output_dir, input_path, outputs, len(raws))
     log.info("pipeline: fertig, %d TTL-Dateien geschrieben", len(outputs))
     return outputs

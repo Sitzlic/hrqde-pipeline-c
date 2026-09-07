@@ -72,6 +72,15 @@ class EscoConcept(BaseModel):
     definition: str | None = None
 
 
+class EscoOccupation(BaseModel):
+    uri: str
+    pref_label: str
+    # ESCO-Code ist ISCO-08-basiert, erste Ziffer = Hauptgruppe
+    code: str
+    isco_major_group: int
+    essential_skills: list[str] = Field(default_factory=list)
+
+
 class SpanMapping(BaseModel):
     id: str
     span_id: str
