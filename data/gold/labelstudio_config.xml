@@ -1,0 +1,8 @@
+<View>
+  <Header value="$title"/>
+  <Labels name="label" toName="text">
+    <Label value="Skill" background="#5b9bd5"/>
+    <Label value="Knowledge" background="#70ad47"/>
+  </Labels>
+  <Text name="text" value="$text"/>
+</View>

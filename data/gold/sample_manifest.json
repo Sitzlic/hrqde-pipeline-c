@@ -1,0 +1,247 @@
+{
+ "drawn_at": "2026-09-07",
+ "seed": 42,
+ "calib_ratio": 0.5,
+ "items": [
+  {
+   "raw_id": "ba-14225-41591ff05f4632bb-s",
+   "partition": "kalibrier"
+  },
+  {
+   "raw_id": "ba-12951-9dc2d9e1-f4a1-4ec7-s",
+   "partition": "kalibrier"
+  },
+  {
+   "raw_id": "ba-11949-17342639-s",
+   "partition": "kalibrier"
+  },
+  {
+   "raw_id": "ba-11949-17343163-s",
+   "partition": "kalibrier"
+  },
+  {
+   "raw_id": "ba-11119-4931584305-s",
+   "partition": "kalibrier"
+  },
+  {
+   "raw_id": "ba-14225-58e09469e3fa22cb-s",
+   "partition": "kalibrier"
+  },
+  {
+   "raw_id": "ba-14225-8040a9d9fb64da90-s",
+   "partition": "kalibrier"
+  },
+  {
+   "raw_id": "ba-14225-911c6f103a50c580-s",
+   "partition": "kalibrier"
+  },
+  {
+   "raw_id": "ba-17560-4a3f52a9fe294cb-s",
+   "partition": "kalibrier"
+  },
+  {
+   "raw_id": "ba-13520-0067236306-s",
+   "partition": "kalibrier"
+  },
+  {
+   "raw_id": "ba-12288-4930441243-s",
+   "partition": "kalibrier"
+  },
+  {
+   "raw_id": "ba-11949-17342505-s",
+   "partition": "kalibrier"
+  },
+  {
+   "raw_id": "ba-12826-sa0146826-jb5240336-s",
+   "partition": "kalibrier"
+  },
+  {
+   "raw_id": "ba-12288-4930444218-s",
+   "partition": "kalibrier"
+  },
+  {
+   "raw_id": "ba-11949-17343132-s",
+   "partition": "kalibrier"
+  },
+  {
+   "raw_id": "ba-11949-17341044-s",
+   "partition": "kalibrier"
+  },
+  {
+   "raw_id": "ba-10001-1003624661-s",
+   "partition": "kalibrier"
+  },
+  {
+   "raw_id": "ba-11852-968259611-s",
+   "partition": "kalibrier"
+  },
+  {
+   "raw_id": "ba-14225-99591b953bbe90a6-s",
+   "partition": "kalibrier"
+  },
+  {
+   "raw_id": "ba-11949-17340438-s",
+   "partition": "kalibrier"
+  },
+  {
+   "raw_id": "ba-18384-6ja67mtdmv93197s-s",
+   "partition": "kalibrier"
+  },
+  {
+   "raw_id": "ba-12288-4928900553-s",
+   "partition": "kalibrier"
+  },
+  {
+   "raw_id": "ba-11949-17343091-s",
+   "partition": "kalibrier"
+  },
+  {
+   "raw_id": "ba-12265-172860-jb5240749-s",
+   "partition": "kalibrier"
+  },
+  {
+   "raw_id": "ba-12288-4931110359-s",
+   "partition": "kalibrier"
+  },
+  {
+   "raw_id": "ba-11852-968267972-s",
+   "partition": "kalibrier"
+  },
+  {
+   "raw_id": "ba-13869-13858813-s",
+   "partition": "kalibrier"
+  },
+  {
+   "raw_id": "ba-12122-218873-1794303-0-s",
+   "partition": "kalibrier"
+  },
+  {
+   "raw_id": "ba-10001-1003636961-s",
+   "partition": "kalibrier"
+  },
+  {
+   "raw_id": "ba-14225-80e9ac703d50529d-s",
+   "partition": "kalibrier"
+  },
+  {
+   "raw_id": "ba-11119-4931573809-s",
+   "partition": "test"
+  },
+  {
+   "raw_id": "ba-12265-348169-jb5240721-s",
+   "partition": "test"
+  },
+  {
+   "raw_id": "ba-14225-de1b502c2c2d3b72-s",
+   "partition": "test"
+  },
+  {
+   "raw_id": "ba-11949-17339477-s",
+   "partition": "test"
+  },
+  {
+   "raw_id": "ba-14927-13ofp95aruj-s",
+   "partition": "test"
+  },
+  {
+   "raw_id": "ba-12122-218399-1794480-0-s",
+   "partition": "test"
+  },
+  {
+   "raw_id": "ba-14225-e14cfd616d6b6573-s",
+   "partition": "test"
+  },
+  {
+   "raw_id": "ba-10001-1003656722-s",
+   "partition": "test"
+  },
+  {
+   "raw_id": "ba-20639-wr7xg7wn33-s",
+   "partition": "test"
+  },
+  {
+   "raw_id": "ba-12618-183477-s",
+   "partition": "test"
+  },
+  {
+   "raw_id": "ba-11949-17340278-s",
+   "partition": "test"
+  },
+  {
+   "raw_id": "ba-12618-181108-s",
+   "partition": "test"
+  },
+  {
+   "raw_id": "ba-11949-17343195-s",
+   "partition": "test"
+  },
+  {
+   "raw_id": "ba-14225-5dea5d9a7e0711de-s",
+   "partition": "test"
+  },
+  {
+   "raw_id": "ba-14225-615f81cdda989c27-s",
+   "partition": "test"
+  },
+  {
+   "raw_id": "ba-12288-4931041039-s",
+   "partition": "test"
+  },
+  {
+   "raw_id": "ba-14225-f6598430a20568bb-s",
+   "partition": "test"
+  },
+  {
+   "raw_id": "ba-12633-cdc64752-jb5240507-s",
+   "partition": "test"
+  },
+  {
+   "raw_id": "ba-11949-17342387-s",
+   "partition": "test"
+  },
+  {
+   "raw_id": "ba-11949-17342463-s",
+   "partition": "test"
+  },
+  {
+   "raw_id": "ba-11949-17248909-s",
+   "partition": "test"
+  },
+  {
+   "raw_id": "ba-12032-rd2da72g2-s",
+   "partition": "test"
+  },
+  {
+   "raw_id": "ba-12265-418411-jb5240876-s",
+   "partition": "test"
+  },
+  {
+   "raw_id": "ba-11949-17341129-s",
+   "partition": "test"
+  },
+  {
+   "raw_id": "ba-14225-03ed20a293cea730-s",
+   "partition": "test"
+  },
+  {
+   "raw_id": "ba-14225-58c6381e53e3d521-s",
+   "partition": "test"
+  },
+  {
+   "raw_id": "ba-11949-17342482-s",
+   "partition": "test"
+  },
+  {
+   "raw_id": "ba-12288-4931605586-s",
+   "partition": "test"
+  },
+  {
+   "raw_id": "ba-11949-17338675-s",
+   "partition": "test"
+  },
+  {
+   "raw_id": "ba-11119-4931585957-s",
+   "partition": "test"
+  }
+ ]
+}
