@@ -54,7 +54,7 @@ class SpanCandidate(BaseModel):
     span_type: SpanType
     char_start: int
     char_end: int
-    extractor: Literal["adj_noun", "escoxlm_r"]
+    extractor: Literal["adj_noun", "escoxlm_r", "adj_noun_en"]
     requirement_kind: RequirementKind = RequirementKind.MUST
     score: float | None = None
 

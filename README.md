@@ -98,9 +98,11 @@ hrqde-c evaluate -i data/input/fetched.json
 hrqde-c calibrate
 ```
 
-Die Variante ADJ+NOUN nach Uebersetzung ins Englische ist konzipiert,
-aber im Prototyp nicht realisiert (deklarierte Abweichung), der
-Evaluator laeuft deshalb mit zwei Varianten.
+Die dritte Variante ADJ+NOUN nach Uebersetzung (`extractors/adj_noun_en.py`,
+Helsinki-NLP/opus-mt-de-en, braucht `python -m spacy download en_core_web_sm`)
+liefert Spans auf dem uebersetzten Text. Ihre Offsets sind deshalb nicht
+gegen den deutschen Gold Standard vergleichbar (dafuer fehlt ein
+Wort-Alignment), der Span-F1-Vergleich laeuft mit zwei Varianten.
 
 ## Verzeichnisse
 
