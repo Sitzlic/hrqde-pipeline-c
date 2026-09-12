@@ -19,8 +19,9 @@ from urllib.request import Request, urlopen
 
 BULK_URL = "https://ec.europa.eu/esco/api/resource/occupation"
 SCHEME = "http://data.europa.eu/esco/concept-scheme/member-occupations"
-# Seitenbreiten fuer die Bisektion um serverseitig kaputte Konzepte herum
-WIDTHS = [200, 100, 50, 25, 5, 1]
+# Seitenbreiten fuer die Bisektion. Der Occupations-Endpoint deckelt bei 50
+# (limit>50 -> HTTP 500), deshalb startet die Bisektion dort.
+WIDTHS = [50, 25, 5, 1]
 RETRIES = 3
 
 
@@ -88,13 +89,15 @@ def main() -> None:
     parser.add_argument("--out", type=Path, default=Path("data/esco/occupations_full.json"))
     args = parser.parse_args()
 
-    first = _get(WIDTHS[0], 0)
-    if first is None:
-        raise RuntimeError("schon die erste Seite liefert HTTP 500")
-    total = first["total"]
-    items: list[dict] = list(first["_embedded"].values())
+    # total ueber eine Mini-Seite holen, die erste grosse Seite kann selbst
+    # kaputt sein und laeuft deshalb wie alle anderen durch die Bisektion
+    probe = _get(1, 0)
+    if probe is None:
+        raise RuntimeError("Endpoint liefert schon fuer limit=1 HTTP 500")
+    total = probe["total"]
+    items: list[dict] = []
     skipped: list[int] = []
-    page_no = 1
+    page_no = 0
     while len(items) + len(skipped) < total:
         collect(0, page_no, items, skipped)
         page_no += 1
