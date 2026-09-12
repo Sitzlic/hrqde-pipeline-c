@@ -67,6 +67,21 @@ Der ESCO-Encoder ist per Umgebungsvariable austauschbar:
 HRQDE_ENCODER="isy-thl/multilingual-e5-base-course-skill-tuned" hrqde-c run -i ...
 ```
 
+## Neo4j-Ablage (optional)
+
+Die TTL-Lieferung laesst sich ueber neosemantics in einen Graphen laden:
+
+```bash
+docker compose up -d                 # Neo4j 5 mit n10s-Plugin
+pip install '.[graph]'               # neo4j-Treiber
+hrqde-c run -i data/input/... -o data/output
+hrqde-c load-neo4j -i data/output    # TTL -> Graph
+```
+
+Browser unter http://localhost:7474 (neo4j / hrqde-dev). Der Import laeuft
+ueber `n10s.rdf.import.inline`, die Vokabular-Labels tragen den
+registrierten Prefix `hrqde__` (z. B. `hrqde__JobPosting`).
+
 ## Gold Standard
 
 Werkzeugkette fuer den annotierten Referenzbestand:
@@ -111,6 +126,7 @@ Wort-Alignment), der Span-F1-Vergleich laeuft mit zwei Varianten.
 - `src/hrqde_c/extractors/` - Span-Extraktoren (adj_noun, escoxlm_r)
 - `src/hrqde_c/mapping/` - ESCO-Index/Matching und DQR-Heuristik
 - `src/hrqde_c/gold/` - Gold-Standard-Kette (Sampling, Label Studio, BIO, Kappa)
+- `src/hrqde_c/graph/` - Neo4j-Import der TTL-Lieferung (neosemantics)
 - `src/hrqde_c/acquisition/` - BA-Jobsuche-Anbindung
 - `src/hrqde_c/cli.py` - CLI
 - `scripts/` - Probeläufe (nicht Teil der Pipeline)

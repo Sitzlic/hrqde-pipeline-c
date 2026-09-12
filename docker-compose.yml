@@ -1,0 +1,19 @@
+# Neo4j mit neosemantics fuer die Ablage der TTL-Lieferung (RC-C.2.3)
+#
+#   docker compose up -d
+#   hrqde-c load-neo4j -i data/output
+#   Browser: http://localhost:7474 (neo4j / hrqde-dev)
+services:
+  neo4j:
+    image: neo4j:5
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    environment:
+      NEO4J_AUTH: neo4j/hrqde-dev
+      NEO4J_PLUGINS: '["n10s"]'
+    volumes:
+      - neo4j-data:/data
+
+volumes:
+  neo4j-data:

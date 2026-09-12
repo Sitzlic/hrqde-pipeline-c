@@ -200,3 +200,23 @@ def calibrate(
     best = max(rows, key=lambda r: r["f1"])
     typer.echo(f"{len(rows)} Schwellenwerte -> {output}")
     typer.echo(f"Bestes F1 {best['f1']:.3f} bei Threshold {best['threshold']}")
+
+
+@app.command("load-neo4j")
+def load_neo4j(
+    input_dir: Path = typer.Option(Path("data/output"), "--input", "-i",
+                                   help="Verzeichnis mit TTL-Dateien."),
+    uri: str = typer.Option("bolt://localhost:7687", "--uri"),
+    user: str = typer.Option("neo4j", "--user"),
+    password: str = typer.Option("hrqde-dev", "--password"),
+    verbose: bool = typer.Option(False, "--verbose", "-v"),
+) -> None:
+    """TTL-Lieferung über neosemantics in Neo4j ablegen (docker compose up -d)."""
+    logging.basicConfig(
+        level=logging.DEBUG if verbose else logging.INFO,
+        format="%(levelname)-7s %(name)s | %(message)s",
+    )
+    from hrqde_c.graph import neo4j_import
+
+    files, triples = neo4j_import.load_directory(input_dir, uri, user, password)
+    typer.echo(f"{files} TTL-Dateien, {triples} Tripel -> {uri}")
