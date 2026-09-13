@@ -70,7 +70,10 @@ def _chunks(text: str) -> list[tuple[int, str]]:
     Satz- und Zeilenenden. Kurze Texte laufen als ein Stueck durch."""
     if len(text) <= MAX_CHUNK_CHARS:
         return [(0, text)]
-    pieces = [m.span() for m in re.finditer(r"[^\n.!?]*(?:[\n.!?]+|$)", text) if m.end() > m.start()]
+    pieces = [
+        m.span() for m in re.finditer(r"[^\n.!?]*(?:[\n.!?]+|$)", text)
+        if m.end() > m.start()
+    ]
     chunks: list[tuple[int, str]] = []
     start = end = None
     for ps, pe in pieces:

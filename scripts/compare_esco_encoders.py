@@ -11,7 +11,6 @@ from pathlib import Path
 import torch
 from sentence_transformers import SentenceTransformer
 
-
 CANDIDATES = [
     ("baseline SBERT", "sentence-transformers/paraphrase-multilingual-mpnet-base-v2", None, None),
     ("TH Luebeck ESCO", "isy-thl/multilingual-e5-base-course-skill-tuned", "query: ", "passage: "),

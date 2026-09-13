@@ -148,9 +148,7 @@ def build_requirements(
     mappings: list[SpanMapping],
 ) -> tuple[list[QualificationRequirement], dqr.DqrResult]:
     by_span = {m.span_id: m for m in mappings if m.decision == MappingDecision.ACCEPTED}
-    dqr_result = dqr.determine(
-        [m.concept_uri for m in by_span.values()], raw.isco_group
-    )
+    dqr_result = dqr.determine(raw.title, raw.isco_group)
     required_level = dqr_result.level
 
     # Dubletten pro Konzept-URI: hoechster Score gewinnt, must schlaegt nice_to_have
@@ -196,6 +194,18 @@ TTL_PREFIX = """@prefix hrqde:      <http://hr-qde.org/ontology/> .
 """
 
 
+def _ttl_escape(value: str) -> str:
+    # Turtle-String-Literale: Backslash, Anführungszeichen und Zeilenumbrueche
+    # maskieren, sonst zerlegt ein " im Arbeitgebernamen die Datei
+    return (
+        value.replace("\\", "\\\\")
+        .replace('"', '\\"')
+        .replace("\n", "\\n")
+        .replace("\r", "")
+        .replace("\t", " ")
+    )
+
+
 def _slugify(value: str) -> str:
     slug = re.sub(r"[^a-z0-9]+", "-", value.lower()).strip("-")
     return slug or "unbenannt"
@@ -223,15 +233,15 @@ def write_ttl(
 
     lines.append(f"employer:{employer_slug}")
     lines.append("  a           hrqde:Employer ;")
-    lines.append(f'  rdfs:label  "{raw.employer}"@de .')
+    lines.append(f'  rdfs:label  "{_ttl_escape(raw.employer)}"@de .')
     lines.append("")
 
     lines.append(f"sitzler:posting_{posting_id}")
     lines.append("  a                    hrqde:JobPosting ;")
-    lines.append(f'  rdfs:label           "{raw.title}"@de ;')
+    lines.append(f'  rdfs:label           "{_ttl_escape(raw.title)}"@de ;')
     lines.append(f'  hrqde:postingDate    "{raw.posting_date}"^^xsd:date ;')
     lines.append(f"  hrqde:issuedBy       employer:{employer_slug} ;")
-    lines.append(f'  hrqde:sourceUrl      "{raw.source_uri}"^^xsd:anyURI ;')
+    lines.append(f'  hrqde:sourceUrl      "{_ttl_escape(raw.source_uri)}"^^xsd:anyURI ;')
     if occupation_uri:
         # Berufsprofil aus dem DQR-Occupation-Lookup (Shape: maxCount 1, optional)
         lines.append(f"  hrqde:refersToOccupation <{occupation_uri}> ;")
@@ -318,7 +328,7 @@ def write_run_metadata(
             "esco_concepts": str(esco.DEFAULT_CONCEPTS_PATH),
             "mapping_threshold": MAPPING_THRESHOLD,
             "mapping_top_k": MAPPING_TOP_K,
-            "dqr_strategy": "Occupation-Lookup -> ISCO-Hauptgruppen-Default -> DQR4",
+            "dqr_strategy": "Titel-Occupation-Lookup -> ISCO-Hauptgruppen-Default -> DQR4",
             "esco_occupations": str(dqr.DEFAULT_OCCUPATIONS_PATH),
         },
     }

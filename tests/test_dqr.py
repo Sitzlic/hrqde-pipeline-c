@@ -1,53 +1,51 @@
-import json
-
 from hrqde_c.mapping import dqr
 from hrqde_c.models import EscoOccupation
 
 
-def _occ(uri, group, skills):
-    return EscoOccupation(uri=uri, pref_label=uri, code=f"{group}223.1",
-                          isco_major_group=group, essential_skills=skills)
+def _occ(uri, group, label):
+    return EscoOccupation(uri=uri, pref_label=label, code=f"{group}223.1",
+                          isco_major_group=group, essential_skills=[])
 
 
-def test_lookup_majority_wins():
-    occs = (
-        _occ("occ:pflege", 3, ["s:1", "s:2", "s:3"]),
-        _occ("occ:it", 2, ["s:9"]),
-    )
-    assert dqr.lookup(["s:1", "s:2", "s:9"], occs).uri == "occ:pflege"
+def _index(labels_groups):
+    occs = tuple(_occ(f"occ:{i}", g, lbl) for i, (lbl, g) in enumerate(labels_groups))
+    emb = dqr.esco.encode([o.pref_label for o in occs], mode="passage")
+    return occs, emb
 
 
-def test_lookup_requires_majority_and_unique_top():
-    occs = (
-        _occ("occ:a", 2, ["s:1"]),
-        _occ("occ:b", 3, ["s:2"]),
-    )
-    # Gleichstand (je 1 Stimme) -> kein eindeutiger Treffer
-    assert dqr.lookup(["s:1", "s:2"], occs) is None
-    # 1 von 3 ist keine Mehrheit
-    assert dqr.lookup(["s:1", "s:8", "s:9"], (occs[0],)) is None
+def test_normalize_title_strips_gender_tags():
+    assert dqr._normalize_title("Softwareentwickler (m/w/d)") == "Softwareentwickler"
+    assert dqr._normalize_title("Buchhalter/in") == "Buchhalter"
 
 
-def test_determine_three_stages(tmp_path, monkeypatch):
-    occ_file = tmp_path / "occs.json"
-    occ_file.write_text(json.dumps([{
-        "uri": "http://data.europa.eu/esco/occupation/x", "pref_label": "Testberuf",
-        "code": "2512.1", "isco_major_group": 2, "essential_skills": ["s:1", "s:2"],
-    }]))
-    monkeypatch.setenv(dqr.OCCUPATIONS_ENV, str(occ_file))
-    dqr._load_occupations.cache_clear()
+def test_lookup_matches_clear_title():
+    occs, emb = _index([("Softwareentwickler", 2), ("Krankenpfleger", 5)])
+    hit = dqr.lookup("Softwareentwickler (m/w/d)", occs, emb)
+    assert hit is not None and hit.isco_major_group == 2
 
-    # Stufe 1: Mehrheit der Konzepte in den Essential Skills
-    r = dqr.determine(["s:1", "s:2"], isco_group=9)
+
+def test_lookup_returns_none_below_threshold():
+    # ein voellig fremder Titel darf kein Profil erzwingen
+    occs, emb = _index([("Softwareentwickler", 2), ("Krankenpfleger", 5)])
+    assert dqr.lookup("Zoologischer Garteninspektor", occs, emb) is None
+
+
+def test_lookup_empty_index():
+    assert dqr.lookup("Softwareentwickler", (), None) is None
+
+
+def test_determine_three_stages(monkeypatch):
+    occs, emb = _index([("Softwareentwickler", 2)])
+    monkeypatch.setattr(dqr, "_occupation_index", lambda *a: (occs, emb))
+
+    r = dqr.determine("Softwareentwickler (m/w/d)", isco_group=9)
     assert (r.level, r.stage) == ("DQR6", "occupation-lookup")
-    assert r.occupation_uri == "http://data.europa.eu/esco/occupation/x"
+    assert r.occupation_uri == "occ:0"
 
-    # Stufe 2: kein Lookup-Treffer, ISCO-Gruppe der Anzeige greift
-    r = dqr.determine(["s:8", "s:9"], isco_group=9)
+    # kein Titel-Treffer -> ISCO-Gruppe der Anzeige
+    r = dqr.determine("Zoologischer Garteninspektor", isco_group=9)
     assert (r.level, r.occupation_uri, r.stage) == ("DQR2", None, "isco-default")
 
-    # Stufe 3: weder Treffer noch ISCO-Gruppe
-    r = dqr.determine([], isco_group=None)
+    # weder Treffer noch ISCO-Gruppe
+    r = dqr.determine("Zoologischer Garteninspektor", isco_group=None)
     assert (r.level, r.occupation_uri, r.stage) == ("DQR4", None, "fallback")
-
-    dqr._load_occupations.cache_clear()
