@@ -1,67 +1,67 @@
-span_id,span_text,extractor,rank,concept_uri,score,decision
-pflege-fachkraft-002-adjn-1,moderne Pflegeeinrichtung,adj_noun,1,http://data.europa.eu/esco/skill/mini/pflegeplanung,0.6317,accepted
-pflege-fachkraft-002-adjn-1,moderne Pflegeeinrichtung,adj_noun,2,http://data.europa.eu/esco/skill/mini/pflegeausbildung,0.5463,rejected
-pflege-fachkraft-002-adjn-1,moderne Pflegeeinrichtung,adj_noun,3,http://data.europa.eu/esco/skill/mini/pflegedokumentation,0.4668,rejected
-pflege-fachkraft-002-adjn-10,unbefristete Anstellung,adj_noun,1,http://data.europa.eu/esco/skill/mini/umsatzsteuer,0.3906,rejected
-pflege-fachkraft-002-adjn-10,unbefristete Anstellung,adj_noun,2,http://data.europa.eu/esco/skill/mini/ms-office,0.3748,rejected
-pflege-fachkraft-002-adjn-10,unbefristete Anstellung,adj_noun,3,http://data.europa.eu/esco/skill/mini/pflegeausbildung,0.3655,rejected
-pflege-fachkraft-002-adjn-11,tarifliche Vergütung,adj_noun,1,http://data.europa.eu/esco/skill/mini/pflegeausbildung,0.3861,rejected
-pflege-fachkraft-002-adjn-11,tarifliche Vergütung,adj_noun,2,http://data.europa.eu/esco/skill/mini/vertrieb,0.3854,rejected
-pflege-fachkraft-002-adjn-11,tarifliche Vergütung,adj_noun,3,http://data.europa.eu/esco/skill/mini/grundpflege,0.3230,rejected
-pflege-fachkraft-002-adjn-12,umfangreiche Fort- und Weiterbildungsmöglichkeiten,adj_noun,1,http://data.europa.eu/esco/skill/mini/pflegeausbildung,0.5156,accepted
-pflege-fachkraft-002-adjn-12,umfangreiche Fort- und Weiterbildungsmöglichkeiten,adj_noun,2,http://data.europa.eu/esco/skill/mini/umsatzsteuer,0.4227,rejected
-pflege-fachkraft-002-adjn-12,umfangreiche Fort- und Weiterbildungsmöglichkeiten,adj_noun,3,http://data.europa.eu/esco/skill/mini/kaufm-ausbildung,0.3908,rejected
-pflege-fachkraft-002-adjn-2,examinierte Pflegefachkräfte,adj_noun,1,http://data.europa.eu/esco/skill/mini/pflegeausbildung,0.6907,accepted
-pflege-fachkraft-002-adjn-2,examinierte Pflegefachkräfte,adj_noun,2,http://data.europa.eu/esco/skill/mini/pflegeplanung,0.6344,rejected
-pflege-fachkraft-002-adjn-2,examinierte Pflegefachkräfte,adj_noun,3,http://data.europa.eu/esco/skill/mini/pflegedokumentation,0.5815,rejected
-pflege-fachkraft-002-adjn-3,ganzheitliche Grund- und Behandlungspflege,adj_noun,1,http://data.europa.eu/esco/skill/mini/grundpflege,0.9279,accepted
-pflege-fachkraft-002-adjn-3,ganzheitliche Grund- und Behandlungspflege,adj_noun,2,http://data.europa.eu/esco/skill/mini/pflegeausbildung,0.3674,rejected
-pflege-fachkraft-002-adjn-3,ganzheitliche Grund- und Behandlungspflege,adj_noun,3,http://data.europa.eu/esco/skill/mini/empathie,0.3615,rejected
-pflege-fachkraft-002-adjn-4,ärztlicher Anordnung,adj_noun,1,http://data.europa.eu/esco/skill/mini/etl,0.3674,rejected
-pflege-fachkraft-002-adjn-4,ärztlicher Anordnung,adj_noun,2,http://data.europa.eu/esco/skill/mini/kaufm-ausbildung,0.3309,rejected
-pflege-fachkraft-002-adjn-4,ärztlicher Anordnung,adj_noun,3,http://data.europa.eu/esco/skill/mini/eigenverantwortung,0.3289,rejected
-pflege-fachkraft-002-adjn-5,abgeschlossene Ausbildung,adj_noun,1,http://data.europa.eu/esco/skill/mini/pflegeausbildung,0.6414,accepted
-pflege-fachkraft-002-adjn-5,abgeschlossene Ausbildung,adj_noun,2,http://data.europa.eu/esco/skill/mini/kaufm-ausbildung,0.5303,rejected
-pflege-fachkraft-002-adjn-5,abgeschlossene Ausbildung,adj_noun,3,http://data.europa.eu/esco/skill/mini/jahresabschluss,0.4512,rejected
-pflege-fachkraft-002-adjn-6,Erste Berufserfahrung,adj_noun,1,http://data.europa.eu/esco/skill/mini/erste-hilfe,0.5438,accepted
-pflege-fachkraft-002-adjn-6,Erste Berufserfahrung,adj_noun,2,http://data.europa.eu/esco/skill/mini/schichtdienst,0.3819,rejected
-pflege-fachkraft-002-adjn-6,Erste Berufserfahrung,adj_noun,3,http://data.europa.eu/esco/skill/mini/empathie,0.3676,rejected
-pflege-fachkraft-002-adjn-7,pflegebedürftigen Menschen,adj_noun,1,http://data.europa.eu/esco/skill/mini/pflegeplanung,0.6494,accepted
-pflege-fachkraft-002-adjn-7,pflegebedürftigen Menschen,adj_noun,2,http://data.europa.eu/esco/skill/mini/pflegeausbildung,0.5994,rejected
-pflege-fachkraft-002-adjn-7,pflegebedürftigen Menschen,adj_noun,3,http://data.europa.eu/esco/skill/mini/pflegedokumentation,0.5127,rejected
-pflege-fachkraft-002-adjn-8,sicherer Umgang,adj_noun,1,http://data.europa.eu/esco/skill/mini/umsatzsteuer,0.4038,rejected
-pflege-fachkraft-002-adjn-8,sicherer Umgang,adj_noun,2,http://data.europa.eu/esco/skill/mini/erste-hilfe,0.3288,rejected
-pflege-fachkraft-002-adjn-8,sicherer Umgang,adj_noun,3,http://data.europa.eu/esco/skill/mini/rechnungswesen,0.2852,rejected
-pflege-fachkraft-002-adjn-9,gängiger Dokumentationssoftware,adj_noun,1,http://data.europa.eu/esco/skill/mini/softwareentwicklung,0.3462,rejected
-pflege-fachkraft-002-adjn-9,gängiger Dokumentationssoftware,adj_noun,2,http://data.europa.eu/esco/skill/mini/deutsch,0.3175,rejected
-pflege-fachkraft-002-adjn-9,gängiger Dokumentationssoftware,adj_noun,3,http://data.europa.eu/esco/skill/mini/pflegeausbildung,0.3160,rejected
-pflege-fachkraft-002-esco-1,übernehmen dieganzheitlicheGrund-undBehandlungspflege,escoxlm_r,1,http://data.europa.eu/esco/skill/mini/grundpflege,0.6349,accepted
-pflege-fachkraft-002-esco-1,übernehmen dieganzheitlicheGrund-undBehandlungspflege,escoxlm_r,2,http://data.europa.eu/esco/skill/mini/empathie,0.4806,rejected
-pflege-fachkraft-002-esco-1,übernehmen dieganzheitlicheGrund-undBehandlungspflege,escoxlm_r,3,http://data.europa.eu/esco/skill/mini/pflegeausbildung,0.4467,rejected
-pflege-fachkraft-002-esco-10,Dokumentationssoftware,escoxlm_r,1,http://data.europa.eu/esco/skill/mini/softwareentwicklung,0.3484,rejected
-pflege-fachkraft-002-esco-10,Dokumentationssoftware,escoxlm_r,2,http://data.europa.eu/esco/skill/mini/deutsch,0.3424,rejected
-pflege-fachkraft-002-esco-10,Dokumentationssoftware,escoxlm_r,3,http://data.europa.eu/esco/skill/mini/kommunikationsstaerke,0.3300,rejected
-pflege-fachkraft-002-esco-2,dokumentieren denPflegeverlaufsorgfältig,escoxlm_r,1,http://data.europa.eu/esco/skill/mini/grundpflege,0.5550,accepted
-pflege-fachkraft-002-esco-2,dokumentieren denPflegeverlaufsorgfältig,escoxlm_r,2,http://data.europa.eu/esco/skill/mini/pflegeausbildung,0.4663,rejected
-pflege-fachkraft-002-esco-2,dokumentieren denPflegeverlaufsorgfältig,escoxlm_r,3,http://data.europa.eu/esco/skill/mini/empathie,0.3924,rejected
-pflege-fachkraft-002-esco-3,wirken beiderPflegeplanung,escoxlm_r,1,http://data.europa.eu/esco/skill/mini/grundpflege,0.5937,accepted
-pflege-fachkraft-002-esco-3,wirken beiderPflegeplanung,escoxlm_r,2,http://data.europa.eu/esco/skill/mini/pflegeausbildung,0.4036,rejected
-pflege-fachkraft-002-esco-3,wirken beiderPflegeplanung,escoxlm_r,3,http://data.europa.eu/esco/skill/mini/empathie,0.3924,rejected
-pflege-fachkraft-002-esco-4,Verabreichung vonMedikamenten,escoxlm_r,1,http://data.europa.eu/esco/skill/mini/medikamentengabe,0.8734,accepted
-pflege-fachkraft-002-esco-4,Verabreichung vonMedikamenten,escoxlm_r,2,http://data.europa.eu/esco/skill/mini/kundenberatung,0.3088,rejected
-pflege-fachkraft-002-esco-4,Verabreichung vonMedikamenten,escoxlm_r,3,http://data.europa.eu/esco/skill/mini/pflegeausbildung,0.3064,rejected
-pflege-fachkraft-002-esco-5,Begleitung,escoxlm_r,1,http://data.europa.eu/esco/skill/mini/grundpflege,0.4521,rejected
-pflege-fachkraft-002-esco-5,Begleitung,escoxlm_r,2,http://data.europa.eu/esco/skill/mini/pflegeausbildung,0.3704,rejected
-pflege-fachkraft-002-esco-5,Begleitung,escoxlm_r,3,http://data.europa.eu/esco/skill/mini/kundenberatung,0.3585,rejected
-pflege-fachkraft-002-esco-6,Beratung,escoxlm_r,1,http://data.europa.eu/esco/skill/mini/kundenberatung,0.3978,rejected
-pflege-fachkraft-002-esco-6,Beratung,escoxlm_r,2,http://data.europa.eu/esco/skill/mini/grundpflege,0.3327,rejected
-pflege-fachkraft-002-esco-6,Beratung,escoxlm_r,3,http://data.europa.eu/esco/skill/mini/schichtdienst,0.3098,rejected
-pflege-fachkraft-002-esco-7,Umgang mit pflegebedürftigen Menschen,escoxlm_r,1,http://data.europa.eu/esco/skill/mini/pflegeausbildung,0.6403,accepted
-pflege-fachkraft-002-esco-7,Umgang mit pflegebedürftigen Menschen,escoxlm_r,2,http://data.europa.eu/esco/skill/mini/pflegeplanung,0.6170,rejected
-pflege-fachkraft-002-esco-7,Umgang mit pflegebedürftigen Menschen,escoxlm_r,3,http://data.europa.eu/esco/skill/mini/pflegedokumentation,0.4693,rejected
-pflege-fachkraft-002-esco-8,Verantwortungsbewusstsein,escoxlm_r,1,http://data.europa.eu/esco/skill/mini/eigenverantwortung,0.4654,rejected
-pflege-fachkraft-002-esco-8,Verantwortungsbewusstsein,escoxlm_r,2,http://data.europa.eu/esco/skill/mini/rechnungswesen,0.4251,rejected
-pflege-fachkraft-002-esco-8,Verantwortungsbewusstsein,escoxlm_r,3,http://data.europa.eu/esco/skill/mini/medikamentengabe,0.4229,rejected
-pflege-fachkraft-002-esco-9,Pflegedokumentation,escoxlm_r,1,http://data.europa.eu/esco/skill/mini/pflegedokumentation,1.0000,accepted
-pflege-fachkraft-002-esco-9,Pflegedokumentation,escoxlm_r,2,http://data.europa.eu/esco/skill/mini/pflegeplanung,0.6909,rejected
-pflege-fachkraft-002-esco-9,Pflegedokumentation,escoxlm_r,3,http://data.europa.eu/esco/skill/mini/pflegeausbildung,0.5200,rejected
+span_id,span_text,extractor,rank,concept_uri,matched_label,score,decision
+pflege-fachkraft-002-adjn-1,moderne Pflegeeinrichtung,adj_noun,1,http://data.europa.eu/esco/skill/3e5ade3b-d5bc-46eb-aff4-7a2fa4257d09,Entgratungsanlage pflegen,0.6354,accepted
+pflege-fachkraft-002-adjn-1,moderne Pflegeeinrichtung,adj_noun,2,http://data.europa.eu/esco/skill/6ec9185b-bce9-4166-8627-cdfed7c79ab4,Pflegefamilien besuchen,0.6351,rejected
+pflege-fachkraft-002-adjn-1,moderne Pflegeeinrichtung,adj_noun,3,http://data.europa.eu/esco/skill/7dda0798-1fb5-40ed-982a-ebd2825082b2,Beziehungen mit Tierschutzeinrichtungen pflegen,0.6192,rejected
+pflege-fachkraft-002-adjn-10,unbefristete Anstellung,adj_noun,1,http://data.europa.eu/esco/skill/b535516b-9f8a-4c29-b6aa-a0a4561e1086,Anrufqualitätssicherung,0.5949,accepted
+pflege-fachkraft-002-adjn-10,unbefristete Anstellung,adj_noun,2,http://data.europa.eu/esco/skill/14d46944-61f1-451e-843c-318c2d7f8928,Schritte zur Erfüllung der Anforderungen eines künstlerischen Werkes unternehmen,0.5708,rejected
+pflege-fachkraft-002-adjn-10,unbefristete Anstellung,adj_noun,3,http://data.europa.eu/esco/skill/acc74047-f59f-4935-afc0-45ec43b9b57a,Anforderungen einteilen,0.5690,rejected
+pflege-fachkraft-002-adjn-11,tarifliche Vergütung,adj_noun,1,http://data.europa.eu/esco/skill/94634bd7-72b8-4f49-9aff-d0cfb6036963,Verglasungen aufarbeiten,0.6168,accepted
+pflege-fachkraft-002-adjn-11,tarifliche Vergütung,adj_noun,2,http://data.europa.eu/esco/skill/592bb88c-c063-48a7-9dca-c81f37f724a5,bei Vergiftungen beraten,0.6132,rejected
+pflege-fachkraft-002-adjn-11,tarifliche Vergütung,adj_noun,3,http://data.europa.eu/esco/skill/ec6bb2f9-7f46-43f3-a3ad-5233ae3986cd,Verglasungsarten,0.5795,rejected
+pflege-fachkraft-002-adjn-12,umfangreiche Fort- und Weiterbildungsmöglichkeiten,adj_noun,1,http://data.europa.eu/esco/skill/d9a6e7e5-5519-4e1e-b9c8-0d04b303f509,Pathologie des weiblichen Fortpflanzungssystems,0.6529,accepted
+pflege-fachkraft-002-adjn-12,umfangreiche Fort- und Weiterbildungsmöglichkeiten,adj_noun,2,http://data.europa.eu/esco/skill/9eb2cbeb-1501-455a-a82b-402857bb1fb8,Fortpflanzungssysteme der Tiere,0.5967,rejected
+pflege-fachkraft-002-adjn-12,umfangreiche Fort- und Weiterbildungsmöglichkeiten,adj_noun,3,http://data.europa.eu/esco/skill/58378416-3a6d-48ef-8291-a14f0ea04e83,Witterungsverhältnisse fortlaufend beobachten,0.5834,rejected
+pflege-fachkraft-002-adjn-2,examinierte Pflegefachkräfte,adj_noun,1,http://data.europa.eu/esco/skill/ae965e49-06f1-442f-87bf-e48fc1e1d8b6,Pflegequalität analysieren,0.6838,accepted
+pflege-fachkraft-002-adjn-2,examinierte Pflegefachkräfte,adj_noun,2,http://data.europa.eu/esco/skill/71480db1-a706-47f9-952f-bdc5036e3df3,Pflege koordinieren,0.6766,rejected
+pflege-fachkraft-002-adjn-2,examinierte Pflegefachkräfte,adj_noun,3,http://data.europa.eu/esco/skill/6ec9185b-bce9-4166-8627-cdfed7c79ab4,Pflegefamilien besuchen,0.6524,rejected
+pflege-fachkraft-002-adjn-3,ganzheitliche Grund- und Behandlungspflege,adj_noun,1,http://data.europa.eu/esco/skill/41be6ab9-1cf9-43af-8c63-b6664b921dd5,Grundstückspflegetätigkeiten durchführen,0.6664,accepted
+pflege-fachkraft-002-adjn-3,ganzheitliche Grund- und Behandlungspflege,adj_noun,2,http://data.europa.eu/esco/skill/a035c74a-d7af-480a-a6d6-e5baa4f3e0ec,Verträge über verwandte Grundstückspflegearbeiten durchsehen,0.5999,rejected
+pflege-fachkraft-002-adjn-3,ganzheitliche Grund- und Behandlungspflege,adj_noun,3,http://data.europa.eu/esco/skill/516e324b-03fc-4d3b-9986-e46e9834cd43,die Grundlagen der Krankenpflege umsetzen,0.5940,rejected
+pflege-fachkraft-002-adjn-4,ärztlicher Anordnung,adj_noun,1,http://data.europa.eu/esco/skill/34d247a0-23da-42d4-872e-df4698c1d5c1,Arzneimittelrecht,0.7197,accepted
+pflege-fachkraft-002-adjn-4,ärztlicher Anordnung,adj_noun,2,http://data.europa.eu/esco/skill/f9246b8b-d8c4-4c28-ba6c-b50680dd0c79,Arztbericht,0.7148,rejected
+pflege-fachkraft-002-adjn-4,ärztlicher Anordnung,adj_noun,3,http://data.europa.eu/esco/skill/4c35663d-f3c7-464a-bbdd-3568eba2dc7b,Arzneimittelverordnungen,0.7101,rejected
+pflege-fachkraft-002-adjn-5,abgeschlossene Ausbildung,adj_noun,1,http://data.europa.eu/esco/skill/4f6e68b2-85c8-446e-a96d-b306ec7e0091,Fachkenntnisse im Bereich Ausbildung,0.6610,accepted
+pflege-fachkraft-002-adjn-5,abgeschlossene Ausbildung,adj_noun,2,http://data.europa.eu/esco/skill/75f839c2-fd9a-4ad3-8921-6e734608568d,Abfragesprachen verwenden,0.6334,rejected
+pflege-fachkraft-002-adjn-5,abgeschlossene Ausbildung,adj_noun,3,http://data.europa.eu/esco/skill/017d3b78-ebfa-431d-acc5-8050e9b0fdc8,Abbruchkugel steuern,0.6186,rejected
+pflege-fachkraft-002-adjn-6,Erste Berufserfahrung,adj_noun,1,http://data.europa.eu/esco/skill/5b1c2df7-93aa-4b7a-ae13-9f84cff79ba4,künstlerische Erfahrung beschreiben,0.6576,accepted
+pflege-fachkraft-002-adjn-6,Erste Berufserfahrung,adj_noun,2,http://data.europa.eu/esco/skill/be6ab363-3de1-427f-a8ef-85d5b0250822,Bericht erstatten,0.6474,rejected
+pflege-fachkraft-002-adjn-6,Erste Berufserfahrung,adj_noun,3,http://data.europa.eu/esco/skill/f23ced50-862a-49d8-b7f6-a5c4bd6b49af,Erhebungsbericht erstellen,0.6345,rejected
+pflege-fachkraft-002-adjn-7,pflegebedürftigen Menschen,adj_noun,1,http://data.europa.eu/esco/skill/d5a7a793-78d2-4a11-baa1-1c9376f5e508,Hufpflegebedarf von Pferden beurteilen,0.6581,accepted
+pflege-fachkraft-002-adjn-7,pflegebedürftigen Menschen,adj_noun,2,http://data.europa.eu/esco/skill/54411e8e-d62f-46d8-b87b-fce23f8e3bc8,Pflege von Personen mit besonderen Bedürfnissen,0.6548,rejected
+pflege-fachkraft-002-adjn-7,pflegebedürftigen Menschen,adj_noun,3,http://data.europa.eu/esco/skill/6ec9185b-bce9-4166-8627-cdfed7c79ab4,Pflegefamilien besuchen,0.6433,rejected
+pflege-fachkraft-002-adjn-8,sicherer Umgang,adj_noun,1,http://data.europa.eu/esco/skill/20a7df5e-f388-4073-b3e2-4bf7a4c46f28,Umsetzung sicherer Fahrweisen sicherstellen,0.7041,accepted
+pflege-fachkraft-002-adjn-8,sicherer Umgang,adj_noun,2,http://data.europa.eu/esco/skill/5c59dac1-0547-4068-b43c-ac59f1344448,gute Umgangsformen pflegen,0.6092,rejected
+pflege-fachkraft-002-adjn-8,sicherer Umgang,adj_noun,3,http://data.europa.eu/esco/skill/7adc8663-d684-4735-82f1-377bad11a8cd,Gute Umgangsformen gegenüber Spielern zeigen,0.6011,rejected
+pflege-fachkraft-002-adjn-9,gängiger Dokumentationssoftware,adj_noun,1,http://data.europa.eu/esco/skill/327d15c8-29ff-4ad4-a4fe-6536d777a45f,Dokumentationsarten,0.5867,accepted
+pflege-fachkraft-002-adjn-9,gängiger Dokumentationssoftware,adj_noun,2,http://data.europa.eu/esco/skill/cffc3e97-e942-4b13-a2f3-0bf4910c06d3,technische Dokumentationen verwenden,0.5819,rejected
+pflege-fachkraft-002-adjn-9,gängiger Dokumentationssoftware,adj_noun,3,http://data.europa.eu/esco/skill/04dfd9fb-e0cf-40f6-96c6-9d2280c4347e,technische Dokumentation vorlegen,0.5717,rejected
+pflege-fachkraft-002-esco-1,übernehmen die ganzheitliche Grund- und Behandlungspflege,escoxlm_r,1,http://data.europa.eu/esco/skill/41be6ab9-1cf9-43af-8c63-b6664b921dd5,Grundstückspflegetätigkeiten durchführen,0.6384,accepted
+pflege-fachkraft-002-esco-1,übernehmen die ganzheitliche Grund- und Behandlungspflege,escoxlm_r,2,http://data.europa.eu/esco/skill/a035c74a-d7af-480a-a6d6-e5baa4f3e0ec,Verträge über verwandte Grundstückspflegearbeiten durchsehen,0.6200,rejected
+pflege-fachkraft-002-esco-1,übernehmen die ganzheitliche Grund- und Behandlungspflege,escoxlm_r,3,http://data.europa.eu/esco/skill/77e1563f-84fb-48dd-98f2-59a4e33908ca,Grunderwerbs- und Grundbesitzsteuer,0.5952,rejected
+pflege-fachkraft-002-esco-10,Dokumentationssoftware,escoxlm_r,1,http://data.europa.eu/esco/skill/327d15c8-29ff-4ad4-a4fe-6536d777a45f,Dokumentationsarten,0.7215,accepted
+pflege-fachkraft-002-esco-10,Dokumentationssoftware,escoxlm_r,2,http://data.europa.eu/esco/skill/cffc3e97-e942-4b13-a2f3-0bf4910c06d3,technische Dokumentationen verwenden,0.6946,rejected
+pflege-fachkraft-002-esco-10,Dokumentationssoftware,escoxlm_r,3,http://data.europa.eu/esco/skill/04dfd9fb-e0cf-40f6-96c6-9d2280c4347e,technische Dokumentationen bereitstellen,0.6736,rejected
+pflege-fachkraft-002-esco-2,dokumentieren den Pflegeverlauf sorgfältig,escoxlm_r,1,http://data.europa.eu/esco/skill/ef2e6fd3-7ae4-478b-b9c8-28c689955277,Pflegebedarf der Klauen von Rindern beurteilen,0.7093,accepted
+pflege-fachkraft-002-esco-2,dokumentieren den Pflegeverlauf sorgfältig,escoxlm_r,2,http://data.europa.eu/esco/skill/6ec9185b-bce9-4166-8627-cdfed7c79ab4,Pflegefamilien besuchen,0.6763,rejected
+pflege-fachkraft-002-esco-2,dokumentieren den Pflegeverlauf sorgfältig,escoxlm_r,3,http://data.europa.eu/esco/skill/7b4bc709-5888-4f78-bbaf-fb760d4e2e4b,Reinigungsgeräte pflegen,0.6662,rejected
+pflege-fachkraft-002-esco-3,wirken bei der Pflegeplanung,escoxlm_r,1,http://data.europa.eu/esco/skill/d429b19a-132f-44d3-971b-bb0ccd94f979,Pflegewissenschaft,0.7316,accepted
+pflege-fachkraft-002-esco-3,wirken bei der Pflegeplanung,escoxlm_r,2,http://data.europa.eu/esco/skill/71480db1-a706-47f9-952f-bdc5036e3df3,Pflege koordinieren,0.7219,rejected
+pflege-fachkraft-002-esco-3,wirken bei der Pflegeplanung,escoxlm_r,3,http://data.europa.eu/esco/skill/7b4bc709-5888-4f78-bbaf-fb760d4e2e4b,Reinigungsgeräte pflegen,0.7212,rejected
+pflege-fachkraft-002-esco-4,Verabreichung von Medikamenten,escoxlm_r,1,http://data.europa.eu/esco/skill/d2f78372-c23b-41ef-bce3-2874f587579c,bei der Verabreichung von Medikamenten an ältere Personen assistieren,0.8041,accepted
+pflege-fachkraft-002-esco-4,Verabreichung von Medikamenten,escoxlm_r,2,http://data.europa.eu/esco/skill/fb89a5bd-8f5e-43fd-9d08-907bd6d6e344,Medikamente für Sehprobleme verabreichen,0.7595,rejected
+pflege-fachkraft-002-esco-4,Verabreichung von Medikamenten,escoxlm_r,3,http://data.europa.eu/esco/skill/cae8a697-1047-4da2-ac7d-77065dade235,mit Nebenwirkungen von Medikamenten umgehen,0.7572,rejected
+pflege-fachkraft-002-esco-5,Begleitung,escoxlm_r,1,http://data.europa.eu/esco/skill/ab89ad86-1098-44bb-9465-05af5624557c,Personen begleiten,0.7447,accepted
+pflege-fachkraft-002-esco-5,Begleitung,escoxlm_r,2,http://data.europa.eu/esco/skill/14ee2652-5d65-4213-8dc2-9c9a8d092c20,Hunde begutachten,0.6945,rejected
+pflege-fachkraft-002-esco-5,Begleitung,escoxlm_r,3,http://data.europa.eu/esco/skill/d9f7e0ca-25ae-4c0e-8c81-8e24eea89104,Kunden von Begleitdiensten überprüfen,0.6515,rejected
+pflege-fachkraft-002-esco-6,Beratung,escoxlm_r,1,http://data.europa.eu/esco/skill/4b3c8605-819d-4b38-83fc-f23663e78dc9,Beratung,1.0000,accepted
+pflege-fachkraft-002-esco-6,Beratung,escoxlm_r,2,http://data.europa.eu/esco/skill/0ffed47f-d320-48cf-988d-40449825085c,Beratungsmethoden,0.8008,rejected
+pflege-fachkraft-002-esco-6,Beratung,escoxlm_r,3,http://data.europa.eu/esco/skill/28722c99-68b7-4b7b-808f-53f343299935,Beratung anbieten,0.7551,rejected
+pflege-fachkraft-002-esco-7,Umgang mit pflegebedürftigen Menschen,escoxlm_r,1,http://data.europa.eu/esco/skill/5c59dac1-0547-4068-b43c-ac59f1344448,gute Umgangsformen pflegen,0.7274,accepted
+pflege-fachkraft-002-esco-7,Umgang mit pflegebedürftigen Menschen,escoxlm_r,2,http://data.europa.eu/esco/skill/f67f2cd7-f179-45a5-acde-a3c74c1ce3cc,Etiketten mit Pflegehinweisen lesen,0.6900,rejected
+pflege-fachkraft-002-esco-7,Umgang mit pflegebedürftigen Menschen,escoxlm_r,3,http://data.europa.eu/esco/skill/54411e8e-d62f-46d8-b87b-fce23f8e3bc8,Pflege von Personen mit besonderen Bedürfnissen,0.6650,rejected
+pflege-fachkraft-002-esco-8,Verantwortungsbewusstsein,escoxlm_r,1,http://data.europa.eu/esco/skill/8f15b22d-930e-4842-80dc-5cab28ac71fc,verantwortungsbewusstes Spielen,0.7902,accepted
+pflege-fachkraft-002-esco-8,Verantwortungsbewusstsein,escoxlm_r,2,http://data.europa.eu/esco/skill/199f7919-5114-41b6-b6a5-41e0e4896ec1,Verantwortung zeigen,0.7836,rejected
+pflege-fachkraft-002-esco-8,Verantwortungsbewusstsein,escoxlm_r,3,http://data.europa.eu/esco/skill/2cf1b872-ada1-4275-b1d3-3cc2d14b458c,Veranstalter auswählen,0.7095,rejected
+pflege-fachkraft-002-esco-9,Pflegedokumentation,escoxlm_r,1,http://data.europa.eu/esco/skill/7b4bc709-5888-4f78-bbaf-fb760d4e2e4b,Reinigungsgeräte pflegen,0.6196,accepted
+pflege-fachkraft-002-esco-9,Pflegedokumentation,escoxlm_r,2,http://data.europa.eu/esco/skill/71480db1-a706-47f9-952f-bdc5036e3df3,Pflege koordinieren,0.5830,rejected
+pflege-fachkraft-002-esco-9,Pflegedokumentation,escoxlm_r,3,http://data.europa.eu/esco/skill/d429b19a-132f-44d3-971b-bb0ccd94f979,Pflegewissenschaft,0.5768,rejected

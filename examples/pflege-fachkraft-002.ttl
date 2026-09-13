@@ -21,52 +21,178 @@ sitzler:posting_554479e9
                        sitzler:req_554479e9_3 ,
                        sitzler:req_554479e9_4 ,
                        sitzler:req_554479e9_5 ,
-                       sitzler:req_554479e9_6 .
+                       sitzler:req_554479e9_6 ,
+                       sitzler:req_554479e9_7 ,
+                       sitzler:req_554479e9_8 ,
+                       sitzler:req_554479e9_9 ,
+                       sitzler:req_554479e9_10 ,
+                       sitzler:req_554479e9_11 ,
+                       sitzler:req_554479e9_12 ,
+                       sitzler:req_554479e9_13 ,
+                       sitzler:req_554479e9_14 ,
+                       sitzler:req_554479e9_15 ,
+                       sitzler:req_554479e9_16 ,
+                       sitzler:req_554479e9_17 ,
+                       sitzler:req_554479e9_18 ,
+                       sitzler:req_554479e9_19 ,
+                       sitzler:req_554479e9_20 .
 
 sitzler:req_554479e9_1
   a                          hrqde:QualificationRequirement ;
-  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/mini/pflegeplanung> ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/3e5ade3b-d5bc-46eb-aff4-7a2fa4257d09> ;
+  hrqde:requiredLevel        hrqde:DQR5 ;
+  hrqde:requirementKind      "must" ;
+  hrqde:provenanceConfidence "0.64"^^xsd:decimal ;
+  hrqde:provenanceSource     "job_posting" .
+
+sitzler:req_554479e9_2
+  a                          hrqde:QualificationRequirement ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/ae965e49-06f1-442f-87bf-e48fc1e1d8b6> ;
+  hrqde:requiredLevel        hrqde:DQR5 ;
+  hrqde:requirementKind      "must" ;
+  hrqde:provenanceConfidence "0.68"^^xsd:decimal ;
+  hrqde:provenanceSource     "job_posting" .
+
+sitzler:req_554479e9_3
+  a                          hrqde:QualificationRequirement ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/41be6ab9-1cf9-43af-8c63-b6664b921dd5> ;
+  hrqde:requiredLevel        hrqde:DQR5 ;
+  hrqde:requirementKind      "must" ;
+  hrqde:provenanceConfidence "0.67"^^xsd:decimal ;
+  hrqde:provenanceSource     "job_posting" .
+
+sitzler:req_554479e9_4
+  a                          hrqde:QualificationRequirement ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/34d247a0-23da-42d4-872e-df4698c1d5c1> ;
+  hrqde:requiredLevel        hrqde:DQR5 ;
+  hrqde:requirementKind      "must" ;
+  hrqde:provenanceConfidence "0.72"^^xsd:decimal ;
+  hrqde:provenanceSource     "job_posting" .
+
+sitzler:req_554479e9_5
+  a                          hrqde:QualificationRequirement ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/4f6e68b2-85c8-446e-a96d-b306ec7e0091> ;
+  hrqde:requiredLevel        hrqde:DQR5 ;
+  hrqde:requirementKind      "must" ;
+  hrqde:provenanceConfidence "0.66"^^xsd:decimal ;
+  hrqde:provenanceSource     "job_posting" .
+
+sitzler:req_554479e9_6
+  a                          hrqde:QualificationRequirement ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/5b1c2df7-93aa-4b7a-ae13-9f84cff79ba4> ;
+  hrqde:requiredLevel        hrqde:DQR5 ;
+  hrqde:requirementKind      "nice_to_have" ;
+  hrqde:provenanceConfidence "0.66"^^xsd:decimal ;
+  hrqde:provenanceSource     "job_posting" .
+
+sitzler:req_554479e9_7
+  a                          hrqde:QualificationRequirement ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/d5a7a793-78d2-4a11-baa1-1c9376f5e508> ;
+  hrqde:requiredLevel        hrqde:DQR5 ;
+  hrqde:requirementKind      "must" ;
+  hrqde:provenanceConfidence "0.66"^^xsd:decimal ;
+  hrqde:provenanceSource     "job_posting" .
+
+sitzler:req_554479e9_8
+  a                          hrqde:QualificationRequirement ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/20a7df5e-f388-4073-b3e2-4bf7a4c46f28> ;
+  hrqde:requiredLevel        hrqde:DQR5 ;
+  hrqde:requirementKind      "nice_to_have" ;
+  hrqde:provenanceConfidence "0.70"^^xsd:decimal ;
+  hrqde:provenanceSource     "job_posting" .
+
+sitzler:req_554479e9_9
+  a                          hrqde:QualificationRequirement ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/327d15c8-29ff-4ad4-a4fe-6536d777a45f> ;
+  hrqde:requiredLevel        hrqde:DQR5 ;
+  hrqde:requirementKind      "nice_to_have" ;
+  hrqde:provenanceConfidence "0.72"^^xsd:decimal ;
+  hrqde:provenanceSource     "job_posting" .
+
+sitzler:req_554479e9_10
+  a                          hrqde:QualificationRequirement ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/b535516b-9f8a-4c29-b6aa-a0a4561e1086> ;
+  hrqde:requiredLevel        hrqde:DQR5 ;
+  hrqde:requirementKind      "must" ;
+  hrqde:provenanceConfidence "0.59"^^xsd:decimal ;
+  hrqde:provenanceSource     "job_posting" .
+
+sitzler:req_554479e9_11
+  a                          hrqde:QualificationRequirement ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/94634bd7-72b8-4f49-9aff-d0cfb6036963> ;
+  hrqde:requiredLevel        hrqde:DQR5 ;
+  hrqde:requirementKind      "must" ;
+  hrqde:provenanceConfidence "0.62"^^xsd:decimal ;
+  hrqde:provenanceSource     "job_posting" .
+
+sitzler:req_554479e9_12
+  a                          hrqde:QualificationRequirement ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/d9a6e7e5-5519-4e1e-b9c8-0d04b303f509> ;
   hrqde:requiredLevel        hrqde:DQR5 ;
   hrqde:requirementKind      "must" ;
   hrqde:provenanceConfidence "0.65"^^xsd:decimal ;
   hrqde:provenanceSource     "job_posting" .
 
-sitzler:req_554479e9_2
+sitzler:req_554479e9_13
   a                          hrqde:QualificationRequirement ;
-  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/mini/pflegeausbildung> ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/ef2e6fd3-7ae4-478b-b9c8-28c689955277> ;
   hrqde:requiredLevel        hrqde:DQR5 ;
   hrqde:requirementKind      "must" ;
-  hrqde:provenanceConfidence "0.69"^^xsd:decimal ;
+  hrqde:provenanceConfidence "0.71"^^xsd:decimal ;
   hrqde:provenanceSource     "job_posting" .
 
-sitzler:req_554479e9_3
+sitzler:req_554479e9_14
   a                          hrqde:QualificationRequirement ;
-  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/mini/grundpflege> ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/d429b19a-132f-44d3-971b-bb0ccd94f979> ;
   hrqde:requiredLevel        hrqde:DQR5 ;
   hrqde:requirementKind      "must" ;
-  hrqde:provenanceConfidence "0.93"^^xsd:decimal ;
+  hrqde:provenanceConfidence "0.73"^^xsd:decimal ;
   hrqde:provenanceSource     "job_posting" .
 
-sitzler:req_554479e9_4
+sitzler:req_554479e9_15
   a                          hrqde:QualificationRequirement ;
-  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/mini/erste-hilfe> ;
-  hrqde:requiredLevel        hrqde:DQR5 ;
-  hrqde:requirementKind      "nice_to_have" ;
-  hrqde:provenanceConfidence "0.54"^^xsd:decimal ;
-  hrqde:provenanceSource     "job_posting" .
-
-sitzler:req_554479e9_5
-  a                          hrqde:QualificationRequirement ;
-  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/mini/medikamentengabe> ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/d2f78372-c23b-41ef-bce3-2874f587579c> ;
   hrqde:requiredLevel        hrqde:DQR5 ;
   hrqde:requirementKind      "must" ;
-  hrqde:provenanceConfidence "0.87"^^xsd:decimal ;
+  hrqde:provenanceConfidence "0.80"^^xsd:decimal ;
   hrqde:provenanceSource     "job_posting" .
 
-sitzler:req_554479e9_6
+sitzler:req_554479e9_16
   a                          hrqde:QualificationRequirement ;
-  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/mini/pflegedokumentation> ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/ab89ad86-1098-44bb-9465-05af5624557c> ;
   hrqde:requiredLevel        hrqde:DQR5 ;
-  hrqde:requirementKind      "nice_to_have" ;
+  hrqde:requirementKind      "must" ;
+  hrqde:provenanceConfidence "0.74"^^xsd:decimal ;
+  hrqde:provenanceSource     "job_posting" .
+
+sitzler:req_554479e9_17
+  a                          hrqde:QualificationRequirement ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/4b3c8605-819d-4b38-83fc-f23663e78dc9> ;
+  hrqde:requiredLevel        hrqde:DQR5 ;
+  hrqde:requirementKind      "must" ;
   hrqde:provenanceConfidence "1.00"^^xsd:decimal ;
+  hrqde:provenanceSource     "job_posting" .
+
+sitzler:req_554479e9_18
+  a                          hrqde:QualificationRequirement ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/5c59dac1-0547-4068-b43c-ac59f1344448> ;
+  hrqde:requiredLevel        hrqde:DQR5 ;
+  hrqde:requirementKind      "must" ;
+  hrqde:provenanceConfidence "0.73"^^xsd:decimal ;
+  hrqde:provenanceSource     "job_posting" .
+
+sitzler:req_554479e9_19
+  a                          hrqde:QualificationRequirement ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/8f15b22d-930e-4842-80dc-5cab28ac71fc> ;
+  hrqde:requiredLevel        hrqde:DQR5 ;
+  hrqde:requirementKind      "must" ;
+  hrqde:provenanceConfidence "0.79"^^xsd:decimal ;
+  hrqde:provenanceSource     "job_posting" .
+
+sitzler:req_554479e9_20
+  a                          hrqde:QualificationRequirement ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/7b4bc709-5888-4f78-bbaf-fb760d4e2e4b> ;
+  hrqde:requiredLevel        hrqde:DQR5 ;
+  hrqde:requirementKind      "nice_to_have" ;
+  hrqde:provenanceConfidence "0.62"^^xsd:decimal ;
   hrqde:provenanceSource     "job_posting" .
