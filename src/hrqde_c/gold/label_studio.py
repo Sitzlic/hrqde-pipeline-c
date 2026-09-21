@@ -119,8 +119,12 @@ def _regions(annotation: dict) -> list[tuple[int, int, SpanType]]:
 def import_gold(
     export_payload: list[dict], partition: dict[str, str]
 ) -> list[GoldAdvertisement]:
-    """LS-Export -> GoldAdvertisements. Erste Annotation ist massgeblich,
-    bei Doppelannotation wird Cohen's Kappa auf Token-Ebene berechnet."""
+    """LS-Export -> GoldAdvertisements.
+
+    Kappa wird ueber die ersten beiden Annotationen (die unabhaengigen Fassungen)
+    auf Token-Ebene berechnet. Liegt eine dritte Annotation vor, gilt sie als
+    die zusammengefuehrte Fassung (SA-C.3.03) und liefert die Gold-Spans, sonst
+    die erste Annotation."""
     gold: list[GoldAdvertisement] = []
     for task in export_payload:
         data = task.get("data") or {}
@@ -136,11 +140,14 @@ def import_gold(
             log.warning("import: %s ohne Annotation, uebersprungen", raw_id)
             continue
 
-        tokens, labels, spans = bio.to_bio(text, _regions(annotations[0]))
+        tokens, labels_a, _ = bio.to_bio(text, _regions(annotations[0]))
         kappa = None
         if len(annotations) >= 2:
             _, labels_b, _ = bio.to_bio(text, _regions(annotations[1]))
-            kappa = cohens_kappa(labels, labels_b)
+            kappa = cohens_kappa(labels_a, labels_b)
+        # zusammengefuehrte Fassung als dritte Annotation, sonst die erste
+        final = annotations[2] if len(annotations) >= 3 else annotations[0]
+        tokens, labels, spans = bio.to_bio(text, _regions(final))
         gold.append(GoldAdvertisement(
             raw_id=raw_id,
             partition=partition[raw_id],

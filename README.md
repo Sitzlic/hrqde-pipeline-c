@@ -94,7 +94,9 @@ hrqde-c gold-sample -i data/input/fetched.json -n 60 --seed 42
 # 2. data/gold/labelstudio_config.xml als Labeling-Interface in Label Studio
 #    einrichten, labelstudio_tasks.json importieren, annotieren, Export als JSON
 
-# 3. Export uebernehmen (BIO-Schema, bei Doppelannotation Cohen's Kappa)
+# 3. Export uebernehmen (BIO-Schema, bei Doppelannotation Cohen's Kappa ueber
+#    die ersten beiden Annotationen; eine dritte Annotation gilt als die
+#    zusammengefuehrte Fassung und liefert die Gold-Spans)
 hrqde-c gold-import -e ls_export.json
 ```
 

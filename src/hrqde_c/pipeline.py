@@ -333,6 +333,7 @@ def write_run_metadata(
             },
             "esco_encoder": esco.DEFAULT_MODEL_ID,
             "esco_concepts": str(esco.DEFAULT_CONCEPTS_PATH),
+            "esco_version": esco.ESCO_VERSION,
             "mapping_threshold": MAPPING_THRESHOLD,
             "mapping_top_k": MAPPING_TOP_K,
             "dqr_strategy": "Titel-Occupation-Lookup -> ISCO-Hauptgruppen-Default -> DQR4",

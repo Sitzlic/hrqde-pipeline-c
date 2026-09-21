@@ -23,11 +23,14 @@ SCHEME = "http://data.europa.eu/esco/concept-scheme/member-occupations"
 # (limit>50 -> HTTP 500), deshalb startet die Bisektion dort.
 WIDTHS = [50, 25, 5, 1]
 RETRIES = 3
+# feste ESCO-Version, sonst liefert die API die jeweils aktuelle (Kap. 2: v1.2.1)
+ESCO_VERSION = "v1.2.1"
 
 
 def _get(limit: int, page_no: int) -> dict | None:
     """None bei dauerhaftem Serverfehler (kaputte Seite), Exception bei Netz."""
     params = {"isInScheme": SCHEME, "language": "de",
+              "selectedVersion": ESCO_VERSION,
               "limit": limit, "offset": page_no}
     url = f"{BULK_URL}?{urlencode(params)}"
     last_exc = None

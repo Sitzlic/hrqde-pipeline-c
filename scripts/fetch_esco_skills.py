@@ -28,6 +28,8 @@ MEMBER_SKILLS_SCHEME = "http://data.europa.eu/esco/concept-scheme/member-skills"
 # Seitenbreiten fuer die Bisektion, jede teilt die vorherige ganzzahlig
 WIDTHS = [200, 100, 50, 25, 5, 1]
 RETRIES = 3
+# feste ESCO-Version, sonst liefert die API die jeweils aktuelle (Kap. 2: v1.2.1)
+ESCO_VERSION = "v1.2.1"
 
 
 def _get(limit: int, page_no: int) -> dict | None:
@@ -35,6 +37,7 @@ def _get(limit: int, page_no: int) -> dict | None:
     params = {
         "isInScheme": MEMBER_SKILLS_SCHEME,
         "language": "de",
+        "selectedVersion": ESCO_VERSION,
         "limit": limit,
         "offset": page_no,
     }

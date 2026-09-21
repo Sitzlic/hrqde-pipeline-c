@@ -6,7 +6,8 @@ Annotator traegt pro Span in der Spalte decision entweder den Rang des
 richtigen Vorschlags (1..k), eine andere ESCO-URI oder "-" fuer "kein
 passendes Konzept" ein. apply_decisions liest das zurueck in die Gold-Datei.
 
-Die Zuordnung passiert erst nach der Zusammenfuehrung der Doppelannotation,
+Die Zuordnung passiert erst nach der Zusammenfuehrung der Doppelannotation
+(dritte Annotation im Label-Studio-Export, siehe label_studio.import_gold),
 damit die Referenz auf der konsolidierten Span-Menge liegt.
 """
 

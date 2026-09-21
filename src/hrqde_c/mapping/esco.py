@@ -20,6 +20,8 @@ log = logging.getLogger(__name__)
 FULL_CONCEPTS_PATH = Path("data/esco/skills_full.json")
 MINI_CONCEPTS_PATH = Path("data/esco/skills_mini.json")
 DEFAULT_TOP_K = 3
+# Version, gegen die scripts/fetch_esco_*.py den Bestand ziehen
+ESCO_VERSION = "v1.2.1"
 ENCODER_ENV = "HRQDE_ENCODER"
 CONCEPTS_ENV = "HRQDE_ESCO_CONCEPTS"
 

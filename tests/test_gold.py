@@ -116,3 +116,26 @@ def test_import_gold_skips_unknown_and_unannotated():
         {"data": {"raw_id": "ad-1", "text": TEXT}, "annotations": []},
     ]
     assert label_studio.import_gold(export, {"ad-1": "test"}) == []
+
+
+def test_import_gold_uses_third_annotation_as_consolidated():
+    java = TEXT.index("Java")
+
+    def annotation(annotator, end_offset):
+        return {
+            "completed_by": annotator,
+            "result": [{
+                "from_name": "label", "to_name": "text", "type": "labels",
+                "value": {"start": java, "end": java + end_offset,
+                          "text": TEXT[java:java + end_offset], "labels": ["Knowledge"]},
+            }],
+        }
+    export = [{
+        "data": {"raw_id": "ad-1", "title": "Titel", "partition": "test", "text": TEXT},
+        # Erst- und Zweitannotator uneins ueber die Spanlaenge, dritte Fassung entscheidet
+        "annotations": [annotation(1, 4), annotation(2, 14), annotation(1, 14)],
+    }]
+    g = label_studio.import_gold(export, {"ad-1": "test"})[0]
+    assert g.annotator_ids == ["1", "2", "1"]
+    assert g.inter_annotator_agreement is not None and g.inter_annotator_agreement < 1.0
+    assert g.spans[0].text == TEXT[java:java + 14]
