@@ -104,7 +104,7 @@ def test_calibration_sweep():
 
     rows = calibration.sweep([gold], thresholds=[0.5, 0.8], match_fn=fake_match)
     assert rows[0] == {"threshold": 0.5, "precision": 1.0, "recall": 1.0,
-                       "f1": 1.0, "accepted": 1, "references": 1}
+                       "f1": 1.0, "accepted": 1, "references": 1, "no_concept": 0}
     assert rows[1]["accepted"] == 0
     assert rows[1]["f1"] == 0.0
 
@@ -113,3 +113,17 @@ def test_calibration_requires_reference_uris():
     import pytest
     with pytest.raises(ValueError):
         calibration.sweep([_gold(partition="kalibrier")], match_fn=lambda t: ("x", 1.0))
+
+
+def test_calibration_counts_no_concept_as_false_positive():
+    from hrqde_c.gold.reference import NO_CONCEPT
+
+    with_uri = _gold(partition="kalibrier", esco_uri="uri:java")
+    without = _gold(partition="kalibrier", esco_uri=NO_CONCEPT)
+    rows = calibration.sweep(
+        [with_uri, without], thresholds=[0.5], match_fn=lambda t: ("uri:java", 0.7)
+    )
+    # zwei akzeptiert, einer davon ohne Konzept -> Precision 0.5, Recall 1.0
+    assert rows[0]["precision"] == 0.5
+    assert rows[0]["recall"] == 1.0
+    assert rows[0]["no_concept"] == 1

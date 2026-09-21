@@ -108,8 +108,14 @@ Auswertung gegen den fertigen Gold Standard:
 # Span-F1 pro Extraktionsvariante gegen den Testteil, Bericht als CSV
 hrqde-c evaluate -i data/input/fetched.json
 
+# Referenz-URIs fuer den Kalibrierteil: Top-3-Vorschlaege des Mappers je
+# Gold-Span als CSV, in der Spalte decision Rang (1-3), eigene URI oder "-"
+# (kein passendes Konzept) eintragen, dann zurueckspielen
+hrqde-c gold-esco-candidates
+hrqde-c gold-esco-import -d data/gold/esco_candidates.csv
+
 # Schwellenwert-Tabelle auf dem Kalibrierteil
-# (braucht GoldSpans mit manuell zugeordneter esco_uri)
+# (braucht GoldSpans mit esco_uri, "-" zaehlt als Fehlgriff bei Akzeptanz)
 hrqde-c calibrate
 ```
 

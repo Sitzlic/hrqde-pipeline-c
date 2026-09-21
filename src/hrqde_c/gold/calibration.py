@@ -1,8 +1,10 @@
 """Schwellenwert-Bestimmung auf dem Kalibrierteil (SA-C.3.05).
 
-Fuer jede GoldSpan mit manuell zugeordneter esco_uri wird der Mapper
-befragt. Pro Schwellenwert entsteht eine Zeile Precision/Recall/F1,
-die Tabelle ist die Tuning-Grundlage fuer AF-C.2.03.
+Fuer jede GoldSpan mit Referenz (esco_uri gesetzt) wird der Mapper befragt.
+Referenz kann eine ESCO-URI sein oder der Marker "kein Konzept": dann ist
+jede akzeptierte Zuordnung ein Fehlgriff und drueckt die Precision. Pro
+Schwellenwert entsteht eine Zeile Precision/Recall/F1, die Tabelle ist die
+Tuning-Grundlage fuer AF-C.2.03.
 """
 
 from __future__ import annotations
@@ -10,6 +12,7 @@ from __future__ import annotations
 import logging
 from typing import Callable
 
+from hrqde_c.gold.reference import NO_CONCEPT
 from hrqde_c.models import GoldAdvertisement
 
 log = logging.getLogger(__name__)
@@ -42,15 +45,21 @@ def sweep(
             "Kalibrierteil enthaelt keine GoldSpans mit esco_uri, "
             "erst Referenz-URIs annotieren"
         )
-    log.info("calibration: %d Referenz-Spans im Kalibrierteil", len(references))
+    with_concept = sum(1 for _, uri in references if uri != NO_CONCEPT)
+    log.info(
+        "calibration: %d Referenz-Spans im Kalibrierteil (%d ohne Konzept)",
+        len(references), len(references) - with_concept,
+    )
 
     scored = [(match(text), uri) for text, uri in references]
     rows = []
     for threshold in thresholds:
         accepted = [(pred, uri) for (pred, uri) in scored if pred[1] >= threshold]
-        correct = sum(1 for (pred_uri, _), uri in accepted if pred_uri == uri)
+        correct = sum(
+            1 for (pred_uri, _), uri in accepted if uri != NO_CONCEPT and pred_uri == uri
+        )
         precision = correct / len(accepted) if accepted else 0.0
-        recall = correct / len(references)
+        recall = correct / with_concept if with_concept else 0.0
         f1 = 2 * precision * recall / (precision + recall) if precision + recall else 0.0
         rows.append({
             "threshold": threshold,
@@ -59,5 +68,6 @@ def sweep(
             "f1": round(f1, 4),
             "accepted": len(accepted),
             "references": len(references),
+            "no_concept": len(references) - with_concept,
         })
     return rows

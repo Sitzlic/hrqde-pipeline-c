@@ -126,6 +126,59 @@ def gold_import(
         typer.echo(f"Doppelannotation: {len(doubled)} Anzeigen, mittleres Kappa {mean:.3f}")
 
 
+@app.command("gold-esco-candidates")
+def gold_esco_candidates(
+    gold: Path = typer.Option(
+        Path("data/gold/gold_advertisements.json"), "--gold", "-g"
+    ),
+    output: Path = typer.Option(Path("data/gold/esco_candidates.csv"), "--output", "-o"),
+    top_k: int = typer.Option(3, "--top-k", "-k"),
+    verbose: bool = typer.Option(False, "--verbose", "-v"),
+) -> None:
+    """Top-k-Vorschläge des ESCO-Mappers je Gold-Span des Kalibrierteils als CSV.
+    In der Spalte decision trägt der Annotator Rang, URI oder "-" (kein Konzept) ein."""
+    logging.basicConfig(
+        level=logging.DEBUG if verbose else logging.INFO,
+        format="%(levelname)-7s %(name)s | %(message)s",
+    )
+    import json
+
+    from hrqde_c.gold import reference
+    from hrqde_c.models import GoldAdvertisement
+
+    gold_ads = [GoldAdvertisement(**g) for g in json.loads(gold.read_text(encoding="utf-8"))]
+    spans = reference.write_candidates(gold_ads, output, top_k=top_k)
+    typer.echo(f"{spans} Kalibrier-Spans mit Top-{top_k}-Vorschlägen -> {output}")
+
+
+@app.command("gold-esco-import")
+def gold_esco_import(
+    decisions: Path = typer.Option(..., "--decisions", "-d", help="Ausgefüllte Kandidaten-CSV."),
+    gold: Path = typer.Option(
+        Path("data/gold/gold_advertisements.json"), "--gold", "-g"
+    ),
+    verbose: bool = typer.Option(False, "--verbose", "-v"),
+) -> None:
+    """Entscheidungen aus der Kandidaten-CSV als esco_uri in den Gold Standard übernehmen."""
+    logging.basicConfig(
+        level=logging.DEBUG if verbose else logging.INFO,
+        format="%(levelname)-7s %(name)s | %(message)s",
+    )
+    import json
+
+    from hrqde_c.gold import reference
+    from hrqde_c.models import GoldAdvertisement
+
+    gold_ads = [GoldAdvertisement(**g) for g in json.loads(gold.read_text(encoding="utf-8"))]
+    applied = reference.apply_decisions(gold_ads, decisions)
+    gold.write_text(
+        json.dumps([g.model_dump(exclude_none=True) for g in gold_ads],
+                   ensure_ascii=False, indent=1),
+        encoding="utf-8",
+    )
+    typer.echo(f"{applied} Referenzen gesetzt -> {gold}")
+
+
 @app.command()
 def evaluate(
     gold: Path = typer.Option(
