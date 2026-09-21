@@ -142,6 +142,16 @@ def map_to_esco(spans: list[SpanCandidate]) -> list[SpanMapping]:
     return mappings
 
 
+def _outranks(
+    span: SpanCandidate, mapping: SpanMapping,
+    other_span: SpanCandidate, other_mapping: SpanMapping,
+) -> bool:
+    """Reihenfolge fuer die Konsolidierung: must vor nice_to_have, dann Score."""
+    if span.requirement_kind != other_span.requirement_kind:
+        return span.requirement_kind == RequirementKind.MUST
+    return mapping.score > other_mapping.score
+
+
 def build_requirements(
     raw: RawAdvertisement,
     spans: list[SpanCandidate],
@@ -151,17 +161,14 @@ def build_requirements(
     dqr_result = dqr.determine(raw.title, raw.isco_group)
     required_level = dqr_result.level
 
-    # Dubletten pro Konzept-URI: hoechster Score gewinnt, must schlaegt nice_to_have
+    # Dubletten pro Konzept-URI: must schlaegt nice_to_have, danach hoechster Score
     best_per_concept: dict[str, tuple[SpanCandidate, SpanMapping]] = {}
     for span in spans:
         mapping = by_span.get(span.id)
         if mapping is None:
             continue
         current = best_per_concept.get(mapping.concept_uri)
-        if current is None or mapping.score > current[1].score:
-            best_per_concept[mapping.concept_uri] = (span, mapping)
-        elif current[0].requirement_kind == RequirementKind.NICE_TO_HAVE and \
-                span.requirement_kind == RequirementKind.MUST:
+        if current is None or _outranks(span, mapping, current[0], current[1]):
             best_per_concept[mapping.concept_uri] = (span, mapping)
 
     requirements = []
