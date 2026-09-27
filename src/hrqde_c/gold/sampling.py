@@ -35,14 +35,44 @@ def draw(
     return partition
 
 
+def draw_stratified(
+    strata: dict[str, list[RawAdvertisement]], size: int, calib_ratio: float, seed: int
+) -> tuple[dict[str, str], dict[str, str]]:
+    """Gleich viele Anzeigen je Schicht (Berufsfeld), innerhalb jeder Schicht
+    haelftig Kalibrier-/Testteil. -> (raw_id -> partition, raw_id -> stratum)"""
+    if size % len(strata):
+        raise ValueError(f"Stichprobe {size} nicht gleichmaessig auf {len(strata)} Schichten teilbar")
+    per_stratum = size // len(strata)
+    rng = random.Random(seed)
+    partition: dict[str, str] = {}
+    stratum_of: dict[str, str] = {}
+    for name, raws in strata.items():
+        chosen = rng.sample(raws, min(per_stratum, len(raws)))
+        n_calib = round(len(chosen) * calib_ratio)
+        for i, raw in enumerate(chosen):
+            partition[raw.id] = "kalibrier" if i < n_calib else "test"
+            stratum_of[raw.id] = name
+        log.info("sampling: Schicht %s: %d gezogen (%d Kalibrier, %d Test)",
+                 name, len(chosen), n_calib, len(chosen) - n_calib)
+    log.info("sampling: %d Anzeigen in %d Schichten, Seed %d", len(partition), len(strata), seed)
+    return partition, stratum_of
+
+
 def write_manifest(
-    path: Path, partition: dict[str, str], seed: int, calib_ratio: float
+    path: Path, partition: dict[str, str], seed: int, calib_ratio: float,
+    stratum_of: dict[str, str] | None = None,
 ) -> None:
+    items = []
+    for rid, part in partition.items():
+        item = {"raw_id": rid, "partition": part}
+        if stratum_of and rid in stratum_of:
+            item["stratum"] = stratum_of[rid]
+        items.append(item)
     payload = {
         "drawn_at": date.today().isoformat(),
         "seed": seed,
         "calib_ratio": calib_ratio,
-        "items": [{"raw_id": rid, "partition": part} for rid, part in partition.items()],
+        "items": items,
     }
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=1), encoding="utf-8")

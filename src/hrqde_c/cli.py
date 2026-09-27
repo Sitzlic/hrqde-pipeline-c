@@ -62,24 +62,34 @@ def fetch(
 
 @app.command("gold-sample")
 def gold_sample(
-    input: Path = typer.Option(..., "--input", "-i", help="JSON mit RawAdvertisements."),
+    inputs: list[Path] = typer.Option(..., "--input", "-i",
+                                      help="JSON mit RawAdvertisements. Mehrfach = eine Schicht (Berufsfeld) je Datei, gleich viele Anzeigen je Schicht."),
     size: int = typer.Option(60, "--size", "-n", help="Stichprobengröße."),
     calib_ratio: float = typer.Option(0.5, "--calib-ratio", help="Anteil Kalibrierteil."),
-    seed: int = typer.Option(42, "--seed", help="Seed für die Zufallszuordnung."),
+    seed: int = typer.Option(42, "--seed", help="Startwert des Zufallsgenerators."),
     out_dir: Path = typer.Option(Path("data/gold"), "--out-dir", "-o"),
     verbose: bool = typer.Option(False, "--verbose", "-v"),
 ) -> None:
-    """Stichprobe ziehen, Kalibrier-/Test-Split festhalten, Label-Studio-Tasks
-    mit Vor-Annotationen aus beiden Extraktoren schreiben."""
+    """Stichprobe ziehen (bei mehreren Eingabedateien geschichtet, gleich viele je
+    Datei), Kalibrier-/Test-Split je Schicht festhalten, Label-Studio-Tasks mit
+    Vor-Annotationen aus beiden Extraktoren schreiben."""
     logging.basicConfig(
         level=logging.DEBUG if verbose else logging.INFO,
         format="%(levelname)-7s %(name)s | %(message)s",
     )
     from hrqde_c.gold import label_studio, sampling
 
-    raws = pipeline.acquire(input)
-    partition = sampling.draw(raws, size=size, calib_ratio=calib_ratio, seed=seed)
-    sampling.write_manifest(out_dir / "sample_manifest.json", partition, seed, calib_ratio)
+    if len(inputs) == 1:
+        raws = pipeline.acquire(inputs[0])
+        partition = sampling.draw(raws, size=size, calib_ratio=calib_ratio, seed=seed)
+        stratum_of = None
+    else:
+        strata = {path.stem.removeprefix("ba_"): pipeline.acquire(path) for path in inputs}
+        raws = [raw for group in strata.values() for raw in group]
+        partition, stratum_of = sampling.draw_stratified(
+            strata, size=size, calib_ratio=calib_ratio, seed=seed)
+    sampling.write_manifest(out_dir / "sample_manifest.json", partition, seed, calib_ratio,
+                            stratum_of=stratum_of)
     tasks = label_studio.build_tasks(raws, partition)
     label_studio.write_tasks(tasks, out_dir / "labelstudio_tasks.json")
     label_studio.write_config(out_dir / "labelstudio_config.xml")

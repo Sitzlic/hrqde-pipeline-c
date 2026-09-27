@@ -54,6 +54,21 @@ def test_sampling_is_deterministic_and_split():
     assert sum(1 for v in p1.values() if v == "kalibrier") == 5
 
 
+def test_stratified_sampling_equal_per_stratum_and_split():
+    strata = {"a": _raws(8), "b": _raws(8), "c": _raws(8)}
+    for name, raws in strata.items():
+        for raw in raws:
+            raw.id = f"{name}-{raw.id}"
+    partition, stratum_of = sampling.draw_stratified(strata, size=12, calib_ratio=0.5, seed=42)
+    assert len(partition) == 12
+    for name in strata:
+        ids = [rid for rid, st in stratum_of.items() if st == name]
+        assert len(ids) == 4
+        assert sum(1 for rid in ids if partition[rid] == "kalibrier") == 2
+    again, _ = sampling.draw_stratified(strata, size=12, calib_ratio=0.5, seed=42)
+    assert again == partition
+
+
 def test_manifest_roundtrip(tmp_path):
     partition = {"ad-1": "kalibrier", "ad-2": "test"}
     path = tmp_path / "manifest.json"
