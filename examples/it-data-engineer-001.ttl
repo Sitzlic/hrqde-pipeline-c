@@ -1,0 +1,306 @@
+@prefix hrqde:      <http://hr-qde.org/ontology/> .
+@prefix sitzler:    <http://hr-qde.org/data/sitzler/> .
+@prefix employer:   <http://hr-qde.org/data/sitzler/employer/> .
+@prefix esco-skill: <http://data.europa.eu/esco/skill/> .
+@prefix rdfs:       <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:        <http://www.w3.org/2001/XMLSchema#> .
+
+
+employer:nordlicht-data-solutions-gmbh
+  a           hrqde:Employer ;
+  rdfs:label  "Nordlicht Data Solutions GmbH"@de .
+
+sitzler:posting_bd184f87
+  a                    hrqde:JobPosting ;
+  rdfs:label           "Data Engineer (m/w/d)"@de ;
+  hrqde:postingDate    "2026-06-20"^^xsd:date ;
+  hrqde:issuedBy       employer:nordlicht-data-solutions-gmbh ;
+  hrqde:sourceUrl      "https://example.com/stellen/it-data-engineer-001"^^xsd:anyURI ;
+  hrqde:hasRequirement sitzler:req_bd184f87_1 ,
+                       sitzler:req_bd184f87_2 ,
+                       sitzler:req_bd184f87_3 ,
+                       sitzler:req_bd184f87_4 ,
+                       sitzler:req_bd184f87_5 ,
+                       sitzler:req_bd184f87_6 ,
+                       sitzler:req_bd184f87_7 ,
+                       sitzler:req_bd184f87_8 ,
+                       sitzler:req_bd184f87_9 ,
+                       sitzler:req_bd184f87_10 ,
+                       sitzler:req_bd184f87_11 ,
+                       sitzler:req_bd184f87_12 ,
+                       sitzler:req_bd184f87_13 ,
+                       sitzler:req_bd184f87_14 ,
+                       sitzler:req_bd184f87_15 ,
+                       sitzler:req_bd184f87_16 ,
+                       sitzler:req_bd184f87_17 ,
+                       sitzler:req_bd184f87_18 ,
+                       sitzler:req_bd184f87_19 ,
+                       sitzler:req_bd184f87_20 ,
+                       sitzler:req_bd184f87_21 ,
+                       sitzler:req_bd184f87_22 ,
+                       sitzler:req_bd184f87_23 ,
+                       sitzler:req_bd184f87_24 ,
+                       sitzler:req_bd184f87_25 ,
+                       sitzler:req_bd184f87_26 ,
+                       sitzler:req_bd184f87_27 ,
+                       sitzler:req_bd184f87_28 ,
+                       sitzler:req_bd184f87_29 ,
+                       sitzler:req_bd184f87_30 ,
+                       sitzler:req_bd184f87_31 ,
+                       sitzler:req_bd184f87_32 .
+
+sitzler:req_bd184f87_1
+  a                          hrqde:QualificationRequirement ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/9fc8af29-f33f-4e80-8a23-11e258c910ab> ;
+  hrqde:requiredLevel        hrqde:DQR6 ;
+  hrqde:requirementKind      "must" ;
+  hrqde:provenanceConfidence "0.71"^^xsd:decimal ;
+  hrqde:provenanceSource     "job_posting" .
+
+sitzler:req_bd184f87_2
+  a                          hrqde:QualificationRequirement ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/89732ae0-bf39-4fe3-928a-726c74ae8c63> ;
+  hrqde:requiredLevel        hrqde:DQR6 ;
+  hrqde:requirementKind      "must" ;
+  hrqde:provenanceConfidence "0.68"^^xsd:decimal ;
+  hrqde:provenanceSource     "job_posting" .
+
+sitzler:req_bd184f87_3
+  a                          hrqde:QualificationRequirement ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/4a193795-fa63-414e-9f2e-bfdb3924571e> ;
+  hrqde:requiredLevel        hrqde:DQR6 ;
+  hrqde:requirementKind      "must" ;
+  hrqde:provenanceConfidence "0.63"^^xsd:decimal ;
+  hrqde:provenanceSource     "job_posting" .
+
+sitzler:req_bd184f87_4
+  a                          hrqde:QualificationRequirement ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/43ae58b9-5e56-4524-b45a-b422777a0576> ;
+  hrqde:requiredLevel        hrqde:DQR6 ;
+  hrqde:requirementKind      "must" ;
+  hrqde:provenanceConfidence "0.87"^^xsd:decimal ;
+  hrqde:provenanceSource     "job_posting" .
+
+sitzler:req_bd184f87_5
+  a                          hrqde:QualificationRequirement ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/64db87c7-2360-4e20-88d3-d222402e477c> ;
+  hrqde:requiredLevel        hrqde:DQR6 ;
+  hrqde:requirementKind      "must" ;
+  hrqde:provenanceConfidence "0.85"^^xsd:decimal ;
+  hrqde:provenanceSource     "job_posting" .
+
+sitzler:req_bd184f87_6
+  a                          hrqde:QualificationRequirement ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/1b8872bd-d869-4b08-b9b2-296d2b1c644c> ;
+  hrqde:requiredLevel        hrqde:DQR6 ;
+  hrqde:requirementKind      "must" ;
+  hrqde:provenanceConfidence "0.62"^^xsd:decimal ;
+  hrqde:provenanceSource     "job_posting" .
+
+sitzler:req_bd184f87_7
+  a                          hrqde:QualificationRequirement ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/df4962a4-221b-4877-ac5c-f4cb592eef1d> ;
+  hrqde:requiredLevel        hrqde:DQR6 ;
+  hrqde:requirementKind      "must" ;
+  hrqde:provenanceConfidence "0.58"^^xsd:decimal ;
+  hrqde:provenanceSource     "job_posting" .
+
+sitzler:req_bd184f87_8
+  a                          hrqde:QualificationRequirement ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/41bf7ede-fc84-4a57-8c89-b548d11b0ba1> ;
+  hrqde:requiredLevel        hrqde:DQR6 ;
+  hrqde:requirementKind      "must" ;
+  hrqde:provenanceConfidence "0.61"^^xsd:decimal ;
+  hrqde:provenanceSource     "job_posting" .
+
+sitzler:req_bd184f87_9
+  a                          hrqde:QualificationRequirement ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/4812a4ea-dc55-4dc6-b9b0-4a59bba2c647> ;
+  hrqde:requiredLevel        hrqde:DQR6 ;
+  hrqde:requirementKind      "must" ;
+  hrqde:provenanceConfidence "0.69"^^xsd:decimal ;
+  hrqde:provenanceSource     "job_posting" .
+
+sitzler:req_bd184f87_10
+  a                          hrqde:QualificationRequirement ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/4707da90-9cfc-46ca-8de0-38a0b7bfb137> ;
+  hrqde:requiredLevel        hrqde:DQR6 ;
+  hrqde:requirementKind      "must" ;
+  hrqde:provenanceConfidence "0.97"^^xsd:decimal ;
+  hrqde:provenanceSource     "job_posting" .
+
+sitzler:req_bd184f87_11
+  a                          hrqde:QualificationRequirement ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/ab28ecc4-f823-4f8d-a858-6a67975cc0b7> ;
+  hrqde:requiredLevel        hrqde:DQR6 ;
+  hrqde:requirementKind      "must" ;
+  hrqde:provenanceConfidence "0.59"^^xsd:decimal ;
+  hrqde:provenanceSource     "job_posting" .
+
+sitzler:req_bd184f87_12
+  a                          hrqde:QualificationRequirement ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/bec4359e-cb92-468f-a997-8fb28e32fba9> ;
+  hrqde:requiredLevel        hrqde:DQR6 ;
+  hrqde:requirementKind      "nice_to_have" ;
+  hrqde:provenanceConfidence "0.71"^^xsd:decimal ;
+  hrqde:provenanceSource     "job_posting" .
+
+sitzler:req_bd184f87_13
+  a                          hrqde:QualificationRequirement ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/19931934-3d3f-4c9f-81a2-e962e02cfe01> ;
+  hrqde:requiredLevel        hrqde:DQR6 ;
+  hrqde:requirementKind      "must" ;
+  hrqde:provenanceConfidence "0.66"^^xsd:decimal ;
+  hrqde:provenanceSource     "job_posting" .
+
+sitzler:req_bd184f87_14
+  a                          hrqde:QualificationRequirement ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/b69cb255-e939-4928-b3fd-9557087dce52> ;
+  hrqde:requiredLevel        hrqde:DQR6 ;
+  hrqde:requirementKind      "must" ;
+  hrqde:provenanceConfidence "0.60"^^xsd:decimal ;
+  hrqde:provenanceSource     "job_posting" .
+
+sitzler:req_bd184f87_15
+  a                          hrqde:QualificationRequirement ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/4dafe480-f2ae-46b5-bd5e-8d4e538f50c7> ;
+  hrqde:requiredLevel        hrqde:DQR6 ;
+  hrqde:requirementKind      "must" ;
+  hrqde:provenanceConfidence "0.68"^^xsd:decimal ;
+  hrqde:provenanceSource     "job_posting" .
+
+sitzler:req_bd184f87_16
+  a                          hrqde:QualificationRequirement ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/84f58e3d-8669-4d83-8c1d-5dd1e73a654f> ;
+  hrqde:requiredLevel        hrqde:DQR6 ;
+  hrqde:requirementKind      "must" ;
+  hrqde:provenanceConfidence "0.62"^^xsd:decimal ;
+  hrqde:provenanceSource     "job_posting" .
+
+sitzler:req_bd184f87_17
+  a                          hrqde:QualificationRequirement ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/f2d57f41-43b4-4f5b-8100-3df5c21eda50> ;
+  hrqde:requiredLevel        hrqde:DQR6 ;
+  hrqde:requirementKind      "must" ;
+  hrqde:provenanceConfidence "0.82"^^xsd:decimal ;
+  hrqde:provenanceSource     "job_posting" .
+
+sitzler:req_bd184f87_18
+  a                          hrqde:QualificationRequirement ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/7369f779-4b71-4aab-8836-48b69c676eec> ;
+  hrqde:requiredLevel        hrqde:DQR6 ;
+  hrqde:requirementKind      "must" ;
+  hrqde:provenanceConfidence "0.71"^^xsd:decimal ;
+  hrqde:provenanceSource     "job_posting" .
+
+sitzler:req_bd184f87_19
+  a                          hrqde:QualificationRequirement ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/912f7556-6b75-4d73-9658-4e710050199d> ;
+  hrqde:requiredLevel        hrqde:DQR6 ;
+  hrqde:requirementKind      "must" ;
+  hrqde:provenanceConfidence "0.61"^^xsd:decimal ;
+  hrqde:provenanceSource     "job_posting" .
+
+sitzler:req_bd184f87_20
+  a                          hrqde:QualificationRequirement ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/86d2e2ea-1ba2-4aa6-b465-8a1f9abc81b8> ;
+  hrqde:requiredLevel        hrqde:DQR6 ;
+  hrqde:requirementKind      "must" ;
+  hrqde:provenanceConfidence "0.59"^^xsd:decimal ;
+  hrqde:provenanceSource     "job_posting" .
+
+sitzler:req_bd184f87_21
+  a                          hrqde:QualificationRequirement ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/da3fb416-d3ee-4d2b-864c-050d8122ee13> ;
+  hrqde:requiredLevel        hrqde:DQR6 ;
+  hrqde:requirementKind      "must" ;
+  hrqde:provenanceConfidence "0.63"^^xsd:decimal ;
+  hrqde:provenanceSource     "job_posting" .
+
+sitzler:req_bd184f87_22
+  a                          hrqde:QualificationRequirement ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/9d0d89be-bffa-4393-b6f6-8d05bea49051> ;
+  hrqde:requiredLevel        hrqde:DQR6 ;
+  hrqde:requirementKind      "must" ;
+  hrqde:provenanceConfidence "0.60"^^xsd:decimal ;
+  hrqde:provenanceSource     "job_posting" .
+
+sitzler:req_bd184f87_23
+  a                          hrqde:QualificationRequirement ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/5650081a-877d-4d59-b7df-05c00572485a> ;
+  hrqde:requiredLevel        hrqde:DQR6 ;
+  hrqde:requirementKind      "must" ;
+  hrqde:provenanceConfidence "0.62"^^xsd:decimal ;
+  hrqde:provenanceSource     "job_posting" .
+
+sitzler:req_bd184f87_24
+  a                          hrqde:QualificationRequirement ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/9db00bb4-4c59-45d2-8040-bbef63361f89> ;
+  hrqde:requiredLevel        hrqde:DQR6 ;
+  hrqde:requirementKind      "nice_to_have" ;
+  hrqde:provenanceConfidence "0.66"^^xsd:decimal ;
+  hrqde:provenanceSource     "job_posting" .
+
+sitzler:req_bd184f87_25
+  a                          hrqde:QualificationRequirement ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/326809fc-238d-40c2-881e-40042f7f2f0d> ;
+  hrqde:requiredLevel        hrqde:DQR6 ;
+  hrqde:requirementKind      "must" ;
+  hrqde:provenanceConfidence "0.57"^^xsd:decimal ;
+  hrqde:provenanceSource     "job_posting" .
+
+sitzler:req_bd184f87_26
+  a                          hrqde:QualificationRequirement ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/7b5cce4d-c7fe-4119-b48f-70aa05391787> ;
+  hrqde:requiredLevel        hrqde:DQR6 ;
+  hrqde:requirementKind      "must" ;
+  hrqde:provenanceConfidence "1.00"^^xsd:decimal ;
+  hrqde:provenanceSource     "job_posting" .
+
+sitzler:req_bd184f87_27
+  a                          hrqde:QualificationRequirement ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/ccd0a1d9-afda-43d9-b901-96344886e14d> ;
+  hrqde:requiredLevel        hrqde:DQR6 ;
+  hrqde:requirementKind      "must" ;
+  hrqde:provenanceConfidence "0.86"^^xsd:decimal ;
+  hrqde:provenanceSource     "job_posting" .
+
+sitzler:req_bd184f87_28
+  a                          hrqde:QualificationRequirement ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/598de5b0-5b58-4ea7-8058-a4bc4d18c742> ;
+  hrqde:requiredLevel        hrqde:DQR6 ;
+  hrqde:requirementKind      "must" ;
+  hrqde:provenanceConfidence "1.00"^^xsd:decimal ;
+  hrqde:provenanceSource     "job_posting" .
+
+sitzler:req_bd184f87_29
+  a                          hrqde:QualificationRequirement ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/6c80d53c-d8c9-41fe-998f-091fca208834> ;
+  hrqde:requiredLevel        hrqde:DQR6 ;
+  hrqde:requirementKind      "must" ;
+  hrqde:provenanceConfidence "0.58"^^xsd:decimal ;
+  hrqde:provenanceSource     "job_posting" .
+
+sitzler:req_bd184f87_30
+  a                          hrqde:QualificationRequirement ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/1b2ec9bb-ba7c-4f93-87ac-ec712c9b68c3> ;
+  hrqde:requiredLevel        hrqde:DQR6 ;
+  hrqde:requirementKind      "must" ;
+  hrqde:provenanceConfidence "0.70"^^xsd:decimal ;
+  hrqde:provenanceSource     "job_posting" .
+
+sitzler:req_bd184f87_31
+  a                          hrqde:QualificationRequirement ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/fc5818b4-66f9-498b-a1bc-ff651db2af68> ;
+  hrqde:requiredLevel        hrqde:DQR6 ;
+  hrqde:requirementKind      "must" ;
+  hrqde:provenanceConfidence "0.70"^^xsd:decimal ;
+  hrqde:provenanceSource     "job_posting" .
+
+sitzler:req_bd184f87_32
+  a                          hrqde:QualificationRequirement ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/2a051ae0-e42e-4733-8bb2-de24c4d5e3b8> ;
+  hrqde:requiredLevel        hrqde:DQR6 ;
+  hrqde:requirementKind      "nice_to_have" ;
+  hrqde:provenanceConfidence "0.66"^^xsd:decimal ;
+  hrqde:provenanceSource     "job_posting" .

@@ -1,0 +1,11 @@
+{
+  "id": "it-data-engineer-001",
+  "source_uri": "https://example.com/stellen/it-data-engineer-001",
+  "crawl_date": "2026-07-01",
+  "platform": "example.com",
+  "employer": "Nordlicht Data Solutions GmbH",
+  "posting_date": "2026-06-20",
+  "title": "Data Engineer (m/w/d)",
+  "isco_group": 2,
+  "raw_text": "Die Nordlicht Data Solutions GmbH ist ein wachsendes Beratungshaus mit Sitz in Hamburg. Für den Ausbau unseres Datenplattform-Teams suchen wir zum nächstmöglichen Zeitpunkt eine Data Engineerin oder einen Data Engineer in Vollzeit.\n\nDeine Aufgaben:\nDu entwirfst und betreibst skalierbare Datenpipelines für die Verarbeitung großer Datenmengen. Du modellierst relationale und dokumentenorientierte Datenbanken und sorgst für deren Performance und Verfügbarkeit. Gemeinsam mit dem Analytics-Team überführst du Rohdaten in belastbare Datenprodukte.\n\nDein Profil:\nDu verfügst über ein abgeschlossenes Studium der Informatik oder eine vergleichbare Qualifikation. Fundierte Kenntnisse in Python und SQL setzen wir voraus. Erfahrung mit Cloud-Plattformen wie AWS sowie mit Containerisierung (Docker, Kubernetes) ist erforderlich. Kenntnisse in Datenbankdesign und im Aufbau von ETL-Prozessen runden dein Profil ab. Erfahrung mit Streaming-Technologien wie Apache Kafka ist von Vorteil. Sehr gute Deutsch- und Englischkenntnisse in Wort und Schrift sind zwingend erforderlich.\n\nWir erwarten ausgeprägtes analytisches Denken, eine strukturierte und eigenverantwortliche Arbeitsweise sowie Teamfähigkeit. Idealerweise bringst du Erfahrung in der Zusammenarbeit in agilen Teams mit.\n\nWir bieten flexible Arbeitszeiten, die Möglichkeit zum mobilen Arbeiten und ein attraktives Weiterbildungsbudget."
+}

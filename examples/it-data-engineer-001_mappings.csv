@@ -1,0 +1,133 @@
+span_id,span_text,extractor,rank,concept_uri,matched_label,score,decision
+it-data-engineer-001-adjn-1,wachsendes Beratungshaus,adj_noun,1,http://data.europa.eu/esco/skill/9fc8af29-f33f-4e80-8a23-11e258c910ab,Beurteilung der Wachstumsraten,0.7096,accepted
+it-data-engineer-001-adjn-1,wachsendes Beratungshaus,adj_noun,2,http://data.europa.eu/esco/skill/34d734d5-2179-49e7-b641-96121f49231c,Wachs befördern,0.6562,rejected
+it-data-engineer-001-adjn-1,wachsendes Beratungshaus,adj_noun,3,http://data.europa.eu/esco/skill/4b3c8605-819d-4b38-83fc-f23663e78dc9,Beratung,0.6549,rejected
+it-data-engineer-001-adjn-10,gute Deutsch- und Englischkenntnisse,adj_noun,1,http://data.europa.eu/esco/skill/4812a4ea-dc55-4dc6-b9b0-4a59bba2c647,Deutsch,0.6899,accepted
+it-data-engineer-001-adjn-10,gute Deutsch- und Englischkenntnisse,adj_noun,2,http://data.europa.eu/esco/skill/6d3edede-8951-4621-a835-e04323300fa0,Englisch,0.6188,rejected
+it-data-engineer-001-adjn-10,gute Deutsch- und Englischkenntnisse,adj_noun,3,http://data.europa.eu/esco/skill/7ee20fe2-facd-4cc5-837b-927429e0e7ac,geschriebenes Englisch verstehen,0.6046,rejected
+it-data-engineer-001-adjn-11,ausgeprägtes analytisches Denken,adj_noun,1,http://data.europa.eu/esco/skill/4707da90-9cfc-46ca-8de0-38a0b7bfb137,analytisch denken,0.8189,accepted
+it-data-engineer-001-adjn-11,ausgeprägtes analytisches Denken,adj_noun,2,http://data.europa.eu/esco/skill/54173a92-b781-4a3f-880b-70fa3a375417,analytisch arbeiten,0.6538,rejected
+it-data-engineer-001-adjn-11,ausgeprägtes analytisches Denken,adj_noun,3,http://data.europa.eu/esco/skill/43438fd0-3af5-48f9-8984-495dfc447b0f,analgetics,0.6479,rejected
+it-data-engineer-001-adjn-12,analytisches Denken,adj_noun,1,http://data.europa.eu/esco/skill/4707da90-9cfc-46ca-8de0-38a0b7bfb137,analytisch denken,0.9694,accepted
+it-data-engineer-001-adjn-12,analytisches Denken,adj_noun,2,http://data.europa.eu/esco/skill/f263da7f-0708-42c2-b1a9-39083416f632,analytische Erkenntnisse mitteilen,0.6182,rejected
+it-data-engineer-001-adjn-12,analytisches Denken,adj_noun,3,http://data.europa.eu/esco/skill/54173a92-b781-4a3f-880b-70fa3a375417,analytisch arbeiten,0.6104,rejected
+it-data-engineer-001-adjn-13,strukturierte und eigenverantwortliche Arbeitsweise,adj_noun,1,http://data.europa.eu/esco/skill/ab28ecc4-f823-4f8d-a858-6a67975cc0b7,Strukturverglasung anbringen,0.5925,accepted
+it-data-engineer-001-adjn-13,strukturierte und eigenverantwortliche Arbeitsweise,adj_noun,2,http://data.europa.eu/esco/skill/03ae1add-eecd-46b1-8117-742b4d7666d4,wirtschaftlich arbeiten,0.5809,rejected
+it-data-engineer-001-adjn-13,strukturierte und eigenverantwortliche Arbeitsweise,adj_noun,3,http://data.europa.eu/esco/skill/f90d4810-8bac-4e5e-b870-3e35a4138ff7,mit Eigenverantwortlichkeit umgehen,0.5521,rejected
+it-data-engineer-001-adjn-14,agilen Teams,adj_noun,1,http://data.europa.eu/esco/skill/bec4359e-cb92-468f-a997-8fb28e32fba9,agile,0.7091,accepted
+it-data-engineer-001-adjn-14,agilen Teams,adj_noun,2,http://data.europa.eu/esco/skill/dba46f87-0831-49cd-a1c7-340a653c0221,Agile development,0.6643,rejected
+it-data-engineer-001-adjn-14,agilen Teams,adj_noun,3,http://data.europa.eu/esco/skill/0a9acb6b-1139-4be9-b431-3a80a959f2f4,agiles Projektmanagement,0.6304,rejected
+it-data-engineer-001-adjn-15,flexible Arbeitszeiten,adj_noun,1,http://data.europa.eu/esco/skill/19931934-3d3f-4c9f-81a2-e962e02cfe01,Arbeitszüge,0.6581,accepted
+it-data-engineer-001-adjn-15,flexible Arbeitszeiten,adj_noun,2,http://data.europa.eu/esco/skill/b184750e-9f9e-4ef2-a882-845e6058b605,Arbeitsprozesse verbessern,0.5758,rejected
+it-data-engineer-001-adjn-15,flexible Arbeitszeiten,adj_noun,3,http://data.europa.eu/esco/skill/5598739b-6718-4cff-8402-91d7f65b1505,Sauberkeit des Arbeitsbereichs bewahren,0.5400,rejected
+it-data-engineer-001-adjn-16,mobilen Arbeiten,adj_noun,1,http://data.europa.eu/esco/skill/b69cb255-e939-4928-b3fd-9557087dce52,unter Aufsicht sicher mit mobilen elektrischen Systemen arbeiten,0.5973,accepted
+it-data-engineer-001-adjn-16,mobilen Arbeiten,adj_noun,2,http://data.europa.eu/esco/skill/ed392b45-1087-44a7-89a9-d514224639ff,undertake mobile marketing,0.5654,rejected
+it-data-engineer-001-adjn-16,mobilen Arbeiten,adj_noun,3,http://data.europa.eu/esco/skill/ef069fe6-305b-4452-8f7d-0c572e98effc,mobile marketing,0.5586,rejected
+it-data-engineer-001-adjn-17,attraktives Weiterbildungsbudget,adj_noun,1,http://data.europa.eu/esco/skill/4dafe480-f2ae-46b5-bd5e-8d4e538f50c7,Weiterbildungsbedarf ermitteln,0.6762,accepted
+it-data-engineer-001-adjn-17,attraktives Weiterbildungsbudget,adj_noun,2,http://data.europa.eu/esco/skill/ebff1a39-7261-49cd-9cb2-88f565e8dc26,betriebliche Weiterbildungsprogramme entwickeln,0.6502,rejected
+it-data-engineer-001-adjn-17,attraktives Weiterbildungsbudget,adj_noun,3,http://data.europa.eu/esco/skill/6e66fa0f-4d3b-415e-9693-dc556eb5112a,betriebliche Weiterbildungsprogramme managen,0.6441,rejected
+it-data-engineer-001-adjn-2,nächstmöglichen Zeitpunkt,adj_noun,1,http://data.europa.eu/esco/skill/89732ae0-bf39-4fe3-928a-726c74ae8c63,Requisiten zum richtigen Zeitpunkt bereitstellen,0.6787,accepted
+it-data-engineer-001-adjn-2,nächstmöglichen Zeitpunkt,adj_noun,2,http://data.europa.eu/esco/skill/f32eb5de-3fc7-4bba-853a-c6f2f043c33e,Ausrüstung zum richtigen Zeitpunkt bereitstellen,0.6691,rejected
+it-data-engineer-001-adjn-2,nächstmöglichen Zeitpunkt,adj_noun,3,http://data.europa.eu/esco/skill/424d7132-9dbb-46dc-b318-078ecf8dde15,Zeitmessgeräte,0.6628,rejected
+it-data-engineer-001-adjn-3,skalierbare Datenpipelines,adj_noun,1,http://data.europa.eu/esco/skill/4a193795-fa63-414e-9f2e-bfdb3924571e,Datenproben gewinnen,0.5581,accepted
+it-data-engineer-001-adjn-3,skalierbare Datenpipelines,adj_noun,2,http://data.europa.eu/esco/skill/2daec0e6-f0c1-43e8-8178-aedba99130ec,Datenprozesse implementieren,0.5378,rejected
+it-data-engineer-001-adjn-3,skalierbare Datenpipelines,adj_noun,3,http://data.europa.eu/esco/skill/84f58e3d-8669-4d83-8c1d-5dd1e73a654f,Datenbank-Diagramme erstellen,0.5369,rejected
+it-data-engineer-001-adjn-4,großer Datenmengen,adj_noun,1,http://data.europa.eu/esco/skill/43ae58b9-5e56-4524-b45a-b422777a0576,Datenspeicher,0.6366,accepted
+it-data-engineer-001-adjn-4,großer Datenmengen,adj_noun,2,http://data.europa.eu/esco/skill/71717c33-dd63-4acf-b052-a5fd5d9fc490,Datenschutz gewährleisten,0.6350,rejected
+it-data-engineer-001-adjn-4,großer Datenmengen,adj_noun,3,http://data.europa.eu/esco/skill/097c6a36-f031-4d3e-b5c1-62d6ffcb430b,Grundsätze des Datenschutzes respektieren,0.6291,rejected
+it-data-engineer-001-adjn-5,relationale und dokumentenorientierte Datenbanken,adj_noun,1,http://data.europa.eu/esco/skill/64db87c7-2360-4e20-88d3-d222402e477c,Dokumentation für Datenbanken schreiben,0.7927,accepted
+it-data-engineer-001-adjn-5,relationale und dokumentenorientierte Datenbanken,adj_noun,2,http://data.europa.eu/esco/skill/7369f779-4b71-4aab-8836-48b69c676eec,relationales Datenbankmanagementsystem bedienen,0.7689,rejected
+it-data-engineer-001-adjn-5,relationale und dokumentenorientierte Datenbanken,adj_noun,3,http://data.europa.eu/esco/skill/43ae58b9-5e56-4524-b45a-b422777a0576,Datenbanken,0.7140,rejected
+it-data-engineer-001-adjn-6,belastbare Datenprodukte,adj_noun,1,http://data.europa.eu/esco/skill/4a193795-fa63-414e-9f2e-bfdb3924571e,Datenproben gewinnen,0.6303,accepted
+it-data-engineer-001-adjn-6,belastbare Datenprodukte,adj_noun,2,http://data.europa.eu/esco/skill/ab1e97ed-2319-4293-a8b7-072d2648822f,Datenbanksysteme,0.6264,rejected
+it-data-engineer-001-adjn-6,belastbare Datenprodukte,adj_noun,3,http://data.europa.eu/esco/skill/99207709-d076-4cce-ba38-e90d3bb28806,Datenbankabfragesprache,0.6025,rejected
+it-data-engineer-001-adjn-7,abgeschlossenes Studium,adj_noun,1,http://data.europa.eu/esco/skill/1b8872bd-d869-4b08-b9b2-296d2b1c644c,Verhalten von Studierenden begleitend beobachten,0.6207,accepted
+it-data-engineer-001-adjn-7,abgeschlossenes Studium,adj_noun,2,http://data.europa.eu/esco/skill/c9eea75d-918e-4733-bf1d-86ecd7a04946,Studien und Feldforschungen betreiben,0.6062,rejected
+it-data-engineer-001-adjn-7,abgeschlossenes Studium,adj_noun,3,http://data.europa.eu/esco/skill/0c9fdeaa-7b3a-480b-b6cc-757f1dfb5f0f,Studierende in Bibliotheksfragen unterstützen,0.5966,rejected
+it-data-engineer-001-adjn-8,vergleichbare Qualifikation,adj_noun,1,http://data.europa.eu/esco/skill/df4962a4-221b-4877-ac5c-f4cb592eef1d,geröstetes Getreide mit einem Standard vergleichen,0.5813,accepted
+it-data-engineer-001-adjn-8,vergleichbare Qualifikation,adj_noun,2,http://data.europa.eu/esco/skill/906c9e66-bdee-4f8e-93d7-88d9fcf39a0a,Termine vereinbaren,0.5764,rejected
+it-data-engineer-001-adjn-8,vergleichbare Qualifikation,adj_noun,3,http://data.europa.eu/esco/skill/7c32a84c-2733-4bc7-8909-3b3413c9cc88,Unterkunft vereinbaren,0.5759,rejected
+it-data-engineer-001-adjn-9,Fundierte Kenntnisse,adj_noun,1,http://data.europa.eu/esco/skill/41bf7ede-fc84-4a57-8c89-b548d11b0ba1,betriebswirtschaftliche Kenntnisse steuern,0.6143,accepted
+it-data-engineer-001-adjn-9,Fundierte Kenntnisse,adj_noun,2,http://data.europa.eu/esco/skill/4021ae85-8f3d-44e8-ac64-eeebac97f3ce,Kenntnisse zu Wildtierarten,0.5986,rejected
+it-data-engineer-001-adjn-9,Fundierte Kenntnisse,adj_noun,3,http://data.europa.eu/esco/skill/0dc7aa1b-b5af-4f4b-81ce-ee22ed8b6926,IT-Kenntnisse erfassen,0.5845,rejected
+it-data-engineer-001-esco-1,entwirfst und betreibst skalierbare Datenpipelines,escoxlm_r,1,http://data.europa.eu/esco/skill/84f58e3d-8669-4d83-8c1d-5dd1e73a654f,Datenbank-Diagramme erstellen,0.6215,accepted
+it-data-engineer-001-esco-1,entwirfst und betreibst skalierbare Datenpipelines,escoxlm_r,2,http://data.europa.eu/esco/skill/2daec0e6-f0c1-43e8-8178-aedba99130ec,Datenprozesse entwickeln,0.6144,rejected
+it-data-engineer-001-esco-1,entwirfst und betreibst skalierbare Datenpipelines,escoxlm_r,3,http://data.europa.eu/esco/skill/4a193795-fa63-414e-9f2e-bfdb3924571e,Datenproben gewinnen,0.6089,rejected
+it-data-engineer-001-esco-10,strukturierte und eigenverantwortliche Arbeitsweise,escoxlm_r,1,http://data.europa.eu/esco/skill/ab28ecc4-f823-4f8d-a858-6a67975cc0b7,Strukturverglasung anbringen,0.5925,accepted
+it-data-engineer-001-esco-10,strukturierte und eigenverantwortliche Arbeitsweise,escoxlm_r,2,http://data.europa.eu/esco/skill/03ae1add-eecd-46b1-8117-742b4d7666d4,wirtschaftlich arbeiten,0.5809,rejected
+it-data-engineer-001-esco-10,strukturierte und eigenverantwortliche Arbeitsweise,escoxlm_r,3,http://data.europa.eu/esco/skill/f90d4810-8bac-4e5e-b870-3e35a4138ff7,mit Eigenverantwortlichkeit umgehen,0.5521,rejected
+it-data-engineer-001-esco-11,Teamfähigkeit,escoxlm_r,1,http://data.europa.eu/esco/skill/5650081a-877d-4d59-b7df-05c00572485a,Teamentwicklung fördern,0.6213,accepted
+it-data-engineer-001-esco-11,Teamfähigkeit,escoxlm_r,2,http://data.europa.eu/esco/skill/60c78287-22eb-4103-9c8c-28deaa460da0,in Teams arbeiten,0.6027,rejected
+it-data-engineer-001-esco-11,Teamfähigkeit,escoxlm_r,3,http://data.europa.eu/esco/skill/a5b0cd5c-e13a-4ab3-8d93-4d242adcfb01,teamwork principle,0.5752,rejected
+it-data-engineer-001-esco-12,Zusammenarbeit in agilen Teams,escoxlm_r,1,http://data.europa.eu/esco/skill/9db00bb4-4c59-45d2-8040-bbef63361f89,Waren zusammenstellen,0.6581,accepted
+it-data-engineer-001-esco-12,Zusammenarbeit in agilen Teams,escoxlm_r,2,http://data.europa.eu/esco/skill/a3ef84f9-c436-437a-bc6f-4956ae13e1eb,Stoffteile zusammennähen,0.6392,rejected
+it-data-engineer-001-esco-12,Zusammenarbeit in agilen Teams,escoxlm_r,3,http://data.europa.eu/esco/skill/ed8de897-adbe-4f0e-b4d2-534953e64c72,System zusammenstellen,0.6365,rejected
+it-data-engineer-001-esco-13,relationale,escoxlm_r,1,http://data.europa.eu/esco/skill/326809fc-238d-40c2-881e-40042f7f2f0d,create collective relations,0.5680,accepted
+it-data-engineer-001-esco-13,relationale,escoxlm_r,2,http://data.europa.eu/esco/skill/e72ce847-f7a9-40b8-ac66-ce291a2121de,quantitative relationship analysis,0.5272,rejected
+it-data-engineer-001-esco-13,relationale,escoxlm_r,3,http://data.europa.eu/esco/skill/dc72ad0a-c5dc-4abd-bc0d-ca43e82162e1,produce business relationships,0.5074,rejected
+it-data-engineer-001-esco-14,dokumentenorientierte Datenbanken,escoxlm_r,1,http://data.europa.eu/esco/skill/64db87c7-2360-4e20-88d3-d222402e477c,Dokumentation für Datenbanken schreiben,0.8531,accepted
+it-data-engineer-001-esco-14,dokumentenorientierte Datenbanken,escoxlm_r,2,http://data.europa.eu/esco/skill/43ae58b9-5e56-4524-b45a-b422777a0576,Datenbanken,0.7787,rejected
+it-data-engineer-001-esco-14,dokumentenorientierte Datenbanken,escoxlm_r,3,http://data.europa.eu/esco/skill/4463a721-69f3-413d-8321-43e3af13a4f1,Datenbanken verwenden,0.7328,rejected
+it-data-engineer-001-esco-15,Informatik,escoxlm_r,1,http://data.europa.eu/esco/skill/7b5cce4d-c7fe-4119-b48f-70aa05391787,Informatik,1.0000,accepted
+it-data-engineer-001-esco-15,Informatik,escoxlm_r,2,http://data.europa.eu/esco/skill/b820c9de-4d00-4e79-9af9-33f26044ff42,Informatik lehren,0.7641,rejected
+it-data-engineer-001-esco-15,Informatik,escoxlm_r,3,http://data.europa.eu/esco/skill/03ff0d53-573a-47a0-a0ad-1995815a4339,Informationsstruktur,0.6415,rejected
+it-data-engineer-001-esco-16,Python,escoxlm_r,1,http://data.europa.eu/esco/skill/ccd0a1d9-afda-43d9-b901-96344886e14d,Python (computer programming),0.8568,accepted
+it-data-engineer-001-esco-16,Python,escoxlm_r,2,http://data.europa.eu/esco/skill/5660c82d-b80b-4883-b474-8ef387969fb5,circus language,0.3716,rejected
+it-data-engineer-001-esco-16,Python,escoxlm_r,3,http://data.europa.eu/esco/skill/3a116ee0-19d4-49e9-a8f0-f2cd4f51c463,pylons,0.3711,rejected
+it-data-engineer-001-esco-17,SQL,escoxlm_r,1,http://data.europa.eu/esco/skill/598de5b0-5b58-4ea7-8058-a4bc4d18c742,SQL,1.0000,accepted
+it-data-engineer-001-esco-17,SQL,escoxlm_r,2,http://data.europa.eu/esco/skill/ab1e97ed-2319-4293-a8b7-072d2648822f,SQL,1.0000,rejected
+it-data-engineer-001-esco-17,SQL,escoxlm_r,3,http://data.europa.eu/esco/skill/c062bab3-3ea0-4291-9220-a2d8fef4bead,SQL Server,0.8194,rejected
+it-data-engineer-001-esco-18,Cloud-Plattformen,escoxlm_r,1,http://data.europa.eu/esco/skill/6c80d53c-d8c9-41fe-998f-091fca208834,E-Learning-Plattform,0.5769,accepted
+it-data-engineer-001-esco-18,Cloud-Plattformen,escoxlm_r,2,http://data.europa.eu/esco/skill/bd14968e-e409-45af-b362-3495ed7b10e0,Cloud-Infrastrukturen,0.5635,rejected
+it-data-engineer-001-esco-18,Cloud-Plattformen,escoxlm_r,3,http://data.europa.eu/esco/skill/8a893c9a-c066-41c1-853b-149491cbc7f2,Platten besprühen,0.5578,rejected
+it-data-engineer-001-esco-19,AWS,escoxlm_r,1,http://data.europa.eu/esco/skill/bd14968e-e409-45af-b362-3495ed7b10e0,Cloud Computing,0.4897,rejected
+it-data-engineer-001-esco-19,AWS,escoxlm_r,2,http://data.europa.eu/esco/skill/3ce1fe19-7f9e-4070-941d-651673a5693b,EUS,0.4390,rejected
+it-data-engineer-001-esco-19,AWS,escoxlm_r,3,http://data.europa.eu/esco/skill/a521903b-aa32-4954-9790-961b0df1261f,UAS,0.4182,rejected
+it-data-engineer-001-esco-2,Verarbeitung großer Datenmengen,escoxlm_r,1,http://data.europa.eu/esco/skill/f2d57f41-43b4-4f5b-8100-3df5c21eda50,Daten verarbeiten,0.8168,accepted
+it-data-engineer-001-esco-2,Verarbeitung großer Datenmengen,escoxlm_r,2,http://data.europa.eu/esco/skill/a56dec32-05ef-45de-a256-ee6741f356db,Vertraulichkeit der Daten,0.6876,rejected
+it-data-engineer-001-esco-2,Verarbeitung großer Datenmengen,escoxlm_r,3,http://data.europa.eu/esco/skill/1b70a55d-b8a4-49fc-96c6-15ab4cff2522,Datenverarbeitungstechniken benutzen,0.6472,rejected
+it-data-engineer-001-esco-20,Containerisierung,escoxlm_r,1,http://data.europa.eu/esco/skill/1b2ec9bb-ba7c-4f93-87ac-ec712c9b68c3,institute containers,0.7045,accepted
+it-data-engineer-001-esco-20,Containerisierung,escoxlm_r,2,http://data.europa.eu/esco/skill/3c73898b-04a6-4e3a-b84a-3a032277c916,Techniken zum Verstauen von Gütern in Container anwenden,0.5920,rejected
+it-data-engineer-001-esco-20,Containerisierung,escoxlm_r,3,http://data.europa.eu/esco/skill/dfe94963-428b-4282-90f9-dfe32c86e088,Container in Aquakulturen instand halten,0.5897,rejected
+it-data-engineer-001-esco-21,Kubernetes,escoxlm_r,1,http://data.europa.eu/esco/skill/fc5818b4-66f9-498b-a1bc-ff651db2af68,Kybernetik,0.7039,accepted
+it-data-engineer-001-esco-21,Kubernetes,escoxlm_r,2,http://data.europa.eu/esco/skill/3821d148-ef26-4658-8200-b6c6c0395167,Plankton kultivieren,0.4996,rejected
+it-data-engineer-001-esco-21,Kubernetes,escoxlm_r,3,http://data.europa.eu/esco/skill/623f9a18-e0cd-4132-92f0-5745692f6503,kupieren,0.4592,rejected
+it-data-engineer-001-esco-22,Datenbankdesign,escoxlm_r,1,http://data.europa.eu/esco/skill/43ae58b9-5e56-4524-b45a-b422777a0576,Datenbank,0.8688,accepted
+it-data-engineer-001-esco-22,Datenbankdesign,escoxlm_r,2,http://data.europa.eu/esco/skill/ab1e97ed-2319-4293-a8b7-072d2648822f,Datenbanksysteme,0.8153,rejected
+it-data-engineer-001-esco-22,Datenbankdesign,escoxlm_r,3,http://data.europa.eu/esco/skill/0df2e216-68ae-4952-b9dc-3c2f2bc04fe3,Datenbank führen,0.7565,rejected
+it-data-engineer-001-esco-23,ETL-Prozessen,escoxlm_r,1,http://data.europa.eu/esco/skill/9d0d89be-bffa-4393-b6f6-8d05bea49051,ETL,0.6023,accepted
+it-data-engineer-001-esco-23,ETL-Prozessen,escoxlm_r,2,http://data.europa.eu/esco/skill/2c28fc20-8a60-4311-8899-5ef8729c05b3,Prozessgestaltung,0.5992,rejected
+it-data-engineer-001-esco-23,ETL-Prozessen,escoxlm_r,3,http://data.europa.eu/esco/skill/72a74f69-5cf1-43c5-99b9-62a444578919,Engineering-Prozesse,0.5883,rejected
+it-data-engineer-001-esco-24,Streaming-Technologien,escoxlm_r,1,http://data.europa.eu/esco/skill/2a051ae0-e42e-4733-8bb2-de24c4d5e3b8,broadcast on streaming,0.6563,accepted
+it-data-engineer-001-esco-24,Streaming-Technologien,escoxlm_r,2,http://data.europa.eu/esco/skill/9e30c91c-a598-4686-80db-8e934aa75bcf,observe technology feed,0.5634,rejected
+it-data-engineer-001-esco-24,Streaming-Technologien,escoxlm_r,3,http://data.europa.eu/esco/skill/1a4cc54f-1e53-442b-a6d2-1682dc8ef8f9,digitale Technologien kreativ einsetzen,0.4931,rejected
+it-data-engineer-001-esco-25,Apache Kafka,escoxlm_r,1,http://data.europa.eu/esco/skill/dae01690-1dea-43fc-91dd-a1be03cbb1da,Kalfaterungsverfahren,0.4883,rejected
+it-data-engineer-001-esco-25,Apache Kafka,escoxlm_r,2,http://data.europa.eu/esco/skill/d2150558-2012-4639-9247-4da53346e54b,käsen,0.4669,rejected
+it-data-engineer-001-esco-25,Apache Kafka,escoxlm_r,3,http://data.europa.eu/esco/skill/0d49200d-d3f1-4412-9168-999d97ffc12c,Kalfatern,0.4638,rejected
+it-data-engineer-001-esco-3,modellierst relationale und dokumentenorientierte Datenbanken,escoxlm_r,1,http://data.europa.eu/esco/skill/7369f779-4b71-4aab-8836-48b69c676eec,relationales Datenbank-Managementsystem bedienen,0.7051,accepted
+it-data-engineer-001-esco-3,modellierst relationale und dokumentenorientierte Datenbanken,escoxlm_r,2,http://data.europa.eu/esco/skill/fbafa41f-cd05-4109-a649-8b44d306d779,Daten-Modelle erstellen,0.6884,rejected
+it-data-engineer-001-esco-3,modellierst relationale und dokumentenorientierte Datenbanken,escoxlm_r,3,http://data.europa.eu/esco/skill/64db87c7-2360-4e20-88d3-d222402e477c,Datenbank-Dokumentation schreiben,0.6748,rejected
+it-data-engineer-001-esco-4,sorgst für,escoxlm_r,1,http://data.europa.eu/esco/skill/912f7556-6b75-4d73-9658-4e710050199d,für Tierhygiene sorgen,0.6105,accepted
+it-data-engineer-001-esco-4,sorgst für,escoxlm_r,2,http://data.europa.eu/esco/skill/800d76d7-3ff9-440b-b5e8-b8737e105f36,produce fur products,0.5515,rejected
+it-data-engineer-001-esco-4,sorgst für,escoxlm_r,3,http://data.europa.eu/esco/skill/901360e7-81ff-408c-8f0a-cc18c2cef1dd,manufacturing of fur goods,0.5456,rejected
+it-data-engineer-001-esco-5,Performance und Verfügbarkeit,escoxlm_r,1,http://data.europa.eu/esco/skill/86d2e2ea-1ba2-4aa6-b465-8a1f9abc81b8,Grundsätze der Vertraulichkeit  Integrität und Verfügbarkeit einhalten,0.5884,accepted
+it-data-engineer-001-esco-5,Performance und Verfügbarkeit,escoxlm_r,2,http://data.europa.eu/esco/skill/0e0eec3f-0a8b-4cfe-b86d-925bde288bc4,Besonderheiten der zur Versteigerung verfügbaren Artikel,0.5784,rejected
+it-data-engineer-001-esco-5,Performance und Verfügbarkeit,escoxlm_r,3,http://data.europa.eu/esco/skill/b88fde8f-1b98-4a83-8a2e-75232be4f725,Lageberichte verfassen,0.5589,rejected
+it-data-engineer-001-esco-6,überführst,escoxlm_r,1,http://data.europa.eu/esco/skill/da3fb416-d3ee-4d2b-864c-050d8122ee13,Übersetzungen überprüfen,0.6344,accepted
+it-data-engineer-001-esco-6,überführst,escoxlm_r,2,http://data.europa.eu/esco/skill/283b5e03-571e-4d58-b087-e7c9b2a45128,Überprüfungsflüge durchführen,0.6032,rejected
+it-data-engineer-001-esco-6,überführst,escoxlm_r,3,http://data.europa.eu/esco/skill/2342a29c-6965-46dc-bdde-ec0e9d330e6f,Personal überprüfen,0.5985,rejected
+it-data-engineer-001-esco-7,"Rohdaten in belastbare Datenprodukte.
+
+Dein",escoxlm_r,1,http://data.europa.eu/esco/skill/4a193795-fa63-414e-9f2e-bfdb3924571e,Datenproben gewinnen,0.5900,accepted
+it-data-engineer-001-esco-7,"Rohdaten in belastbare Datenprodukte.
+
+Dein",escoxlm_r,2,http://data.europa.eu/esco/skill/2daec0e6-f0c1-43e8-8178-aedba99130ec,Datenprozesse entwickeln,0.5822,rejected
+it-data-engineer-001-esco-7,"Rohdaten in belastbare Datenprodukte.
+
+Dein",escoxlm_r,3,http://data.europa.eu/esco/skill/29fb0fb5-dfc4-4098-ac9b-3a712000f48f,Datenbank verwalten,0.5675,rejected
+it-data-engineer-001-esco-8,Aufbau von ETL-Prozessen,escoxlm_r,1,http://data.europa.eu/esco/skill/9d0d89be-bffa-4393-b6f6-8d05bea49051,ETL-Werkzeuge,0.5715,accepted
+it-data-engineer-001-esco-8,Aufbau von ETL-Prozessen,escoxlm_r,2,http://data.europa.eu/esco/skill/2c28fc20-8a60-4311-8899-5ef8729c05b3,Prozessgestaltung,0.5693,rejected
+it-data-engineer-001-esco-8,Aufbau von ETL-Prozessen,escoxlm_r,3,http://data.europa.eu/esco/skill/958b8802-ec3e-4813-97f7-6c8f48610dbd,Möglichkeiten zur Verbesserung von Prozessen erkennen,0.5682,rejected
+it-data-engineer-001-esco-9,analytisches Denken,escoxlm_r,1,http://data.europa.eu/esco/skill/4707da90-9cfc-46ca-8de0-38a0b7bfb137,analytisch denken,0.9694,accepted
+it-data-engineer-001-esco-9,analytisches Denken,escoxlm_r,2,http://data.europa.eu/esco/skill/f263da7f-0708-42c2-b1a9-39083416f632,analytische Erkenntnisse mitteilen,0.6182,rejected
+it-data-engineer-001-esco-9,analytisches Denken,escoxlm_r,3,http://data.europa.eu/esco/skill/54173a92-b781-4a3f-880b-70fa3a375417,analytisch arbeiten,0.6104,rejected

@@ -11,3 +11,13 @@ Erzeugt mit dem vollen ESCO-Index (echte ESCO-URIs, siehe Haupt-README
 und liefert entsprechend Stub-URIs.
 
 Selbst erzeugen: `hrqde-c run -i examples/pflege-fachkraft-002_input.json -o data/output -v` (Setup siehe Haupt-README).
+
+## Zweites Beispiel: Data Engineer
+
+Dieselbe Kette über eine IT-Anzeige (`it-data-engineer-001`), erzeugt am 27.09.2026 mit dem vollen ESCO-Index:
+
+- `it-data-engineer-001_input.json` - die Eingabe-Anzeige (aus `data/input/postings_sample.json`)
+- `it-data-engineer-001.ttl` - die Lieferung, validiert gegen `hrqde-shapes-all.ttl` (CONFORMS)
+- `it-data-engineer-001_mappings.csv` - alle Mapping-Kandidaten inkl. der verworfenen, mit Scores
+
+Selbst erzeugen: `hrqde-c run -i examples/it-data-engineer-001_input.json -o data/output -v`
