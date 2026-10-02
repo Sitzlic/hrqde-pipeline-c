@@ -49,11 +49,17 @@ Pro Lauf entstehen im Output-Verzeichnis: `<id>.ttl` (Lieferung),
 ### ESCO-Index
 
 Mitgeliefert ist nur ein Mini-Bestand (`data/esco/skills_mini.json`, 40 Konzepte).
-Den vollen Index (alle ~13.500 ESCO-Skills, Labels DE+EN) einmalig bauen:
+Den vollen Index (13.939 ESCO-Skills der Version v1.2.1, Labels DE+EN) und die
+Berufsprofile fuer die DQR-Heuristik (3.039 Occupations) einmalig holen:
 
 ```bash
 python scripts/fetch_esco_skills.py
+python scripts/fetch_esco_occupations.py
 ```
+
+Beide Skripte fragen die ESCO-API mit `selectedVersion=v1.2.1` ab. Ohne diesen
+Parameter liefert die API nicht die aktuelle Version, sondern einen aelteren
+Bestand (13.485 Skills, 2.942 Occupations).
 
 Liegt `data/esco/skills_full.json` danach vor, nutzt die Pipeline ihn automatisch.
 Beim ersten Lauf wird der Embedding-Cache gebaut, das dauert ein paar Minuten.

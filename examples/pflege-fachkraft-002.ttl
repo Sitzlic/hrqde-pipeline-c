@@ -47,7 +47,7 @@ sitzler:req_554479e9_1
 
 sitzler:req_554479e9_2
   a                          hrqde:QualificationRequirement ;
-  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/ae965e49-06f1-442f-87bf-e48fc1e1d8b6> ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/71480db1-a706-47f9-952f-bdc5036e3df3> ;
   hrqde:requiredLevel        hrqde:DQR5 ;
   hrqde:requirementKind      "must" ;
   hrqde:provenanceConfidence "0.68"^^xsd:decimal ;
@@ -111,10 +111,10 @@ sitzler:req_554479e9_9
 
 sitzler:req_554479e9_10
   a                          hrqde:QualificationRequirement ;
-  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/b535516b-9f8a-4c29-b6aa-a0a4561e1086> ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/d82b3bfc-b323-44d6-8776-e3d28e9183a4> ;
   hrqde:requiredLevel        hrqde:DQR5 ;
   hrqde:requirementKind      "must" ;
-  hrqde:provenanceConfidence "0.59"^^xsd:decimal ;
+  hrqde:provenanceConfidence "0.60"^^xsd:decimal ;
   hrqde:provenanceSource     "job_posting" .
 
 sitzler:req_554479e9_11
@@ -143,10 +143,10 @@ sitzler:req_554479e9_13
 
 sitzler:req_554479e9_14
   a                          hrqde:QualificationRequirement ;
-  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/d429b19a-132f-44d3-971b-bb0ccd94f979> ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/6acf652c-33b2-4e28-8f79-1e553f255229> ;
   hrqde:requiredLevel        hrqde:DQR5 ;
   hrqde:requirementKind      "must" ;
-  hrqde:provenanceConfidence "0.73"^^xsd:decimal ;
+  hrqde:provenanceConfidence "0.79"^^xsd:decimal ;
   hrqde:provenanceSource     "job_posting" .
 
 sitzler:req_554479e9_15
@@ -175,10 +175,10 @@ sitzler:req_554479e9_17
 
 sitzler:req_554479e9_18
   a                          hrqde:QualificationRequirement ;
-  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/5c59dac1-0547-4068-b43c-ac59f1344448> ;
+  hrqde:refersToCompetence   <http://data.europa.eu/esco/skill/f67f2cd7-f179-45a5-acde-a3c74c1ce3cc> ;
   hrqde:requiredLevel        hrqde:DQR5 ;
   hrqde:requirementKind      "must" ;
-  hrqde:provenanceConfidence "0.73"^^xsd:decimal ;
+  hrqde:provenanceConfidence "0.69"^^xsd:decimal ;
   hrqde:provenanceSource     "job_posting" .
 
 sitzler:req_554479e9_19
