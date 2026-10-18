@@ -18,7 +18,7 @@ funktioniert nur mit deutscher IP, die API blockt Auslands-Anfragen).
 Reihenfolge der Stages in `pipeline.py`:
 
     acquire -> process_nlp -> extract_spans -> aggregate -> map_to_esco
-    -> build_requirements -> write_ttl (+ mapping-CSV + run_metadata)
+    -> build_requirements -> write_ttl (+ mapping-CSV, drafts.json, span_candidates.csv, run_metadata)
 
 ## Setup
 
@@ -44,7 +44,9 @@ hrqde-c fetch --was "Pflegefachkraft" --wo Berlin -n 25 -o data/input/fetched.js
 
 Pro Lauf entstehen im Output-Verzeichnis: `<id>.ttl` (Lieferung),
 `<id>_mappings.csv` (alle Mapping-Kandidaten für die Stichprobenprüfung),
-`run_metadata.json` (Lauf-Parameter).
+`drafts.json` (Demand-Bestand des Laufs, eine JobPostingDraft je Anzeige),
+`span_candidates.csv` (alle Span-Kandidaten beider Extraktoren mit Bezug auf
+die Quellanzeige), `run_metadata.json` (Lauf-Parameter).
 
 ### ESCO-Index
 

@@ -64,8 +64,17 @@ def acquire(input_path: Path) -> list[RawAdvertisement]:
 
 
 def process_nlp(raw: RawAdvertisement, doc: Doc) -> ProcessedAdvertisement:
+    sentence_of = {
+        tok.i: idx for idx, sent in enumerate(doc.sents) for tok in sent
+    }
     tokens = [
-        Token(text=tok.text, pos=tok.pos_, lemma=tok.lemma_)
+        Token(
+            text=tok.text,
+            pos=tok.pos_,
+            lemma=tok.lemma_,
+            dep=tok.dep_,
+            sentence=sentence_of.get(tok.i, 0),
+        )
         for tok in doc
         if not tok.is_space
     ]
@@ -309,11 +318,51 @@ def write_mapping_csv(
     return path
 
 
+def write_drafts(drafts: list[JobPostingDraft], output_dir: Path) -> Path:
+    """Demand-Bestand eines Laufs ablegen: eine JobPostingDraft je Anzeige (SA-C.1.05)."""
+    output_dir.mkdir(parents=True, exist_ok=True)
+    path = output_dir / "drafts.json"
+    payload = [d.model_dump(exclude_none=True) for d in drafts]
+    path.write_text(json.dumps(payload, ensure_ascii=False, indent=1), encoding="utf-8")
+    log.info("drafts: %d JobPostingDrafts -> %s", len(drafts), path)
+    return path
+
+
+def write_candidates_csv(drafts: list[JobPostingDraft], output_dir: Path) -> Path:
+    """CSV-Sicht aller Span-Kandidaten eines Laufs mit Bezug auf die Quellanzeige (SA-C.1.02)."""
+    output_dir.mkdir(parents=True, exist_ok=True)
+    path = output_dir / "span_candidates.csv"
+    count = 0
+    with path.open("w", encoding="utf-8", newline="") as fh:
+        writer = csv.writer(fh)
+        writer.writerow(
+            ["raw_id", "span_id", "span_text", "span_type", "extractor",
+             "char_start", "char_end", "requirement_kind", "score"]
+        )
+        for d in drafts:
+            for s in d.span_candidates:
+                writer.writerow([
+                    d.raw_advertisement.id,
+                    s.id,
+                    s.text,
+                    s.span_type.value,
+                    s.extractor,
+                    s.char_start,
+                    s.char_end,
+                    s.requirement_kind.value,
+                    "" if s.score is None else f"{s.score:.4f}",
+                ])
+                count += 1
+    log.info("csv: %d Span-Kandidaten -> %s", count, path)
+    return path
+
+
 def write_run_metadata(
     output_dir: Path,
     input_path: Path,
     outputs: list[Path],
     posting_count: int,
+    demand_files: list[Path] | None = None,
 ) -> Path:
     """Lauf-Parameter festhalten, damit ein Lauf reproduzierbar ist (Lieferspec §8)."""
     meta = {
@@ -321,6 +370,7 @@ def write_run_metadata(
         "pipeline_version": __version__,
         "input": str(input_path),
         "posting_count": posting_count,
+        "demand_files": [str(p) for p in demand_files or []],
         "output_files": [str(p) for p in outputs],
         "parameters": {
             "spacy_model": SPACY_MODEL,
@@ -350,17 +400,21 @@ def run(input_path: Path, output_dir: Path) -> list[Path]:
     raws = acquire(input_path)
     nlp = _load_nlp()
     outputs: list[Path] = []
+    drafts: list[JobPostingDraft] = []
     for raw in raws:
-        # einmal parsen, das Doc geht an alle spaCy-Schritte
+        # einmal parsen, das Doc geht an die spaCy-Schritte (ADJ+NOUN, Satz-Heuristik)
         doc = nlp(raw.raw_text)
         process_nlp(raw, doc)
         spans = extract_spans(raw, doc)
         draft = aggregate(raw, spans)
+        drafts.append(draft)
         mappings = map_to_esco(draft.span_candidates)
         write_mapping_csv(raw, draft.span_candidates, mappings, output_dir)
         requirements, dqr_result = build_requirements(raw, draft.span_candidates, mappings)
         outputs.append(write_ttl(raw, requirements, output_dir,
                                  occupation_uri=dqr_result.occupation_uri))
-    write_run_metadata(output_dir, input_path, outputs, len(raws))
+    # Demand-Bestand des Laufs ablegen (UCon1-UCas4): Drafts und Kandidaten-Sicht
+    demand_files = [write_drafts(drafts, output_dir), write_candidates_csv(drafts, output_dir)]
+    write_run_metadata(output_dir, input_path, outputs, len(raws), demand_files)
     log.info("pipeline: fertig, %d TTL-Dateien geschrieben", len(outputs))
     return outputs

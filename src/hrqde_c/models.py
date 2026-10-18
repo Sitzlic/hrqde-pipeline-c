@@ -39,6 +39,9 @@ class Token(BaseModel):
     text: str
     pos: str
     lemma: str
+    # Dependenzrelation zum Kopf und Index des Satzes in der Anzeige
+    dep: str = ""
+    sentence: int = 0
 
 
 class ProcessedAdvertisement(BaseModel):
