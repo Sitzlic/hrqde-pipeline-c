@@ -154,3 +154,21 @@ def test_import_gold_uses_third_annotation_as_consolidated():
     assert g.annotator_ids == ["1", "2", "1"]
     assert g.inter_annotator_agreement is not None and g.inter_annotator_agreement < 1.0
     assert g.spans[0].text == TEXT[java:java + 14]
+
+
+def test_stratified_sampling_aborts_on_small_stratum():
+    """UCon3-UCas1, Ausnahme: zu kleine Schicht bricht die Ziehung ab."""
+    import pytest
+
+    from hrqde_c.gold import sampling
+    from hrqde_c.models import RawAdvertisement
+
+    def raw(i):
+        return RawAdvertisement(
+            id=f"r{i}", source_uri=f"https://example.org/{i}", crawl_date="2026-01-01",
+            platform="test", employer="Firma", posting_date="2026-01-01", title="T", raw_text="x",
+        )
+
+    strata = {"a": [raw(1), raw(2), raw(3)], "b": [raw(4)]}
+    with pytest.raises(ValueError):
+        sampling.draw_stratified(strata, size=4, calib_ratio=0.5, seed=1)

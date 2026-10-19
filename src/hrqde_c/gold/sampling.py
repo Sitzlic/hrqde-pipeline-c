@@ -47,7 +47,11 @@ def draw_stratified(
     partition: dict[str, str] = {}
     stratum_of: dict[str, str] = {}
     for name, raws in strata.items():
-        chosen = rng.sample(raws, min(per_stratum, len(raws)))
+        if len(raws) < per_stratum:
+            raise ValueError(
+                f"Schicht {name}: nur {len(raws)} Anzeigen, {per_stratum} benoetigt (UCon3-UCas1)"
+            )
+        chosen = rng.sample(raws, per_stratum)
         n_calib = round(len(chosen) * calib_ratio)
         for i, raw in enumerate(chosen):
             partition[raw.id] = "kalibrier" if i < n_calib else "test"

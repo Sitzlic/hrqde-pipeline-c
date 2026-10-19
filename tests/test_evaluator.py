@@ -92,7 +92,8 @@ def test_report_csv_sorted_by_f1(tmp_path):
     path = tmp_path / "report.csv"
     reporter.write_report([bad, good], path)
     rows = list(csv.DictReader(path.open()))
-    assert [r["variant"] for r in rows] == ["escoxlm-r-de", "adj-noun-de"]
+    # gemessene Laeufe nach F1 sortiert, danach die nicht messbare Variante mit Vermerk
+    assert [r["variant"] for r in rows][:2] == ["escoxlm-r-de", "adj-noun-de"]
     assert rows[0]["f1"] == "1.0"
 
 
@@ -127,3 +128,14 @@ def test_calibration_counts_no_concept_as_false_positive():
     assert rows[0]["precision"] == 0.5
     assert rows[0]["recall"] == 1.0
     assert rows[0]["no_concept"] == 1
+
+
+def test_report_lists_unmeasured_variant(tmp_path):
+    """UCon3-UCas5, Ausnahme: nicht messbare Variante steht im Bericht mit Vermerk."""
+    from hrqde_c.gold import reporter
+
+    path = tmp_path / "report.csv"
+    reporter.write_report([], path)
+    rows = path.read_text(encoding="utf-8").splitlines()
+    assert rows[0].endswith(",note")
+    assert any(r.startswith("adj-noun-en-uebersetzt,") and "nicht gemessen" in r for r in rows[1:])
