@@ -123,14 +123,16 @@ def aggregate(raw: RawAdvertisement, spans: list[SpanCandidate]) -> JobPostingDr
     return draft
 
 
-def map_to_esco(spans: list[SpanCandidate]) -> list[SpanMapping]:
+def map_to_esco(
+    spans: list[SpanCandidate], threshold: float = MAPPING_THRESHOLD
+) -> list[SpanMapping]:
     index = esco.get_index()
     mappings: list[SpanMapping] = []
     accepted = 0
     for span in spans:
         for rank, match in enumerate(index.match(span.text, top_k=MAPPING_TOP_K), start=1):
             # nur Rang 1 kann accepted werden, der Rest laeuft als rejected mit
-            is_accept = rank == 1 and match.score >= MAPPING_THRESHOLD
+            is_accept = rank == 1 and match.score >= threshold
             accepted += int(is_accept)
             mappings.append(
                 SpanMapping(
@@ -363,6 +365,7 @@ def write_run_metadata(
     outputs: list[Path],
     posting_count: int,
     demand_files: list[Path] | None = None,
+    threshold: float = MAPPING_THRESHOLD,
 ) -> Path:
     """Lauf-Parameter festhalten, damit ein Lauf reproduzierbar ist (Lieferspec §8)."""
     meta = {
@@ -384,7 +387,7 @@ def write_run_metadata(
             "esco_encoder": esco.DEFAULT_MODEL_ID,
             "esco_concepts": str(esco.DEFAULT_CONCEPTS_PATH),
             "esco_version": esco.ESCO_VERSION,
-            "mapping_threshold": MAPPING_THRESHOLD,
+            "mapping_threshold": threshold,
             "mapping_top_k": MAPPING_TOP_K,
             "dqr_strategy": "Titel-Occupation-Lookup -> ISCO-Hauptgruppen-Default -> DQR4",
             "esco_occupations": str(dqr.DEFAULT_OCCUPATIONS_PATH),
@@ -396,7 +399,13 @@ def write_run_metadata(
     return path
 
 
-def run(input_path: Path, output_dir: Path) -> list[Path]:
+def run(
+    input_path: Path, output_dir: Path, threshold: float = MAPPING_THRESHOLD
+) -> list[Path]:
+    """Alle Stufen von UCon-1 und UCon-2 in einem Prozess. threshold ist der
+    Lauf-Parameter des Schwellenwert-Filters (UCon2-UCas4), Bereich 0..1."""
+    if not 0.0 <= threshold <= 1.0:
+        raise ValueError(f"Schwellenwert {threshold} liegt nicht in [0, 1]")
     raws = acquire(input_path)
     nlp = _load_nlp()
     outputs: list[Path] = []
@@ -408,13 +417,13 @@ def run(input_path: Path, output_dir: Path) -> list[Path]:
         spans = extract_spans(raw, doc)
         draft = aggregate(raw, spans)
         drafts.append(draft)
-        mappings = map_to_esco(draft.span_candidates)
+        mappings = map_to_esco(draft.span_candidates, threshold)
         write_mapping_csv(raw, draft.span_candidates, mappings, output_dir)
         requirements, dqr_result = build_requirements(raw, draft.span_candidates, mappings)
         outputs.append(write_ttl(raw, requirements, output_dir,
                                  occupation_uri=dqr_result.occupation_uri))
     # Demand-Bestand des Laufs ablegen (UCon1-UCas4): Drafts und Kandidaten-Sicht
     demand_files = [write_drafts(drafts, output_dir), write_candidates_csv(drafts, output_dir)]
-    write_run_metadata(output_dir, input_path, outputs, len(raws), demand_files)
+    write_run_metadata(output_dir, input_path, outputs, len(raws), demand_files, threshold)
     log.info("pipeline: fertig, %d TTL-Dateien geschrieben", len(outputs))
     return outputs

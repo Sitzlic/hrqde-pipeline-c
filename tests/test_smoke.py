@@ -76,3 +76,15 @@ def test_ttl_escapes_quotes_in_labels(tmp_path):
     g = rdflib.Graph()
     g.parse(str(outputs[0]), format="turtle")
     assert any('Standort Innsbruck' in str(o) for o in g.objects())
+
+
+def test_threshold_is_run_parameter(tmp_path: Path) -> None:
+    """UCon2-UCas4 / SA-2.03: Schwellenwert als Lauf-Parameter, in den Metadaten festgehalten."""
+    import pytest
+
+    input_path = Path("data/input/example_posting.json")
+    pipeline.run(input_path, tmp_path / "out", threshold=0.9)
+    meta = json.loads((tmp_path / "out" / "run_metadata.json").read_text(encoding="utf-8"))
+    assert meta["parameters"]["mapping_threshold"] == 0.9
+    with pytest.raises(ValueError):
+        pipeline.run(input_path, tmp_path / "out2", threshold=1.5)

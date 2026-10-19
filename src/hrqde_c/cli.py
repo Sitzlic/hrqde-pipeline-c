@@ -25,13 +25,21 @@ def run(
         "-o",
         help="Verzeichnis für die TTL-Lieferung.",
     ),
+    threshold: float = typer.Option(
+        pipeline.MAPPING_THRESHOLD,
+        "--threshold",
+        "-t",
+        min=0.0,
+        max=1.0,
+        help="Mapping-Schwellenwert aus der Schwellenwert-Tabelle von UCon-3 (0 bis 1).",
+    ),
     verbose: bool = typer.Option(False, "--verbose", "-v"),
 ) -> None:
     logging.basicConfig(
         level=logging.DEBUG if verbose else logging.INFO,
         format="%(levelname)-7s %(name)s | %(message)s",
     )
-    paths = pipeline.run(input, output)
+    paths = pipeline.run(input, output, threshold=threshold)
     typer.echo(f"\nFertig. {len(paths)} TTL-Datei(en) in {output}:")
     for p in paths:
         typer.echo(f"  - {p}")

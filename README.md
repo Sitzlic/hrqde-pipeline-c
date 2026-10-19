@@ -34,6 +34,8 @@ python -m spacy download de_core_news_sm
 ```bash
 # Ein Minimalbeispiel
 hrqde-c run -i data/input/example_posting.json -o data/output -v
+# Schwellenwert des Mapping-Filters setzen (Standard 0.5, Bereich 0..1):
+hrqde-c run -i data/input/example_posting.json -o data/output --threshold 0.65
 
 # Drei realistische Anzeigen (IT, Pflege, kaufmännisch)
 hrqde-c run -i data/input/postings_sample.json -o data/output -v
