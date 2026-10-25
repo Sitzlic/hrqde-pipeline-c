@@ -10,6 +10,22 @@ from hrqde_c.acquisition import jobsuche
 
 app = typer.Typer(add_completion=False, help="HR-QDE Säule C - Pipeline-Lauf")
 
+GOLD_HINT = "Erst `hrqde-c gold-import -e <export.json>` ausführen."
+INPUT_HINT = "Erst `hrqde-c fetch --was <Beruf> -o <datei>` ausführen oder den Pfad mit -i angeben."
+REFERENCE_HINT = ("Erst `hrqde-c gold-esco-candidates` ausführen, Spalte decision ausfüllen, "
+                  "dann `hrqde-c gold-esco-import -d <csv>`.")
+
+
+def _fail(message: str) -> None:
+    """Einzeilige Fehlermeldung statt Traceback, Exit-Code 1."""
+    typer.echo(message, err=True)
+    raise typer.Exit(code=1)
+
+
+def _require(path: Path, label: str, hint: str) -> None:
+    if not path.exists():
+        _fail(f"{label} {path} nicht gefunden. {hint}")
+
 
 @app.command()
 def run(
@@ -39,6 +55,7 @@ def run(
         level=logging.DEBUG if verbose else logging.INFO,
         format="%(levelname)-7s %(name)s | %(message)s",
     )
+    _require(input, "Eingabedatei", INPUT_HINT)
     paths = pipeline.run(input, output, threshold=threshold)
     typer.echo(f"\nFertig. {len(paths)} TTL-Datei(en) in {output}:")
     for p in paths:
@@ -87,6 +104,8 @@ def gold_sample(
     )
     from hrqde_c.gold import label_studio, sampling
 
+    for path in inputs:
+        _require(path, "Eingabedatei", INPUT_HINT)
     if len(inputs) == 1:
         raws = pipeline.acquire(inputs[0])
         partition = sampling.draw(raws, size=size, calib_ratio=calib_ratio, seed=seed)
@@ -122,6 +141,8 @@ def gold_import(
 
     from hrqde_c.gold import label_studio, sampling
 
+    _require(export, "Label-Studio-Export", "Export in Label Studio als JSON erzeugen.")
+    _require(manifest, "Manifest", "Erst `hrqde-c gold-sample -i <input.json>` ausführen.")
     payload = json.loads(export.read_text(encoding="utf-8"))
     partition = sampling.load_manifest(manifest)
     gold = label_studio.import_gold(payload, partition)
@@ -164,6 +185,7 @@ def gold_esco_candidates(
     from hrqde_c.gold import reference
     from hrqde_c.models import GoldAdvertisement
 
+    _require(gold, "Gold-Datei", GOLD_HINT)
     gold_ads = [GoldAdvertisement(**g) for g in json.loads(gold.read_text(encoding="utf-8"))]
     spans = reference.write_candidates(gold_ads, output, top_k=top_k)
     typer.echo(f"{spans} Kalibrier-Spans mit Top-{top_k}-Vorschlägen -> {output}")
@@ -187,6 +209,9 @@ def gold_esco_import(
     from hrqde_c.gold import reference
     from hrqde_c.models import GoldAdvertisement
 
+    _require(decisions, "Kandidaten-CSV",
+             "Erst `hrqde-c gold-esco-candidates` ausführen und die Spalte decision ausfüllen.")
+    _require(gold, "Gold-Datei", GOLD_HINT)
     gold_ads = [GoldAdvertisement(**g) for g in json.loads(gold.read_text(encoding="utf-8"))]
     applied = reference.apply_decisions(gold_ads, decisions)
     gold.write_text(
@@ -217,6 +242,8 @@ def evaluate(
     from hrqde_c.gold import evaluator, reporter
     from hrqde_c.models import GoldAdvertisement
 
+    _require(gold, "Gold-Datei", GOLD_HINT)
+    _require(input, "Eingabedatei", INPUT_HINT)
     gold_ads = [GoldAdvertisement(**g) for g in json.loads(gold.read_text(encoding="utf-8"))]
     raws_by_id = {r.id: r for r in pipeline.acquire(input)}
     runs = [
@@ -261,8 +288,12 @@ def calibrate(
     from hrqde_c.gold import calibration
     from hrqde_c.models import GoldAdvertisement
 
+    _require(gold, "Gold-Datei", GOLD_HINT)
     gold_ads = [GoldAdvertisement(**g) for g in json.loads(gold.read_text(encoding="utf-8"))]
-    rows = calibration.sweep(gold_ads)
+    try:
+        rows = calibration.sweep(gold_ads)
+    except ValueError as exc:
+        _fail(f"{exc}. {REFERENCE_HINT}")
     output.parent.mkdir(parents=True, exist_ok=True)
     with output.open("w", encoding="utf-8", newline="") as fh:
         writer = csv.DictWriter(fh, fieldnames=list(rows[0].keys()))
@@ -289,5 +320,9 @@ def load_neo4j(
     )
     from hrqde_c.graph import neo4j_import
 
-    files, triples = neo4j_import.load_directory(input_dir, uri, user, password)
+    _require(input_dir, "Verzeichnis", f"Erst `hrqde-c run -o {input_dir}` ausführen.")
+    try:
+        files, triples = neo4j_import.load_directory(input_dir, uri, user, password)
+    except RuntimeError as exc:
+        _fail(str(exc))
     typer.echo(f"{files} TTL-Dateien, {triples} Tripel -> {uri}")
