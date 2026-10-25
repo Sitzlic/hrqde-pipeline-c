@@ -12,8 +12,7 @@ Durchstich von Akquise bis TTL-Lieferung:
 - DQR-Niveau über ISCO-Hauptgruppen-Heuristik
 - TTL nach HR-QDE-Lieferspec, SHACL-validiert
 
-Akquise: JSON-Reader plus Anbindung der BA-Jobsuche-API (`fetch`-Kommando,
-funktioniert nur mit deutscher IP, die API blockt Auslands-Anfragen).
+Akquise: JSON-Reader plus Anbindung der BA-Jobsuche-API (`fetch`-Kommando).
 
 Reihenfolge der Stages in `pipeline.py`:
 
@@ -40,7 +39,7 @@ hrqde-c run -i data/input/example_posting.json -o data/output --threshold 0.65
 # Drei realistische Anzeigen (IT, Pflege, kaufmännisch)
 hrqde-c run -i data/input/postings_sample.json -o data/output -v
 
-# Echte Anzeigen von der BA-Jobsuche holen (deutsche IP noetig)
+# Echte Anzeigen von der BA-Jobsuche holen
 hrqde-c fetch --was "Pflegefachkraft" --wo Berlin -n 25 -o data/input/fetched.json
 ```
 

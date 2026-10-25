@@ -51,6 +51,7 @@ def run(
     ),
     verbose: bool = typer.Option(False, "--verbose", "-v"),
 ) -> None:
+    """Pipeline-Lauf: Extraktion, ESCO-Mapping, Konsolidierung und TTL-Lieferung je Anzeige."""
     logging.basicConfig(
         level=logging.DEBUG if verbose else logging.INFO,
         format="%(levelname)-7s %(name)s | %(message)s",
@@ -75,7 +76,7 @@ def fetch(
     ),
     verbose: bool = typer.Option(False, "--verbose", "-v"),
 ) -> None:
-    """Stellenanzeigen über die BA-Jobsuche-API einsammeln (braucht deutsche IP)."""
+    """Stellenanzeigen über die BA-Jobsuche-API einsammeln."""
     logging.basicConfig(
         level=logging.DEBUG if verbose else logging.INFO,
         format="%(levelname)-7s %(name)s | %(message)s",

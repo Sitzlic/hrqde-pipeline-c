@@ -147,8 +147,9 @@ def map_to_esco(
                 )
             )
     log.info(
-        "mapping: %d Spans -> %d SpanMappings (%d akzeptiert)",
-        len(spans), len(mappings), accepted,
+        "mapping: %d Spans -> %d SpanMappings (Top-%d Kandidaten je Span in der CSV, "
+        "%d akzeptiert)",
+        len(spans), len(mappings), MAPPING_TOP_K, accepted,
     )
     return mappings
 

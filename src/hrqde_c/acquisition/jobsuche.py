@@ -4,9 +4,7 @@ Freie API der Bundesagentur fuer Arbeit. Die Suche liefert Treffer-Metadaten,
 erst der Detail-Aufruf den Beschreibungs-Volltext. Anzeigen ohne Volltext
 (extern gehostete Inserate) werden uebersprungen.
 
-Achtung: der Dienst blockt Anfragen aus dem Ausland, Aufrufe brauchen
-eine deutsche IP (oder VPN). Suche laeuft ueber /pc/v6/jobs, die alten
-v4-Suchpfade liefern pauschal 403.
+Suche laeuft ueber /pc/v6/jobs, die alten v4-Suchpfade liefern pauschal 403.
 """
 
 from __future__ import annotations
