@@ -289,6 +289,12 @@ def write_ttl(
     return path
 
 
+def _csv_text(value: str) -> str:
+    # Zeilenumbrueche im Span-Text nur fuer die CSV-Sicht glaetten, die Modelle
+    # behalten den Originaltext
+    return " ".join(value.split())
+
+
 def write_mapping_csv(
     raw: RawAdvertisement,
     spans: list[SpanCandidate],
@@ -309,7 +315,7 @@ def write_mapping_csv(
             span = span_by_id.get(m.span_id)
             writer.writerow([
                 m.span_id,
-                span.text if span else "",
+                _csv_text(span.text) if span else "",
                 span.extractor if span else "",
                 m.rank,
                 m.concept_uri,
@@ -347,7 +353,7 @@ def write_candidates_csv(drafts: list[JobPostingDraft], output_dir: Path) -> Pat
                 writer.writerow([
                     d.raw_advertisement.id,
                     s.id,
-                    s.text,
+                    _csv_text(s.text),
                     s.span_type.value,
                     s.extractor,
                     s.char_start,
@@ -407,6 +413,11 @@ def run(
     Lauf-Parameter des Schwellenwert-Filters (UCon2-UCas4), Bereich 0..1."""
     if not 0.0 <= threshold <= 1.0:
         raise ValueError(f"Schwellenwert {threshold} liegt nicht in [0, 1]")
+    if (output_dir / "run_metadata.json").exists():
+        log.warning(
+            "Ausgabeverzeichnis %s enthält bereits einen Lauf, Dateien werden überschrieben",
+            output_dir,
+        )
     raws = acquire(input_path)
     nlp = _load_nlp()
     outputs: list[Path] = []

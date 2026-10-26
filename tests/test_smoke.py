@@ -88,3 +88,33 @@ def test_threshold_is_run_parameter(tmp_path: Path) -> None:
     assert meta["parameters"]["mapping_threshold"] == 0.9
     with pytest.raises(ValueError):
         pipeline.run(input_path, tmp_path / "out2", threshold=1.5)
+
+
+def test_csv_flattens_newlines_in_span_text(tmp_path: Path) -> None:
+    import csv
+
+    from hrqde_c.models import JobPostingDraft, RawAdvertisement, SpanCandidate, SpanType
+
+    raw = RawAdvertisement(
+        id="nl-1", source_uri="https://example.org/nl", crawl_date="2026-01-01",
+        platform="test", employer="Firma", posting_date="2026-01-01",
+        title="Test", raw_text="Kenntnisse in\nJava",
+    )
+    span = SpanCandidate(id="s1", processed_raw_id="nl-1", text="Kenntnisse in\nJava",
+                         span_type=SpanType.KNOWLEDGE, char_start=0, char_end=18,
+                         extractor="adj_noun")
+    draft = JobPostingDraft(id="d1", raw_advertisement=raw, span_candidates=[span])
+    path = pipeline.write_candidates_csv([draft], tmp_path)
+    rows = list(csv.DictReader(path.open(encoding="utf-8")))
+    assert rows[0]["span_text"] == "Kenntnisse in Java"
+    assert span.text == "Kenntnisse in\nJava"  # Modell unveraendert
+
+
+def test_rerun_into_same_directory_warns(tmp_path: Path, caplog) -> None:
+    import logging
+
+    input_path = Path("data/input/example_posting.json")
+    pipeline.run(input_path, tmp_path / "out")
+    with caplog.at_level(logging.WARNING, logger="hrqde_c.pipeline"):
+        pipeline.run(input_path, tmp_path / "out")
+    assert "enthält bereits einen Lauf, Dateien werden überschrieben" in caplog.text
