@@ -39,7 +39,8 @@ hrqde-c run -i data/input/example_posting.json -o data/output --threshold 0.65
 # Drei realistische Anzeigen (IT, Pflege, kaufmännisch)
 hrqde-c run -i data/input/postings_sample.json -o data/output -v
 
-# Echte Anzeigen von der BA-Jobsuche holen
+# Echte Anzeigen von der BA-Jobsuche holen; daneben entsteht
+# data/input/fetched.fetch.json mit Abrufparametern und Bilanz
 hrqde-c fetch --was "Pflegefachkraft" --wo Berlin -n 25 -o data/input/fetched.json
 ```
 

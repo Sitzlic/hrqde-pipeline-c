@@ -14,7 +14,8 @@ import json
 import logging
 import re
 import time
-from datetime import date
+from datetime import date, datetime, timezone
+from pathlib import Path
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
@@ -86,34 +87,68 @@ def to_raw_advertisement(hit: dict, detail: dict, crawl_date: str) -> RawAdverti
     )
 
 
-def fetch(was: str, wo: str | None = None, count: int = 25) -> list[RawAdvertisement]:
+def fetch_with_stats(
+    was: str, wo: str | None = None, count: int = 25
+) -> tuple[list[RawAdvertisement], dict]:
+    """Anzeigen einsammeln und die Abrufbilanz mitliefern (Treffer, abgerufen,
+    uebersprungen, Fehler) -> (raws, stats)."""
     crawl_date = date.today().isoformat()
     raws: list[RawAdvertisement] = []
+    stats = {
+        "was": was, "wo": wo, "count": count,
+        "fetched_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "hits": 0, "fetched": 0, "skipped": 0, "errors": 0,
+    }
     page = 1
     while len(raws) < count:
         hits = search(was, wo=wo, size=min(count * 2, 100), page=page)
         if not hits:
             break
         for hit in hits:
+            stats["hits"] += 1
             refnr = hit.get("referenznummer")
             if not refnr:
+                stats["skipped"] += 1
+                log.info("jobsuche: Treffer ohne Referenznummer uebersprungen")
                 continue
             time.sleep(REQUEST_DELAY)
             try:
                 detail = details(refnr)
             except Exception as exc:  # noqa: BLE001 - einzelner Treffer soll den Lauf nicht kippen
+                stats["errors"] += 1
                 log.warning("jobsuche: Detail %s fehlgeschlagen (%s)", refnr, exc)
                 continue
             raw = to_raw_advertisement(hit, detail, crawl_date)
             if raw is None:
-                log.debug("jobsuche: %s ohne Volltext, uebersprungen", refnr)
+                stats["skipped"] += 1
+                log.info("jobsuche: %s uebersprungen, kein Volltext (extern gehostetes Inserat)",
+                         refnr)
                 continue
             raws.append(raw)
             if len(raws) >= count:
                 break
         page += 1
-    log.info("jobsuche: %d Anzeigen mit Volltext eingesammelt", len(raws))
-    return raws
+    stats["fetched"] = len(raws)
+    log.info(
+        "jobsuche: Bilanz %d Treffer, %d abgerufen, %d uebersprungen, %d Fehler",
+        stats["hits"], stats["fetched"], stats["skipped"], stats["errors"],
+    )
+    return raws, stats
+
+
+def fetch(was: str, wo: str | None = None, count: int = 25) -> list[RawAdvertisement]:
+    return fetch_with_stats(was, wo=wo, count=count)[0]
+
+
+def save_fetch_log(stats: dict, out_path) -> Path:
+    """Abrufparameter und Bilanz neben die Ausgabedatei schreiben (<name>.fetch.json)."""
+    log_path = out_path.with_suffix(".fetch.json")
+    log_path.write_text(
+        json.dumps({**stats, "output": str(out_path)}, ensure_ascii=False, indent=1),
+        encoding="utf-8",
+    )
+    log.info("jobsuche: Abrufprotokoll -> %s", log_path)
+    return log_path
 
 
 def save(raws: list[RawAdvertisement], out_path) -> None:

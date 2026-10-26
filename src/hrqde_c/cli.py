@@ -81,9 +81,10 @@ def fetch(
         level=logging.DEBUG if verbose else logging.INFO,
         format="%(levelname)-7s %(name)s | %(message)s",
     )
-    raws = jobsuche.fetch(was, wo=wo, count=count)
+    raws, stats = jobsuche.fetch_with_stats(was, wo=wo, count=count)
     jobsuche.save(raws, output)
-    typer.echo(f"{len(raws)} Anzeigen -> {output}")
+    log_path = jobsuche.save_fetch_log(stats, output)
+    typer.echo(f"{len(raws)} Anzeigen -> {output} (Abrufprotokoll {log_path})")
 
 
 @app.command("gold-sample")
