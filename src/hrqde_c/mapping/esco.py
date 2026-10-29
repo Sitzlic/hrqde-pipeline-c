@@ -197,8 +197,8 @@ def get_index(
     cached = _load_from_cache(cache_path, labels, model_id)
     if cached is not None:
         log.info(
-            "esco-index: Cache-Hit (%d Konzepte, %d Labels, %s)",
-            len(concepts), len(labels), model_id,
+            "esco-index: Cache-Hit %s (%d Konzepte, %d Labels, ESCO %s, %s)",
+            cache_path.name, len(concepts), len(labels), ESCO_VERSION, model_id,
         )
         return EscoIndex(concepts, labels, owners, cached, model_id)
 

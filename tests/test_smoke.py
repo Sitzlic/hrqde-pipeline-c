@@ -118,3 +118,16 @@ def test_rerun_into_same_directory_warns(tmp_path: Path, caplog) -> None:
     with caplog.at_level(logging.WARNING, logger="hrqde_c.pipeline"):
         pipeline.run(input_path, tmp_path / "out")
     assert "enthält bereits einen Lauf, Dateien werden überschrieben" in caplog.text
+
+
+def test_esco_cache_hit_names_file_and_version(caplog) -> None:
+    import logging
+
+    from hrqde_c.mapping import esco
+
+    esco.get_index()  # baut den Cache, falls er noch fehlt
+    esco.get_index.cache_clear()
+    with caplog.at_level(logging.INFO, logger="hrqde_c.mapping.esco"):
+        esco.get_index()
+    assert "Cache-Hit skills_mini." in caplog.text
+    assert f"ESCO {esco.ESCO_VERSION}" in caplog.text

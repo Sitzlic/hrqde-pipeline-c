@@ -71,3 +71,12 @@ def sweep(
             "no_concept": len(references) - with_concept,
         })
     return rows
+
+
+def mark_best(rows: list[dict]) -> dict:
+    """Spalte best setzen: "true" nur in der Zeile mit dem hoechsten F1
+    (bei Gleichstand die niedrigste Schwelle). -> beste Zeile"""
+    best = max(rows, key=lambda r: r["f1"])
+    for row in rows:
+        row["best"] = "true" if row is best else "false"
+    return best

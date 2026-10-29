@@ -139,3 +139,11 @@ def test_report_lists_unmeasured_variant(tmp_path):
     rows = path.read_text(encoding="utf-8").splitlines()
     assert rows[0].endswith(",note")
     assert any(r.startswith("adj-noun-en-uebersetzt,") and "nicht gemessen" in r for r in rows[1:])
+
+
+def test_mark_best_flags_single_row():
+    rows = [{"threshold": 0.5, "f1": 0.4}, {"threshold": 0.6, "f1": 0.7},
+            {"threshold": 0.7, "f1": 0.7}]
+    best = calibration.mark_best(rows)
+    assert best["threshold"] == 0.6
+    assert [r["best"] for r in rows] == ["false", "true", "false"]

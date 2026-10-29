@@ -47,7 +47,8 @@ def run(
         "-t",
         min=0.0,
         max=1.0,
-        help="Mapping-Schwellenwert aus der Schwellenwert-Tabelle von UCon-3 (0 bis 1).",
+        help="Mapping-Schwellenwert (0 bis 1). Der kalibrierte Wert steht in "
+             "data/gold/calibration.csv (Zeile best=true, Kommando calibrate).",
     ),
     verbose: bool = typer.Option(False, "--verbose", "-v"),
 ) -> None:
@@ -296,14 +297,15 @@ def calibrate(
         rows = calibration.sweep(gold_ads)
     except ValueError as exc:
         _fail(f"{exc}. {REFERENCE_HINT}")
+    best = calibration.mark_best(rows)
     output.parent.mkdir(parents=True, exist_ok=True)
     with output.open("w", encoding="utf-8", newline="") as fh:
         writer = csv.DictWriter(fh, fieldnames=list(rows[0].keys()))
         writer.writeheader()
         writer.writerows(rows)
-    best = max(rows, key=lambda r: r["f1"])
     typer.echo(f"{len(rows)} Schwellenwerte -> {output}")
-    typer.echo(f"Bestes F1 {best['f1']:.3f} bei Threshold {best['threshold']}")
+    typer.echo(f"Bestes F1 {best['f1']:.3f} bei Threshold {best['threshold']} "
+               f"(Spalte best=true, als --threshold an `hrqde-c run` übergeben)")
 
 
 @app.command("load-neo4j")
