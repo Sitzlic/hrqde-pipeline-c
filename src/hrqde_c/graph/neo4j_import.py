@@ -27,6 +27,9 @@ def _connect(uri: str, user: str, password: str):
         raise RuntimeError(
             "neo4j-Treiber fehlt. Installieren mit: pip install '.[graph]'"
         ) from exc
+    # Server-Notifications des Treibers (z. B. Hinweise zu Cypher-Statements von
+    # n10s) nicht auf der Konsole ausgeben, Fehler bleiben sichtbar
+    logging.getLogger("neo4j").setLevel(logging.ERROR)
     return GraphDatabase.driver(uri, auth=(user, password))
 
 
@@ -77,3 +80,13 @@ def load_directory(
     driver.close()
     log.info("neo4j: %d Dateien, %d Tripel importiert", len(ttl_files), triples)
     return len(ttl_files), triples
+
+
+def graph_size(uri: str, user: str, password: str) -> tuple[int, int]:
+    """Bestand im Graphen nach dem Laden. -> (Knoten, Beziehungen)"""
+    driver = _connect(uri, user, password)
+    with driver.session() as session:
+        nodes = session.run("MATCH (n) RETURN count(n) AS n").single()["n"]
+        rels = session.run("MATCH ()-[r]->() RETURN count(r) AS n").single()["n"]
+    driver.close()
+    return nodes, rels
