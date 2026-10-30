@@ -308,6 +308,42 @@ def calibrate(
                f"(Spalte best=true, als --threshold an `hrqde-c run` übergeben)")
 
 
+@app.command()
+def validate(
+    input_dir: Path = typer.Option(Path("data/output"), "--input", "-i",
+                                   help="Verzeichnis mit TTL-Dateien."),
+    shapes: Path = typer.Option(Path("data/shapes/hrqde-shapes-all.ttl"), "--shapes", "-s",
+                                help="SHACL-Shapes des HR-QDE-Toolkits."),
+) -> None:
+    """TTL-Lieferungen eines Verzeichnisses mit SHACL gegen die HR-QDE-Shapes prüfen."""
+    from pyshacl import validate as shacl_validate
+    from rdflib.namespace import SH
+
+    _require(input_dir, "Verzeichnis", f"Erst `hrqde-c run -o {input_dir}` ausführen.")
+    _require(shapes, "Shapes-Datei", "Pfad mit -s angeben.")
+    ttl_files = sorted(input_dir.glob("*.ttl"))
+    if not ttl_files:
+        _fail(f"Keine TTL-Dateien in {input_dir}. Erst `hrqde-c run -o {input_dir}` ausführen.")
+    violations = 0
+    failed = 0
+    for ttl in ttl_files:
+        conforms, results, report = shacl_validate(str(ttl), shacl_graph=str(shapes))
+        if conforms:
+            typer.echo(f"{ttl.name}: konform")
+            continue
+        count = sum(1 for _ in results.subjects(SH.focusNode, None))
+        failed += 1
+        violations += count
+        typer.echo(f"{ttl.name}: nicht konform ({count} Verstöße)")
+        typer.echo(report)
+    typer.echo(
+        f"{len(ttl_files) - failed} von {len(ttl_files)} Dateien konform, "
+        f"{violations} Verstöße ({shapes})"
+    )
+    if failed:
+        raise typer.Exit(code=1)
+
+
 @app.command(
     "load-neo4j",
     short_help="TTL-Lieferung über neosemantics in Neo4j ablegen (docker compose up -d).",

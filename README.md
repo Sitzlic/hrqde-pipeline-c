@@ -42,6 +42,9 @@ hrqde-c run -i data/input/postings_sample.json -o data/output -v
 # Echte Anzeigen von der BA-Jobsuche holen; daneben entsteht
 # data/input/fetched.fetch.json mit Abrufparametern und Bilanz
 hrqde-c fetch --was "Pflegefachkraft" --wo Berlin -n 25 -o data/input/fetched.json
+
+# TTL-Lieferung eines Verzeichnisses gegen die HR-QDE-Shapes pruefen (SHACL)
+hrqde-c validate -i data/output
 ```
 
 Pro Lauf entstehen im Output-Verzeichnis: `<id>.ttl` (Lieferung),

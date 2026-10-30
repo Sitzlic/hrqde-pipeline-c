@@ -1,4 +1,4 @@
-"""CLI-Verhalten ohne externe Dienste: Fehlerpfade, fetch-Protokoll."""
+"""CLI-Verhalten ohne externe Dienste: Fehlerpfade, validate, fetch-Protokoll."""
 
 import json
 from pathlib import Path
@@ -41,6 +41,28 @@ def test_load_neo4j_without_directory_gives_hint(tmp_path: Path):
     result = runner.invoke(app, ["load-neo4j", "-i", str(tmp_path / "nix")])
     assert result.exit_code == 1
     assert "Verzeichnis" in result.output and "hrqde-c run" in result.output
+
+
+def test_validate_reports_per_file_and_exit_code(tmp_path: Path):
+    from hrqde_c import pipeline
+
+    out = tmp_path / "out"
+    pipeline.run(Path("data/input/example_posting.json"), out)
+    result = runner.invoke(app, ["validate", "-i", str(out)])
+    assert result.exit_code == 0, result.output
+    assert "demo-001.ttl: konform" in result.output
+    assert "1 von 1 Dateien konform, 0 Verstöße" in result.output
+
+    # JobPosting ohne Pflichtangaben verletzt die Shape
+    (out / "kaputt.ttl").write_text(
+        "@prefix hrqde: <http://hr-qde.org/ontology/> .\n"
+        "<http://hr-qde.org/data/sitzler/posting_x> a hrqde:JobPosting .\n",
+        encoding="utf-8",
+    )
+    result = runner.invoke(app, ["validate", "-i", str(out)])
+    assert result.exit_code == 1
+    assert "kaputt.ttl: nicht konform" in result.output
+    assert "1 von 2 Dateien konform" in result.output
 
 
 def test_fetch_writes_fetch_log(tmp_path: Path, monkeypatch):
