@@ -85,7 +85,7 @@ HRQDE_ENCODER="isy-thl/multilingual-e5-base-course-skill-tuned" hrqde-c run -i .
 Die TTL-Lieferung laesst sich ueber neosemantics in einen Graphen laden:
 
 ```bash
-docker compose up -d                 # Neo4j 5 mit n10s-Plugin
+docker compose up -d                 # Neo4j 5 mit n10s-Plugin (und Label Studio)
 pip install '.[graph]'               # neo4j-Treiber
 hrqde-c run -i data/input/... -o data/output
 hrqde-c load-neo4j -i data/output    # TTL -> Graph

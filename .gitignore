@@ -36,3 +36,8 @@ data/esco/occupations_full.json
 # Gezogene BA-Rohdaten bleiben lokal (Lizenzlage Weitergabe offen), per fetch reproduzierbar
 data/input/ba_*.json
 data/gold/labelstudio_tasks.json
+data/input/pflege.json
+# Walkthrough-Material (Terminalprotokolle, Zwischenstände) bleibt lokal
+data/walkthrough/
+# Zugangsdaten fuer docker compose (Label Studio)
+.env

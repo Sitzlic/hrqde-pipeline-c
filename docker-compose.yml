@@ -1,8 +1,11 @@
 # Neo4j mit neosemantics fuer die Ablage der TTL-Lieferung (RC-C.2.3)
+# und Label Studio fuer die Gold-Annotation (gold-sample / gold-import)
 #
 #   docker compose up -d
 #   hrqde-c load-neo4j -i data/output
 #   Browser: http://localhost:7474 (neo4j / hrqde-dev)
+#   Label Studio: http://localhost:8080, Login aus .env
+#   (LABEL_STUDIO_USERNAME / LABEL_STUDIO_PASSWORD, sonst die Defaults unten)
 services:
   neo4j:
     image: neo4j:5
@@ -15,5 +18,16 @@ services:
     volumes:
       - neo4j-data:/data
 
+  labelstudio:
+    image: heartexlabs/label-studio:latest
+    ports:
+      - "8080:8080"
+    environment:
+      LABEL_STUDIO_USERNAME: ${LABEL_STUDIO_USERNAME:-annotator@hrqde.local}
+      LABEL_STUDIO_PASSWORD: ${LABEL_STUDIO_PASSWORD:-hrqde-dev}
+    volumes:
+      - labelstudio-data:/label-studio/data
+
 volumes:
   neo4j-data:
+  labelstudio-data:
