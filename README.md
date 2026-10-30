@@ -110,6 +110,8 @@ hrqde-c gold-sample -i data/input/fetched.json -n 60 --seed 42
 # 3. Export uebernehmen (BIO-Schema, bei Doppelannotation Cohen's Kappa ueber
 #    die ersten beiden Annotationen; eine dritte Annotation gilt als die
 #    zusammengefuehrte Fassung und liefert die Gold-Spans)
+hrqde-c gold-merge --seed export_a.json export_b.json -o tasks_c.json   # Tasks fuer die gemeinsame Fassung
+hrqde-c gold-merge export_a.json export_b.json export_c.json -o ls_export.json
 hrqde-c gold-import -e ls_export.json
 ```
 

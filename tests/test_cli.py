@@ -79,3 +79,29 @@ def test_fetch_writes_fetch_log(tmp_path: Path, monkeypatch):
     log = json.loads((tmp_path / "fetched.fetch.json").read_text(encoding="utf-8"))
     assert log["was"] == "Pflege" and log["output"] == str(out)
     assert "Abrufprotokoll" in result.output
+
+
+def _ls_export(raw_id: str, regions, who: str) -> dict:
+    return {"data": {"raw_id": raw_id, "text": "Java und Pflege", "partition": "kalibrier"},
+            "annotations": [{"completed_by": who, "was_cancelled": False, "result": [
+                {"from_name": "label", "to_name": "text", "type": "labels",
+                 "value": {"start": s, "end": e, "text": "x", "labels": [lab]}}
+                for s, e, lab in regions]}]}
+
+
+def test_gold_merge_seed_and_merge(tmp_path: Path):
+    a = tmp_path / "a.json"
+    b = tmp_path / "b.json"
+    a.write_text(json.dumps([_ls_export("ad-1", [(0, 4, "Knowledge")], "a")]), encoding="utf-8")
+    b.write_text(json.dumps([_ls_export("ad-1", [(0, 4, "Knowledge"), (9, 15, "Skill")], "b")]),
+                 encoding="utf-8")
+    seeded = tmp_path / "c_tasks.json"
+    result = runner.invoke(app, ["gold-merge", "--seed", str(a), str(b), "-o", str(seeded)])
+    assert result.exit_code == 0, result.output
+    tasks = json.loads(seeded.read_text(encoding="utf-8"))
+    assert len(tasks[0]["predictions"][0]["result"]) == 2  # Doppel einmal, Abweichung dazu
+    merged = tmp_path / "export.json"
+    result = runner.invoke(app, ["gold-merge", str(a), str(b), "-o", str(merged)])
+    assert result.exit_code == 0, result.output
+    export = json.loads(merged.read_text(encoding="utf-8"))
+    assert [ann["completed_by"] for ann in export[0]["annotations"]] == ["A", "B", "C"]

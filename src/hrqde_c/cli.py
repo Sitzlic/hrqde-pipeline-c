@@ -126,6 +126,40 @@ def gold_sample(
     typer.echo(f"{len(tasks)} Tasks mit Vor-Annotationen -> {out_dir}")
 
 
+@app.command("gold-merge")
+def gold_merge(
+    exports: list[Path] = typer.Argument(..., help="Exporte der Projekte A und B, optional C."),
+    output: Path = typer.Option(..., "--output", "-o"),
+    seed: bool = typer.Option(False, "--seed",
+                              help="Statt zu mischen: Tasks für das dritte Projekt mit beiden "
+                                   "Fassungen als Vorschlägen schreiben."),
+) -> None:
+    """Exporte der Gold-Projekte zusammenführen: A und B zu Tasks für die gemeinsame Fassung
+    (--seed) oder A, B und C zu einem Export mit drei Annotationen je Aufgabe."""
+    import json
+
+    from hrqde_c.gold import merge
+
+    if len(exports) < 2 or len(exports) > 3 or (seed and len(exports) != 2):
+        _fail("Erwartet die Exporte A und B, beim Mischen optional C.")
+    for path in exports:
+        _require(path, "Export", "Projekt in Label Studio als JSON exportieren.")
+    payloads = [json.loads(p.read_text(encoding="utf-8")) for p in exports]
+    output.parent.mkdir(parents=True, exist_ok=True)
+    if seed:
+        tasks = merge.seed_tasks(payloads[0], payloads[1])
+        output.write_text(json.dumps(tasks, ensure_ascii=False, indent=1), encoding="utf-8")
+        typer.echo(f"{len(tasks)} Tasks mit Vorschlägen aus A und B -> {output}")
+        return
+    merged, missing = merge.merge_exports(payloads[0], payloads[1],
+                                          payloads[2] if len(payloads) == 3 else None)
+    output.write_text(json.dumps(merged, ensure_ascii=False, indent=1), encoding="utf-8")
+    typer.echo(f"{len(merged)} Aufgaben mit {'drei' if len(payloads) == 3 else 'zwei'} "
+               f"Annotationen -> {output}")
+    if missing:
+        typer.echo(f"Ohne Annotation: {', '.join(missing)}")
+
+
 @app.command("gold-import")
 def gold_import(
     export: Path = typer.Option(..., "--export", "-e", help="Label-Studio-Export (JSON)."),
