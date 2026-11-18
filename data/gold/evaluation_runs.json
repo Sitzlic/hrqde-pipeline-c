@@ -1,0 +1,40 @@
+[
+ {
+  "run": {
+   "id": "run-4784cbbd",
+   "variant": "adj-noun-de",
+   "gold_dataset": "data/gold/gold_advertisements.json",
+   "partition": "test",
+   "advertisement_count": 30,
+   "run_timestamp": "2026-11-01T00:35:39+00:00"
+  },
+  "result": {
+   "run_id": "run-4784cbbd",
+   "precision": 0.0302,
+   "recall": 0.0405,
+   "f1": 0.0346,
+   "true_positives": 24,
+   "false_positives": 771,
+   "false_negatives": 568
+  }
+ },
+ {
+  "run": {
+   "id": "run-252405f2",
+   "variant": "escoxlm-r-de",
+   "gold_dataset": "data/gold/gold_advertisements.json",
+   "partition": "test",
+   "advertisement_count": 30,
+   "run_timestamp": "2026-11-01T00:35:51+00:00"
+  },
+  "result": {
+   "run_id": "run-252405f2",
+   "precision": 0.3725,
+   "recall": 0.4122,
+   "f1": 0.3913,
+   "true_positives": 244,
+   "false_positives": 411,
+   "false_negatives": 348
+  }
+ }
+]

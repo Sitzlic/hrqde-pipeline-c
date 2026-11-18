@@ -41,3 +41,8 @@ data/input/pflege.json
 data/walkthrough/
 # Zugangsdaten fuer docker compose (Label Studio)
 .env
+# Label-Studio-Exporte und Tasks der gemeinsamen Fassung enthalten die BA-Rohtexte
+data/gold/export*.json
+data/gold/tasks_c.json
+# Gold-Datei mit den Token der 60 Anzeigen (Volltexte), nicht versioniert
+data/gold/gold_advertisements.json

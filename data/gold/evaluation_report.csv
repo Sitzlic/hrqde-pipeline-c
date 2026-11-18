@@ -1,0 +1,4 @@
+variant,precision,recall,f1,true_positives,false_positives,false_negatives,advertisements,run_id,run_timestamp,note
+escoxlm-r-de,0.3725,0.4122,0.3913,244,411,348,30,run-252405f2,2026-11-01T00:35:51+00:00,
+adj-noun-de,0.0302,0.0405,0.0346,24,771,568,30,run-4784cbbd,2026-11-01T00:35:39+00:00,
+adj-noun-en-uebersetzt,,,,,,,,,,nicht gemessen: Spans liegen auf dem uebersetzten Text
